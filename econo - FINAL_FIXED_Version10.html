@@ -21,8 +21,8 @@
             width: 100vw;
             overflow: hidden !important;
             font-family: 'Share Tech Mono', monospace;
-            background: #000;
-            color: #00ff00;
+            background: var(--theme-background);
+            color: var(--theme-primary);
         }
 
         /* FLUID TYPOGRAPHY SYSTEM */
@@ -32,6 +32,23 @@
             --scale: calc(var(--text-scale) * var(--content-density));
             --usable-h: calc(100dvh - 120px);
             --transition-speed: 0.3s;
+            
+            /* Theme Colors - Default: Classic Green Terminal */
+            --theme-primary: #00ff00;
+            --theme-secondary: #00aa00;
+            --theme-tertiary: #00dd00;
+            --theme-background: #000000;
+            --theme-background-light: #001100;
+            --theme-background-dark: #000800;
+            --theme-accent: #00ff00;
+            --theme-border: #00ff00;
+            --theme-shadow: rgba(0, 255, 0, 0.4);
+            --theme-shadow-strong: rgba(0, 255, 0, 0.6);
+            --theme-glow: rgba(0, 255, 0, 0.5);
+            --theme-error: #ff0000;
+            --theme-success: #00ff00;
+            --theme-scanline: rgba(0, 255, 0, 0.03);
+            --theme-crt-rgb: rgba(0, 255, 0, 0.02);
             
             /* True fluid typography with clamp() - increased max values for better scaling */
             --text-xs: clamp(10px, calc(18px * var(--text-scale)), 36px);
@@ -55,7 +72,15 @@
             --space-12: calc(32px * var(--text-scale));
         }
 
-        /* Smooth transitions for all scalable content */
+        /* Smooth transitions for all scalable content and theme changes */
+        * {
+            transition: background-color 0.3s ease, 
+                        color 0.3s ease, 
+                        border-color 0.3s ease, 
+                        box-shadow 0.3s ease,
+                        text-shadow 0.3s ease;
+        }
+        
         .terminal-title, .terminal-subtitle,
         .role-name, .role-name-zh, .role-desc,
         .content-text, .story-text,
@@ -64,7 +89,12 @@
         .timer-display, .scene-info,
         .section-label, .start-title,
         h1, h2, h3, h4, h5, h6, p, span, div {
-            transition: font-size var(--transition-speed) ease;
+            transition: font-size var(--transition-speed) ease,
+                        background-color 0.3s ease, 
+                        color 0.3s ease, 
+                        border-color 0.3s ease, 
+                        box-shadow 0.3s ease,
+                        text-shadow 0.3s ease;
         }
 
         /* ENHANCED CRT Terminal Effect */
@@ -99,7 +129,7 @@
             height: 100%;
             background: linear-gradient(
                 transparent 50%,
-                rgba(0, 255, 0, 0.03) 50%
+                var(--theme-scanline) 50%
             );
             background-size: 100% 4px;
             pointer-events: none;
@@ -117,21 +147,21 @@
             width: 100vw;
             height: 100dvh;
             height: 100vh; /* Fallback */
-            background: #000;
+            background: var(--theme-background);
             overflow: hidden !important;
             display: flex;
             flex-direction: column;
             padding-bottom: max(10px, env(safe-area-inset-bottom));
             padding-left: max(0px, env(safe-area-inset-left));
             padding-right: max(0px, env(safe-area-inset-right));
-            box-shadow: inset 0 0 30px rgba(0, 255, 0, 0.1);
+            box-shadow: inset 0 0 30px var(--theme-glow);
         }
 
         /* BULLETPROOF HEADER */
         .terminal-header {
-            background: linear-gradient(135deg, #001100, #000800);
-            border: 2px solid #00ff00;
-            border-bottom: 1px solid #00ff00;
+            background: linear-gradient(135deg, var(--theme-background-light), var(--theme-background-dark));
+            border: 2px solid var(--theme-border);
+            border-bottom: 1px solid var(--theme-border);
             padding: var(--space-4);
             display: grid;
             grid-template-columns: 1fr auto 1fr;
@@ -145,8 +175,8 @@
         .terminal-title {
             font-family: 'Orbitron', monospace;
             font-size: var(--text-3xl);
-            color: #00ff00;
-            text-shadow: 0 0 10px #00ff00;
+            color: var(--theme-primary);
+            text-shadow: 0 0 10px var(--theme-primary);
             letter-spacing: 2px;
             font-weight: 900;
             line-height: 1;
@@ -154,14 +184,14 @@
 
         .terminal-subtitle {
             font-size: var(--text-sm);
-            color: #00aa00;
+            color: var(--theme-secondary);
             margin-top: 3px;
         }
 
         .timer-section {
             text-align: center;
-            background: #000;
-            border: 2px solid #00ff00;
+            background: var(--theme-background);
+            border: 2px solid var(--theme-border);
             padding: var(--space-4);
             border-radius: 3px;
             min-width: 200px;
@@ -170,8 +200,8 @@
         .timer-display {
             font-family: 'Orbitron', monospace;
             font-size: var(--text-4xl);
-            color: #00ff00;
-            text-shadow: 0 0 15px #00ff00;
+            color: var(--theme-primary);
+            text-shadow: 0 0 15px var(--theme-primary);
             letter-spacing: 2px;
             line-height: 1;
         }
@@ -179,8 +209,8 @@
         .progress-bar {
             width: 100%;
             height: 12px;
-            background: #000;
-            border: 1px solid #00ff00;
+            background: var(--theme-background);
+            border: 1px solid var(--theme-border);
             margin: var(--space-2) 0;
             border-radius: 2px;
             overflow: hidden;
@@ -188,20 +218,20 @@
 
         .progress-fill {
             height: 100%;
-            background: #00ff00;
+            background: var(--theme-primary);
             transition: width 1s linear;
-            box-shadow: 0 0 8px #00ff00;
+            box-shadow: 0 0 8px var(--theme-primary);
         }
 
         .scene-info {
             font-size: var(--text-xs);
-            color: #00aa00;
+            color: var(--theme-secondary);
             text-transform: uppercase;
         }
 
         .roles-section {
-            background: #000;
-            border: 2px solid #00ff00;
+            background: var(--theme-background);
+            border: 2px solid var(--theme-border);
             padding: var(--space-4);
             border-radius: 3px;
             text-align: right;
@@ -209,23 +239,23 @@
 
         .roles-title {
             font-size: var(--text-xs);
-            color: #00ff00;
+            color: var(--theme-primary);
             margin-bottom: var(--space-2);
             font-weight: bold;
         }
 
         .roles-content {
             font-size: var(--text-xs);
-            color: #00dd00;
+            color: var(--theme-tertiary);
             line-height: 1.3;
         }
 
         /* BULLETPROOF MAIN CONTENT */
         .terminal-screen {
             flex: 1;
-            background: #000;
-            border: 2px solid #00ff00;
-            border-top: 1px solid #00ff00;
+            background: var(--theme-background);
+            border: 2px solid var(--theme-border);
+            border-top: 1px solid var(--theme-border);
             overflow: hidden !important;
             display: flex;
             flex-direction: column;
@@ -305,8 +335,8 @@
         .scene-title {
             font-family: 'Orbitron', monospace;
             font-size: var(--text-4xl);
-            color: #00ff00;
-            text-shadow: 0 0 12px #00ff00;
+            color: var(--theme-primary);
+            text-shadow: 0 0 12px var(--theme-primary);
             margin-bottom: var(--space-3);
             letter-spacing: 2px;
             font-weight: 700;
@@ -315,39 +345,39 @@
 
         .scene-subtitle {
             font-size: var(--text-lg);
-            color: #00aa00;
+            color: var(--theme-secondary);
             text-transform: uppercase;
             line-height: 1.1;
         }
 
         .scene-subtitle-zh {
             font-size: var(--text-lg);
-            color: #008800;
+            color: var(--theme-secondary);
             margin-top: var(--space-1);
         }
 
         /* BULLETPROOF CONTENT */
         .content-box {
-            background: linear-gradient(135deg, #001100, #000800);
-            border: 2px solid #00ff00;
+            background: linear-gradient(135deg, var(--theme-background-light), var(--theme-background-dark));
+            border: 2px solid var(--theme-border);
             padding: var(--space-6);
             margin: var(--space-4) 0;
             border-radius: 3px;
-            box-shadow: inset 0 0 15px rgba(0, 255, 0, 0.1);
+            box-shadow: inset 0 0 15px var(--theme-glow);
             flex-shrink: 0;
         }
 
         .story-text {
             font-size: var(--text-lg);
             line-height: 1.8;
-            color: #00ff00;
+            color: var(--theme-primary);
             text-align: justify;
-            text-shadow: 0 0 1px #00ff00;
+            text-shadow: 0 0 1px var(--theme-primary);
         }
 
         .keyword {
-            background: #00ff00;
-            color: #000;
+            background: var(--theme-primary);
+            color: var(--theme-background);
             padding: 2px 4px;
             border-radius: 2px;
             font-weight: bold;
@@ -356,9 +386,9 @@
         }
 
         .keyword:hover {
-            background: #00dd00;
+            background: var(--theme-tertiary);
             transform: scale(1.05);
-            box-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
+            box-shadow: 0 0 8px var(--theme-shadow-strong);
         }
 
         /* CONTAINER QUERY GRIDS */
@@ -423,8 +453,8 @@
 
         /* BULLETPROOF CARDS */
         .terminal-card {
-            background: linear-gradient(135deg, #000, #001100);
-            border: 2px solid #00ff00;
+            background: linear-gradient(135deg, var(--theme-background), var(--theme-background-light));
+            border: 2px solid var(--theme-border);
             padding: var(--space-5);
             border-radius: 3px;
             cursor: pointer;
@@ -438,14 +468,14 @@
         }
 
         .terminal-card:hover {
-            background: linear-gradient(135deg, #001100, #002200);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+            background: linear-gradient(135deg, var(--theme-background-light), var(--theme-background-light));
+            box-shadow: 0 0 15px var(--theme-glow);
             transform: scale(1.02);
         }
 
         .card-title {
             font-size: var(--text-md);
-            color: #00ff00;
+            color: var(--theme-primary);
             margin-bottom: var(--space-2);
             font-weight: bold;
             line-height: 1.3;
@@ -453,7 +483,7 @@
 
         .card-subtitle {
             font-size: var(--text-base);
-            color: #00aa00;
+            color: var(--theme-secondary);
             line-height: 1.3;
         }
 
@@ -461,7 +491,7 @@
         .frame-text {
             font-size: var(--text-lg);
             line-height: 1.5;
-            color: #00ff00;
+            color: var(--theme-primary);
             text-align: center;
             margin: var(--space-5) 0;
             font-weight: 600;
@@ -471,11 +501,11 @@
             display: inline-block;
             min-width: clamp(64px, 10cqw, 140px);
             height: clamp(24px, 4cqh, 36px);
-            border: 2px dashed #00ff00;
+            border: 2px dashed var(--theme-border);
             border-radius: 3px;
             margin: 0 var(--space-2);
-            background: #000;
-            color: #00ff00;
+            background: var(--theme-background);
+            color: var(--theme-primary);
             text-align: center;
             line-height: clamp(20px, 4cqh, 32px);
             font-weight: bold;
@@ -486,23 +516,23 @@
 
         .frame-blank.selected {
             border: 2px solid #ffff00;
-            background: #002200;
+            background: var(--theme-background-light);
         }
 
         .frame-blank.filled {
-            border: 2px solid #00ff00;
-            background: #001100;
+            border: 2px solid var(--theme-border);
+            background: var(--theme-background-light);
         }
 
         .frame-blank.wrong {
-            border: 2px solid #ff0000;
+            border: 2px solid var(--theme-error);
             animation: errorShake 0.3s ease;
         }
 
         .frame-blank.correct {
-            border: 2px solid #00ff00;
-            background: #002200;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            border: 2px solid var(--theme-success);
+            background: var(--theme-background-light);
+            box-shadow: 0 0 10px var(--theme-glow);
         }
 
         @keyframes errorShake {
@@ -513,7 +543,7 @@
         /* BULLETPROOF MCQ */
         .mcq-question {
             font-size: var(--text-xl);
-            color: #00ff00;
+            color: var(--theme-primary);
             text-align: center;
             margin: var(--space-5) 0;
             font-weight: bold;
@@ -522,13 +552,13 @@
 
         .mcq-question-zh {
             font-size: var(--text-lg);
-            color: #00aa00;
+            color: var(--theme-secondary);
             margin-top: var(--space-2);
         }
 
         .mcq-option {
-            background: #000;
-            border: 2px solid #00ff00;
+            background: var(--theme-background);
+            border: 2px solid var(--theme-border);
             padding: var(--space-5);
             border-radius: 3px;
             cursor: pointer;
@@ -541,12 +571,12 @@
         }
 
         .mcq-option:hover {
-            background: #001100;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+            background: var(--theme-background-light);
+            box-shadow: 0 0 15px var(--theme-shadow);
         }
 
         .mcq-option.selected {
-            background: #002200;
+            background: var(--theme-background-light);
             border-color: #ffff00;
             box-shadow: 0 0 15px rgba(255, 255, 0, 0.4);
         }
@@ -564,14 +594,14 @@
 
         .mcq-option-en {
             font-size: var(--text-md);
-            color: #00ff00;
+            color: var(--theme-primary);
             margin-bottom: var(--space-2);
             font-weight: bold;
         }
 
         .mcq-option-zh {
             font-size: var(--text-base);
-            color: #00aa00;
+            color: var(--theme-secondary);
         }
 
         /* BULLETPROOF CONTROLS */
@@ -581,16 +611,16 @@
             padding: var(--space-5) 0;
             flex-shrink: 0;
             background: rgba(0, 0, 0, 0.9);
-            border-top: 1px solid #00ff00;
+            border-top: 1px solid var(--theme-border);
             position: sticky;
             bottom: 0;
             z-index: 100;
         }
 
         .btn {
-            background: #000;
-            color: #00ff00;
-            border: 2px solid #00ff00;
+            background: var(--theme-background);
+            color: var(--theme-primary);
+            border: 2px solid var(--theme-border);
             padding: var(--space-4) var(--space-6);
             font-family: 'Share Tech Mono', monospace;
             font-size: var(--text-base);
@@ -603,54 +633,55 @@
         }
 
         .btn:hover {
-            background: #001100;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+            background: var(--theme-background-light);
+            box-shadow: 0 0 15px var(--theme-glow);
             transform: scale(1.02);
         }
 
         .btn:disabled {
-            color: #004400;
-            border-color: #004400;
+            color: var(--theme-secondary);
+            border-color: var(--theme-secondary);
             cursor: not-allowed;
+            opacity: 0.5;
         }
 
-        .btn.secondary { border-color: #00aa00; color: #00aa00; }
-        .btn.danger { border-color: #ff4444; color: #ff4444; }
+        .btn.secondary { border-color: var(--theme-secondary); color: var(--theme-secondary); }
+        .btn.danger { border-color: var(--theme-error); color: var(--theme-error); }
         .btn.panic { border-color: #ffff00; color: #ffff00; }
 
         .btn.success {
-            color: #00ff00;
-            border-color: #00ff00;
-            background: #001100;
+            color: var(--theme-success);
+            border-color: var(--theme-success);
+            background: var(--theme-background-light);
         }
 
         .btn.success:hover {
-            background: #002200;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.7);
+            background: var(--theme-background-light);
+            box-shadow: 0 0 20px var(--theme-glow);
         }
 
         .btn.warning {
             color: #ffaa00;
             border-color: #ffaa00;
-            background: #110800;
+            background: var(--theme-background-light);
         }
 
         .btn.warning:hover {
-            background: #221100;
+            background: var(--theme-background-light);
             box-shadow: 0 0 20px rgba(255, 170, 0, 0.7);
         }
 
         /* Button state indicators */
         .btn.active {
-            background: #002200;
+            background: var(--theme-background-light);
             border-color: #ffff00;
             color: #ffff00;
         }
 
         /* BULLETPROOF WRITE AREAS */
         .write-reminder {
-            background: #002200;
-            border: 2px solid #00ff00;
+            background: var(--theme-background-light);
+            border: 2px solid var(--theme-border);
             padding: var(--space-6);
             margin: var(--space-4) 0;
             text-align: center;
@@ -668,8 +699,8 @@
         }
 
         .write-prompt {
-            background: #001100;
-            border: 1px solid #00aa00;
+            background: var(--theme-background-light);
+            border: 1px solid var(--theme-secondary);
             padding: var(--space-5);
             margin: var(--space-3) 0;
             border-radius: 3px;
@@ -692,8 +723,8 @@
         .start-title {
             font-family: 'Orbitron', monospace;
             font-size: var(--text-4xl);
-            color: #00ff00;
-            text-shadow: 0 0 20px #00ff00;
+            color: var(--theme-primary);
+            text-shadow: 0 0 20px var(--theme-primary);
             margin-bottom: var(--space-4);
             letter-spacing: 3px;
             font-weight: 900;
@@ -702,39 +733,39 @@
 
         .start-subtitle {
             font-size: var(--text-lg);
-            color: #00aa00;
+            color: var(--theme-secondary);
             margin-bottom: var(--space-6);
         }
 
         .start-subtitle-zh {
             font-size: var(--text-md);
-            color: #008800;
+            color: var(--theme-secondary);
             margin-top: var(--space-2);
         }
 
         .role-card {
-            background: #001100;
-            border: 2px solid #00aa00;
+            background: var(--theme-background-light);
+            border: 2px solid var(--theme-secondary);
             padding: var(--space-5);
             border-radius: 3px;
         }
 
         .role-name {
             font-size: var(--text-md);
-            color: #00ff00;
+            color: var(--theme-primary);
             margin-bottom: var(--space-2);
             font-weight: bold;
         }
 
         .role-name-zh {
             font-size: var(--text-md);
-            color: #00aa00;
+            color: var(--theme-secondary);
             margin-bottom: var(--space-3);
         }
 
         .role-desc {
             font-size: var(--text-sm);
-            color: #00aa00;
+            color: var(--theme-secondary);
             line-height: 1.3;
         }
 
@@ -743,9 +774,9 @@
             position: fixed;
             top: var(--space-4);
             right: var(--space-4);
-            background: #000;
-            color: #00ff00;
-            border: 2px solid #00ff00;
+            background: var(--theme-background);
+            color: var(--theme-primary);
+            border: 2px solid var(--theme-border);
             width: 36px;
             height: 36px;
             border-radius: 50%;
@@ -759,17 +790,17 @@
         }
 
         .settings-toggle:hover {
-            background: #001100;
+            background: var(--theme-background-light);
             transform: scale(1.1) rotate(90deg);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 15px var(--theme-glow);
         }
 
         .settings-panel {
             position: fixed;
             top: 50px;
             right: var(--space-4);
-            background: #000;
-            border: 2px solid #00ff00;
+            background: var(--theme-background);
+            border: 2px solid var(--theme-border);
             padding: var(--space-5);
             border-radius: 3px;
             z-index: 1999;
@@ -778,7 +809,7 @@
             width: 220px;
             max-height: 400px;
             overflow-y: auto;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+            box-shadow: 0 0 20px var(--theme-shadow);
         }
 
         .settings-panel.open {
@@ -786,7 +817,7 @@
         }
 
         .settings-title {
-            color: #00ff00;
+            color: var(--theme-primary);
             margin-bottom: var(--space-4);
             font-size: 12px;
             font-weight: bold;
@@ -796,13 +827,13 @@
         .setting-group {
             margin: var(--space-4) 0;
             padding: var(--space-3);
-            background: #001100;
-            border: 1px solid #00aa00;
+            background: var(--theme-background-light);
+            border: 1px solid var(--theme-secondary);
             border-radius: 3px;
         }
 
         .setting-label {
-            color: #00ff00;
+            color: var(--theme-primary);
             font-size: 10px;
             display: block;
             margin-bottom: var(--space-2);
@@ -817,9 +848,9 @@
         }
 
         .timer-btn {
-            background: #000;
-            color: #00aa00;
-            border: 1px solid #00aa00;
+            background: var(--theme-background);
+            color: var(--theme-secondary);
+            border: 1px solid var(--theme-secondary);
             padding: 4px;
             font-size: 9px;
             cursor: pointer;
@@ -828,16 +859,16 @@
         }
 
         .timer-btn:hover {
-            background: #001100;
-            color: #00ff00;
-            border-color: #00ff00;
+            background: var(--theme-background-light);
+            color: var(--theme-primary);
+            border-color: var(--theme-primary);
         }
 
         .custom-input {
             width: 100%;
-            background: #000;
-            border: 1px solid #00ff00;
-            color: #00ff00;
+            background: var(--theme-background);
+            border: 1px solid var(--theme-border);
+            color: var(--theme-primary);
             padding: 4px;
             border-radius: 2px;
             font-size: 10px;
@@ -846,9 +877,9 @@
 
         .file-input {
             width: 100%;
-            background: #000;
-            border: 1px solid #00aa00;
-            color: #00ff00;
+            background: var(--theme-background);
+            border: 1px solid var(--theme-secondary);
+            color: var(--theme-primary);
             padding: 4px;
             margin: 4px 0;
             border-radius: 2px;
@@ -871,35 +902,35 @@
         }
 
         .modal-content {
-            background: #001100;
-            border: 3px solid #00ff00;
+            background: var(--theme-background-light);
+            border: 3px solid var(--theme-border);
             border-radius: 5px;
             padding: var(--space-8);
             max-width: 400px;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+            box-shadow: 0 0 30px var(--theme-shadow-strong);
             text-align: center;
         }
 
         .modal-title {
             font-family: 'Orbitron', monospace;
             font-size: var(--text-lg);
-            color: #00ff00;
-            text-shadow: 0 0 8px #00ff00;
+            color: var(--theme-primary);
+            text-shadow: 0 0 8px var(--theme-primary);
             margin-bottom: var(--space-4);
             font-weight: bold;
         }
 
         .modal-text {
             font-size: var(--text-base);
-            color: #00aa00;
+            color: var(--theme-secondary);
             line-height: 1.4;
             margin-bottom: var(--space-5);
         }
 
         .modal-close {
-            background: #000;
-            color: #00ff00;
-            border: 2px solid #00ff00;
+            background: var(--theme-background);
+            color: var(--theme-primary);
+            border: 2px solid var(--theme-border);
             padding: var(--space-3) var(--space-5);
             font-size: var(--text-sm);
             cursor: pointer;
@@ -908,22 +939,77 @@
         }
 
         .modal-close:hover {
-            background: #001100;
-            box-shadow: 0 0 12px rgba(0, 255, 0, 0.5);
+            background: var(--theme-background-light);
+            box-shadow: 0 0 12px var(--theme-glow);
         }
+
+        /* THEME SELECTOR STYLES */
+        .theme-selector {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            background: var(--theme-background);
+            border: 2px solid var(--theme-secondary);
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .theme-option:hover {
+            border-color: var(--theme-primary);
+            box-shadow: 0 0 10px var(--theme-glow);
+        }
+
+        .theme-option.active {
+            border-color: var(--theme-primary);
+            background: var(--theme-background-light);
+            box-shadow: 0 0 15px var(--theme-glow);
+        }
+
+        .theme-preview {
+            display: flex;
+            gap: 3px;
+            flex-shrink: 0;
+        }
+
+        .theme-color-box {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .theme-name {
+            font-size: 9px;
+            font-weight: bold;
+            flex: 1;
+        }
+
+        .theme-icon {
+            font-size: 10px;
+        }
+
 
         /* SCALE CONTROL PANEL */
         .scale-control {
             position: fixed;
             bottom: 20px;
             right: -300px;
-            background: linear-gradient(135deg, #000, #001100);
-            border: 2px solid #00ff00;
+            background: linear-gradient(135deg, var(--theme-background), var(--theme-background-light));
+            border: 2px solid var(--theme-border);
             border-radius: 8px;
             padding: 15px;
             z-index: 2000;
             width: 280px;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.4);
+            box-shadow: 0 0 30px var(--theme-shadow);
             transition: right 0.3s ease;
             -webkit-backdrop-filter: blur(10px); /* Add this line for Safari support */
             backdrop-filter: blur(10px);
@@ -940,8 +1026,8 @@
             right: 20px;
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, #000, #001100);
-            border: 2px solid #00ff00;
+            background: linear-gradient(135deg, var(--theme-background), var(--theme-background-light));
+            border: 2px solid var(--theme-border);
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -949,15 +1035,15 @@
             cursor: pointer;
             z-index: 1999;
             font-size: 24px;
-            color: #00ff00;
-            text-shadow: 0 0 10px #00ff00;
+            color: var(--theme-primary);
+            text-shadow: 0 0 10px var(--theme-primary);
             transition: all 0.3s ease;
             animation: scalePulse 3s infinite;
         }
 
         .scale-toggle:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+            box-shadow: 0 0 20px var(--theme-shadow-strong);
         }
 
         .scale-control-header {
@@ -965,7 +1051,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
-            color: #00ff00;
+            color: var(--theme-primary);
             font-size: 11px;
             font-weight: bold;
             letter-spacing: 1px;
@@ -973,12 +1059,12 @@
 
         .scale-current {
             font-size: 18px;
-            color: #00ff00;
+            color: var(--theme-primary);
             font-weight: bold;
             text-align: center;
             padding: 5px;
-            background: #001100;
-            border: 1px solid #00aa00;
+            background: var(--theme-background-light);
+            border: 1px solid var(--theme-secondary);
             border-radius: 4px;
             min-width: 60px;
             font-family: 'Courier New', monospace;
@@ -988,8 +1074,8 @@
             width: 20px;
             height: 20px;
             background: transparent;
-            border: 1px solid #00ff00;
-            color: #00ff00;
+            border: 1px solid var(--theme-border);
+            color: var(--theme-primary);
             cursor: pointer;
             border-radius: 3px;
             font-size: 12px;
@@ -998,7 +1084,7 @@
         }
 
         .scale-minimize-btn:hover {
-            background: #001100;
+            background: var(--theme-background-light);
             transform: scale(1.1);
         }
 
@@ -1010,9 +1096,9 @@
         }
 
         .scale-preset-btn {
-            background: #001100;
-            border: 2px solid #00aa00;
-            color: #00ff00;
+            background: var(--theme-background-light);
+            border: 2px solid var(--theme-secondary);
+            color: var(--theme-primary);
             padding: 8px 4px;
             cursor: pointer;
             border-radius: 4px;
@@ -1024,17 +1110,17 @@
         }
 
         .scale-preset-btn:hover {
-            background: #001100;
-            border-color: #00ff00;
-            color: #00ff00;
+            background: var(--theme-background-light);
+            border-color: var(--theme-border);
+            color: var(--theme-primary);
             transform: scale(1.05);
         }
 
         .scale-preset-btn.active {
-            background: #00ff00;
-            color: #000;
-            border-color: #00ff00;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            background: var(--theme-primary);
+            color: var(--theme-background);
+            border-color: var(--theme-primary);
+            box-shadow: 0 0 10px var(--theme-glow);
         }
 
         .scale-slider-container {
@@ -1044,7 +1130,7 @@
         .scale-slider-label {
             display: flex;
             justify-content: space-between;
-            color: #00aa00;
+            color: var(--theme-secondary);
             font-size: 9px;
             margin-bottom: 5px;
         }
@@ -1054,8 +1140,8 @@
             -webkit-appearance: none;
             appearance: none;
             height: 6px;
-            background: #001100;
-            border: 1px solid #00aa00;
+            background: var(--theme-background-light);
+            border: 1px solid var(--theme-secondary);
             border-radius: 3px;
             outline: none;
             transition: all 0.2s ease;
@@ -1066,49 +1152,49 @@
             appearance: none;
             width: 18px;
             height: 18px;
-            background: #00ff00;
-            border: 2px solid #000;
+            background: var(--theme-primary);
+            border: 2px solid var(--theme-background);
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 10px var(--theme-glow);
             transition: all 0.2s ease;
         }
 
         .scale-slider::-moz-range-thumb {
             width: 18px;
             height: 18px;
-            background: #00ff00;
-            border: 2px solid #000;
+            background: var(--theme-primary);
+            border: 2px solid var(--theme-background);
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 10px var(--theme-glow);
             transition: all 0.2s ease;
         }
 
         .scale-slider:hover::-webkit-slider-thumb {
             transform: scale(1.2);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+            box-shadow: 0 0 15px var(--theme-glow);
         }
 
         .scale-slider:hover::-moz-range-thumb {
             transform: scale(1.2);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+            box-shadow: 0 0 15px var(--theme-glow);
         }
 
         .scale-info {
             display: flex;
             justify-content: space-between;
             font-size: 9px;
-            color: #00aa00;
+            color: var(--theme-secondary);
             margin-top: 8px;
             padding-top: 8px;
-            border-top: 1px solid #003300;
+            border-top: 1px solid var(--theme-secondary);
         }
 
         .scale-reset-btn {
             background: transparent;
-            border: 1px solid #ff3333;
-            color: #ff3333;
+            border: 1px solid var(--theme-error);
+            color: var(--theme-error);
             padding: 6px 12px;
             cursor: pointer;
             border-radius: 4px;
@@ -1122,8 +1208,8 @@
         /* Presentation mode toggle button inside scale panel */
         .presentation-mode-btn {
             background: transparent;
-            border: 1px solid #00aa00;
-            color: #00aa00;
+            border: 1px solid var(--theme-secondary);
+            color: var(--theme-secondary);
             padding: 6px 12px;
             cursor: pointer;
             border-radius: 4px;
@@ -1379,20 +1465,20 @@
         .image-modal-img {
             max-width: 100%;
             max-height: 80vh;
-            border: 3px solid #00ff00;
+            border: 3px solid var(--theme-border);
             border-radius: 5px;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+            box-shadow: 0 0 30px var(--theme-shadow-strong);
             cursor: zoom-in;
         }
 
         .image-modal-caption {
             margin-top: var(--space-4);
-            color: #00ff00;
+            color: var(--theme-primary);
             font-size: var(--text-base);
             text-align: center;
-            background: #000;
+            background: var(--theme-background);
             padding: var(--space-3) var(--space-5);
-            border: 1px solid #00ff00;
+            border: 1px solid var(--theme-border);
             border-radius: 3px;
         }
 
@@ -1400,9 +1486,9 @@
             position: absolute;
             top: -40px;
             right: 0;
-            background: #000;
-            color: #00ff00;
-            border: 2px solid #00ff00;
+            background: var(--theme-background);
+            color: var(--theme-primary);
+            border: 2px solid var(--theme-border);
             width: 36px;
             height: 36px;
             border-radius: 50%;
@@ -1415,9 +1501,9 @@
         }
 
         .image-modal-close:hover {
-            background: #001100;
+            background: var(--theme-background-light);
             transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 15px var(--theme-glow);
         }
 
         /* IMAGE BUTTONS */
@@ -1505,7 +1591,7 @@
             top: 140px;
             left: var(--space-4);
             background: rgba(0, 0, 0, 0.95);
-            border: 1px solid #00ff00;
+            border: 1px solid var(--theme-border);
             padding: var(--space-3);
             border-radius: 3px;
             z-index: 1400;
@@ -1525,8 +1611,8 @@
             top: 140px;
             left: 5px;
             background: rgba(0, 0, 0, 0.9);
-            border: 1px solid #00ff00;
-            color: #00ff00;
+            border: 1px solid var(--theme-border);
+            color: var(--theme-primary);
             padding: var(--space-2);
             border-radius: 3px;
             cursor: pointer;
@@ -1543,8 +1629,8 @@
         }
 
         .section-toggle:hover {
-            background: #001100;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
+            background: var(--theme-background-light);
+            box-shadow: 0 0 10px var(--theme-shadow);
         }
 
         /* Adjust toggle position when menu is open */
@@ -1561,23 +1647,23 @@
             cursor: pointer;
             transition: all 0.2s ease;
             font-size: 10px;
-            color: #00aa00;
+            color: var(--theme-secondary);
             border: 1px solid transparent;
         }
 
         .section-indicator.active {
-            background: #001100;
-            border: 1px solid #00ff00;
-            color: #00ff00;
+            background: var(--theme-background-light);
+            border: 1px solid var(--theme-border);
+            color: var(--theme-primary);
         }
 
         .section-indicator.completed {
-            color: #00ff00;
+            color: var(--theme-primary);
         }
 
         .section-indicator:hover {
-            background: #001100;
-            border: 1px solid #00ff00;
+            background: var(--theme-background-light);
+            border: 1px solid var(--theme-border);
         }
 
         .section-icon {
@@ -1654,11 +1740,11 @@
        ============================================ */
     /* HAL Variables (compatible with existing) */
     .od-control-bar {
-      --od-ink: #00ff65;
-      --od-ink-soft: #21c96c;
-      --od-bg: #000;
-      --od-cyan: #00fff6;
-      --od-red: #ff2a2a;
+      --od-ink: var(--theme-primary);
+      --od-ink-soft: var(--theme-secondary);
+      --od-bg: var(--theme-background);
+      --od-cyan: var(--theme-accent);
+      --od-red: var(--theme-error);
     }
     /* Control Bar - Positioned to avoid conflicts */
     .od-control-bar {
@@ -2533,9 +2619,9 @@
 
     .winner-score {
         font-size: 36px;
-        color: #00ff00;
+        color: var(--theme-primary);
         font-weight: bold;
-        text-shadow: 0 0 20px #00ff00;
+        text-shadow: 0 0 20px var(--theme-primary);
         margin: 15px 0;
     }
 
@@ -2623,13 +2709,24 @@
          to enter the app. -->
     <div id="introOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.95); display: none; justify-content: center; align-items: center; z-index: 10000;">
       <video id="introVideo" 
-             src="intro.mp4" 
              style="width: 90vw; max-width: 1200px; height: auto; border: 3px solid #fff; box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);" 
              autoplay
              controls
              preload="auto"
              playsinline
              webkit-playsinline>
+        <!-- Multiple source formats for better compatibility -->
+        <source src="intro.mp4" type="video/mp4">
+        <source src="intro.webm" type="video/webm">
+        <source src="intro.ogv" type="video/ogg">
+        <p style="color: #ff0000; font-family: 'Orbitron', monospace;">
+          Your browser does not support the video tag or the video file could not be loaded.
+          <br><br>
+          <button onclick="document.getElementById('introOverlay').style.display='none'" 
+                  style="background: #00ff00; color: #000; border: 2px solid #00ff00; padding: 10px 20px; font-family: 'Orbitron', monospace; cursor: pointer; border-radius: 4px;">
+            SKIP TO APP
+          </button>
+        </p>
       </video>
       <div id="introPrompt" style="position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; color: #00ff00; font-family: 'Orbitron', monospace; font-size: 14px; letter-spacing: 1px; display: none;">Click to play video</div>
     </div>
@@ -2681,6 +2778,14 @@
     <div class="settings-panel" id="settingsPanel">
         <div class="settings-title">SYSTEM SETTINGS | 系统设置</div>
         
+        <!-- Theme Selector -->
+        <div class="setting-group">
+            <div class="setting-label">THEME SELECTOR | 主题选择器</div>
+            <div class="theme-selector" id="themeSelector">
+                <!-- Theme options will be dynamically populated by JavaScript -->
+            </div>
+        </div>
+
         <!-- Timer Settings -->
         <div class="setting-group">
             <div class="setting-label">TIMER DURATION | 计时器时长</div>
@@ -3020,6 +3125,468 @@
     <!-- Load Dictionary Optimizer for Performance (disabled) -->
     <!-- <script src="dictionary-optimizer.js"></script> -->
     <script>
+        // ============================================
+        // THEME MANAGEMENT SYSTEM
+        // ============================================
+        
+        let currentTheme = 'classic-green';  // Track current theme for sound system
+        
+        const themes = {
+            'classic-green': {
+                name: 'Classic Green Terminal',
+                icon: '🟢',
+                classroom: false,
+                primary: '#00ff00',
+                secondary: '#00aa00',
+                tertiary: '#00dd00',
+                background: '#000000',
+                backgroundLight: '#001100',
+                backgroundDark: '#000800',
+                accent: '#00ff00',
+                border: '#00ff00',
+                shadow: 'rgba(0, 255, 0, 0.4)',
+                shadowStrong: 'rgba(0, 255, 0, 0.6)',
+                glow: 'rgba(0, 255, 0, 0.5)',
+                error: '#ff0000',
+                success: '#00ff00',
+                scanline: 'rgba(0, 255, 0, 0.03)',
+                crtRgb: 'rgba(0, 255, 0, 0.02)',
+                sounds: {
+                    click: { freq: 800, duration: 100, type: 'square' },
+                    hover: { freq: 600, duration: 50, type: 'square' },
+                    success: { freq: [600, 800, 1000, 1200], duration: 150, type: 'sine' },
+                    error: { freq: [400, 300, 200, 100], duration: 200, type: 'sawtooth' },
+                    ambient: { freq: 120, type: 'sawtooth', volume: 0.15, modulation: 0.3 },
+                    random: { freq: [1200, 1400, 1600, 1800], duration: 80, type: 'triangle' },
+                    gameOver: { freq: [800, 900, 1000, 1100, 1200], duration: 250, type: 'square' }
+                }
+            },
+            'amber-mono': {
+                name: 'Amber Monochrome',
+                icon: '🟠',
+                classroom: true,
+                primary: '#ffaa00',
+                secondary: '#cc8800',
+                tertiary: '#ffcc44',
+                background: '#0a0500',
+                backgroundLight: '#1a0f00',
+                backgroundDark: '#050200',
+                accent: '#ffaa00',
+                border: '#ffaa00',
+                shadow: 'rgba(255, 170, 0, 0.4)',
+                shadowStrong: 'rgba(255, 170, 0, 0.6)',
+                glow: 'rgba(255, 170, 0, 0.5)',
+                error: '#ff3300',
+                success: '#ffcc00',
+                scanline: 'rgba(255, 170, 0, 0.03)',
+                crtRgb: 'rgba(255, 170, 0, 0.02)',
+                sounds: {
+                    click: { freq: 700, duration: 120, type: 'sine' },
+                    hover: { freq: 500, duration: 60, type: 'sine' },
+                    success: { freq: [550, 700, 850, 1000], duration: 180, type: 'triangle' },
+                    error: { freq: [350, 280, 210, 140], duration: 220, type: 'sine' },
+                    ambient: { freq: 100, type: 'triangle', volume: 0.12, modulation: 0.2 },
+                    random: { freq: [1100, 1250, 1400, 1550], duration: 90, type: 'sine' },
+                    gameOver: { freq: [700, 800, 900, 1000, 1100], duration: 270, type: 'triangle' }
+                }
+            },
+            'blue-matrix': {
+                name: 'Blue Matrix',
+                icon: '🔵',
+                classroom: false,
+                primary: '#00ccff',
+                secondary: '#0088cc',
+                tertiary: '#00ddff',
+                background: '#000510',
+                backgroundLight: '#001520',
+                backgroundDark: '#000208',
+                accent: '#00ccff',
+                border: '#00ccff',
+                shadow: 'rgba(0, 204, 255, 0.4)',
+                shadowStrong: 'rgba(0, 204, 255, 0.6)',
+                glow: 'rgba(0, 204, 255, 0.5)',
+                error: '#ff0044',
+                success: '#00ffcc',
+                scanline: 'rgba(0, 204, 255, 0.03)',
+                crtRgb: 'rgba(0, 204, 255, 0.02)',
+                sounds: {
+                    click: { freq: 900, duration: 90, type: 'sine' },
+                    hover: { freq: 700, duration: 45, type: 'sine' },
+                    success: { freq: [700, 900, 1100, 1300], duration: 140, type: 'sine' },
+                    error: { freq: [450, 360, 270, 180], duration: 190, type: 'triangle' },
+                    ambient: { freq: 140, type: 'sine', volume: 0.18, modulation: 0.4 },
+                    random: { freq: [1300, 1450, 1600, 1750], duration: 75, type: 'sine' },
+                    gameOver: { freq: [900, 1000, 1100, 1200, 1300], duration: 240, type: 'sine' }
+                }
+            },
+            'purple-cyber': {
+                name: 'Purple Cyber',
+                icon: '🟣',
+                classroom: false,
+                primary: '#bb00ff',
+                secondary: '#8800cc',
+                tertiary: '#dd44ff',
+                background: '#0a000a',
+                backgroundLight: '#150015',
+                backgroundDark: '#050005',
+                accent: '#bb00ff',
+                border: '#bb00ff',
+                shadow: 'rgba(187, 0, 255, 0.4)',
+                shadowStrong: 'rgba(187, 0, 255, 0.6)',
+                glow: 'rgba(187, 0, 255, 0.5)',
+                error: '#ff0066',
+                success: '#cc00ff',
+                scanline: 'rgba(187, 0, 255, 0.03)',
+                crtRgb: 'rgba(187, 0, 255, 0.02)',
+                sounds: {
+                    click: { freq: 1000, duration: 80, type: 'triangle' },
+                    hover: { freq: 800, duration: 40, type: 'triangle' },
+                    success: { freq: [800, 1000, 1200, 1400], duration: 130, type: 'triangle' },
+                    error: { freq: [500, 420, 340, 260], duration: 180, type: 'sawtooth' },
+                    ambient: { freq: 160, type: 'triangle', volume: 0.20, modulation: 0.5 },
+                    random: { freq: [1400, 1550, 1700, 1850], duration: 70, type: 'triangle' },
+                    gameOver: { freq: [1000, 1100, 1200, 1300, 1400], duration: 230, type: 'triangle' }
+                }
+            },
+            'white-paper': {
+                name: 'White Paper (Classroom)',
+                icon: '📄',
+                classroom: true,
+                primary: '#000000',
+                secondary: '#333333',
+                tertiary: '#111111',
+                background: '#f5f5dc',
+                backgroundLight: '#ffffff',
+                backgroundDark: '#e8e8d0',
+                accent: '#000000',
+                border: '#666666',
+                shadow: 'rgba(0, 0, 0, 0.2)',
+                shadowStrong: 'rgba(0, 0, 0, 0.4)',
+                glow: 'rgba(0, 0, 0, 0.3)',
+                error: '#cc0000',
+                success: '#006600',
+                scanline: 'rgba(0, 0, 0, 0.02)',
+                crtRgb: 'rgba(0, 0, 0, 0.01)',
+                sounds: {
+                    click: { freq: 600, duration: 100, type: 'sine' },
+                    hover: { freq: 450, duration: 50, type: 'sine' },
+                    success: { freq: [500, 600, 750, 900], duration: 160, type: 'sine' },
+                    error: { freq: [300, 240, 180, 120], duration: 210, type: 'sine' },
+                    ambient: { freq: 80, type: 'sine', volume: 0.10, modulation: 0.15 },
+                    random: { freq: [1000, 1150, 1300, 1450], duration: 85, type: 'sine' },
+                    gameOver: { freq: [600, 700, 800, 900, 1000], duration: 260, type: 'sine' }
+                }
+            },
+            'high-contrast': {
+                name: 'High Contrast (Classroom)',
+                icon: '⚫',
+                classroom: true,
+                primary: '#ffffff',
+                secondary: '#cccccc',
+                tertiary: '#eeeeee',
+                background: '#000000',
+                backgroundLight: '#1a1a1a',
+                backgroundDark: '#000000',
+                accent: '#ffffff',
+                border: '#ffffff',
+                shadow: 'rgba(255, 255, 255, 0.3)',
+                shadowStrong: 'rgba(255, 255, 255, 0.5)',
+                glow: 'rgba(255, 255, 255, 0.4)',
+                error: '#ff4444',
+                success: '#44ff44',
+                scanline: 'rgba(255, 255, 255, 0.02)',
+                crtRgb: 'rgba(255, 255, 255, 0.01)',
+                sounds: {
+                    click: { freq: 850, duration: 95, type: 'square' },
+                    hover: { freq: 650, duration: 48, type: 'square' },
+                    success: { freq: [650, 850, 1050, 1250], duration: 145, type: 'square' },
+                    error: { freq: [420, 340, 260, 180], duration: 195, type: 'square' },
+                    ambient: { freq: 130, type: 'square', volume: 0.16, modulation: 0.35 },
+                    random: { freq: [1250, 1400, 1550, 1700], duration: 78, type: 'square' },
+                    gameOver: { freq: [850, 950, 1050, 1150, 1250], duration: 245, type: 'square' }
+                }
+            },
+            'sepia-classroom': {
+                name: 'Sepia Classroom',
+                icon: '📚',
+                classroom: true,
+                primary: '#5c4033',
+                secondary: '#8b6f47',
+                tertiary: '#704214',
+                background: '#f4ecd8',
+                backgroundLight: '#ffffff',
+                backgroundDark: '#e8dcc8',
+                accent: '#5c4033',
+                border: '#8b6f47',
+                shadow: 'rgba(92, 64, 51, 0.3)',
+                shadowStrong: 'rgba(92, 64, 51, 0.5)',
+                glow: 'rgba(92, 64, 51, 0.4)',
+                error: '#b22222',
+                success: '#228b22',
+                scanline: 'rgba(92, 64, 51, 0.02)',
+                crtRgb: 'rgba(92, 64, 51, 0.01)',
+                sounds: {
+                    click: { freq: 550, duration: 110, type: 'sine' },
+                    hover: { freq: 400, duration: 55, type: 'sine' },
+                    success: { freq: [450, 550, 700, 850], duration: 170, type: 'triangle' },
+                    error: { freq: [280, 220, 160, 100], duration: 215, type: 'sine' },
+                    ambient: { freq: 70, type: 'sine', volume: 0.08, modulation: 0.12 },
+                    random: { freq: [950, 1100, 1250, 1400], duration: 88, type: 'sine' },
+                    gameOver: { freq: [550, 650, 750, 850, 950], duration: 265, type: 'sine' }
+                }
+            },
+            'future-blue': {
+                name: 'Future Blue (Presentation)',
+                icon: '🌌',
+                classroom: true,
+                primary: '#4da6ff',
+                secondary: '#3385cc',
+                tertiary: '#66b3ff',
+                background: '#0d1929',
+                backgroundLight: '#1a2d3d',
+                backgroundDark: '#060c14',
+                accent: '#4da6ff',
+                border: '#4da6ff',
+                shadow: 'rgba(77, 166, 255, 0.4)',
+                shadowStrong: 'rgba(77, 166, 255, 0.6)',
+                glow: 'rgba(77, 166, 255, 0.5)',
+                error: '#ff5555',
+                success: '#55ff55',
+                scanline: 'rgba(77, 166, 255, 0.03)',
+                crtRgb: 'rgba(77, 166, 255, 0.02)',
+                sounds: {
+                    click: { freq: 950, duration: 85, type: 'triangle' },
+                    hover: { freq: 750, duration: 43, type: 'triangle' },
+                    success: { freq: [750, 950, 1150, 1350], duration: 135, type: 'triangle' },
+                    error: { freq: [480, 400, 320, 240], duration: 185, type: 'triangle' },
+                    ambient: { freq: 150, type: 'triangle', volume: 0.17, modulation: 0.42 },
+                    random: { freq: [1350, 1500, 1650, 1800], duration: 73, type: 'triangle' },
+                    gameOver: { freq: [950, 1050, 1150, 1250, 1350], duration: 235, type: 'triangle' }
+                }
+            }
+        };
+
+        // Apply theme to CSS variables
+        function applyTheme(themeId) {
+            const theme = themes[themeId];
+            if (!theme) return;
+
+            const root = document.documentElement;
+            root.style.setProperty('--theme-primary', theme.primary);
+            root.style.setProperty('--theme-secondary', theme.secondary);
+            root.style.setProperty('--theme-tertiary', theme.tertiary);
+            root.style.setProperty('--theme-background', theme.background);
+            root.style.setProperty('--theme-background-light', theme.backgroundLight);
+            root.style.setProperty('--theme-background-dark', theme.backgroundDark);
+            root.style.setProperty('--theme-accent', theme.accent);
+            root.style.setProperty('--theme-border', theme.border);
+            root.style.setProperty('--theme-shadow', theme.shadow);
+            root.style.setProperty('--theme-shadow-strong', theme.shadowStrong);
+            root.style.setProperty('--theme-glow', theme.glow);
+            root.style.setProperty('--theme-error', theme.error);
+            root.style.setProperty('--theme-success', theme.success);
+            root.style.setProperty('--theme-scanline', theme.scanline);
+            root.style.setProperty('--theme-crt-rgb', theme.crtRgb);
+
+            // Update current theme for sound system
+            currentTheme = themeId;
+
+            // Restart ambient sound with new theme
+            if (ambientOscillator) {
+                stopAmbientSound();
+                startAmbientSound();
+            }
+
+            // Save to localStorage
+            localStorage.setItem('selectedTheme', themeId);
+
+            // Update active state in UI
+            updateThemeUI(themeId);
+
+            // Play theme switch sound
+            playThemedSound('click');
+        }
+
+        // Update theme selector UI
+        function updateThemeUI(activeThemeId) {
+            const themeOptions = document.querySelectorAll('.theme-option');
+            themeOptions.forEach(option => {
+                if (option.dataset.theme === activeThemeId) {
+                    option.classList.add('active');
+                } else {
+                    option.classList.remove('active');
+                }
+            });
+        }
+
+        // Initialize theme selector
+        function initThemeSelector() {
+            const themeSelector = document.getElementById('themeSelector');
+            if (!themeSelector) return;
+
+            // Create theme options
+            Object.entries(themes).forEach(([themeId, theme]) => {
+                const option = document.createElement('div');
+                option.className = 'theme-option';
+                option.dataset.theme = themeId;
+                option.onclick = () => applyTheme(themeId);
+
+                const preview = document.createElement('div');
+                preview.className = 'theme-preview';
+                
+                // Create color boxes for preview
+                const colors = [theme.primary, theme.secondary, theme.background];
+                colors.forEach(color => {
+                    const box = document.createElement('div');
+                    box.className = 'theme-color-box';
+                    box.style.backgroundColor = color;
+                    preview.appendChild(box);
+                });
+
+                const name = document.createElement('div');
+                name.className = 'theme-name';
+                name.textContent = theme.name;
+
+                const icon = document.createElement('div');
+                icon.className = 'theme-icon';
+                icon.textContent = theme.icon;
+
+                option.appendChild(preview);
+                option.appendChild(name);
+                option.appendChild(icon);
+                themeSelector.appendChild(option);
+            });
+
+            // Load saved theme or use default
+            const savedTheme = localStorage.getItem('selectedTheme') || 'classic-green';
+            applyTheme(savedTheme);
+        }
+
+        // Initialize theme system on page load
+        document.addEventListener('DOMContentLoaded', initThemeSelector);
+
+        // ============================================
+        // THEME-AWARE SOUND SYSTEM
+        // ============================================
+
+        // Play theme-specific sound
+        function playThemedSound(soundType) {
+            if (!soundEnabled || !ensureAudioContext()) return;
+            
+            const theme = themes[currentTheme];
+            if (!theme || !theme.sounds || !theme.sounds[soundType]) return;
+            
+            const soundConfig = theme.sounds[soundType];
+            
+            if (Array.isArray(soundConfig.freq)) {
+                // Multi-tone sound (sequence)
+                soundConfig.freq.forEach((freq, index) => {
+                    setTimeout(() => {
+                        playThemedTone(freq, soundConfig.duration, soundConfig.type);
+                    }, index * 80);
+                });
+            } else {
+                // Single tone
+                playThemedTone(soundConfig.freq, soundConfig.duration, soundConfig.type);
+            }
+        }
+
+        // Play a single themed tone
+        function playThemedTone(frequency, duration, waveType = 'square') {
+            if (!soundEnabled || !ensureAudioContext()) return;
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+            oscillator.type = waveType;
+            
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
+            
+            oscillator.start();
+            oscillator.stop(audioContext.currentTime + duration / 1000);
+        }
+
+        // Update ambient sound to use theme settings
+        function startAmbientSound() {
+            console.log('startAmbientSound called:', {
+                soundEnabled,
+                audioContextExists: !!audioContext,
+                audioContextState: audioContext?.state,
+                ambientOscillatorExists: !!ambientOscillator,
+                currentTheme
+            });
+            
+            if (!soundEnabled || !audioContext || ambientOscillator) {
+                console.log('startAmbientSound early return');
+                return;
+            }
+
+            const theme = themes[currentTheme];
+            if (!theme || !theme.sounds || !theme.sounds.ambient) {
+                console.log('startAmbientSound: no theme or ambient config');
+                return;
+            }
+
+            const ambientConfig = theme.sounds.ambient;
+            console.log('Starting ambient with config:', ambientConfig);
+
+            ambientOscillator = audioContext.createOscillator();
+            ambientGain = audioContext.createGain();
+            const ambientFilter = audioContext.createBiquadFilter();
+            
+            // Add LFO (Low Frequency Oscillator) for modulation if specified
+            if (ambientConfig.modulation) {
+                ambientLFO = audioContext.createOscillator();
+                ambientLFOGain = audioContext.createGain();
+                
+                ambientLFO.frequency.setValueAtTime(0.5, audioContext.currentTime); // Slow modulation
+                ambientLFOGain.gain.setValueAtTime(ambientConfig.freq * ambientConfig.modulation, audioContext.currentTime);
+                
+                ambientLFO.connect(ambientLFOGain);
+                ambientLFOGain.connect(ambientOscillator.frequency);
+                ambientLFO.start();
+            }
+
+            ambientOscillator.type = ambientConfig.type;
+            ambientOscillator.frequency.setValueAtTime(ambientConfig.freq, audioContext.currentTime);
+
+            ambientFilter.type = 'lowpass';
+            ambientFilter.frequency.setValueAtTime(120 + ambientConfig.freq * 0.5, audioContext.currentTime);
+
+            ambientOscillator.connect(ambientFilter);
+            ambientFilter.connect(ambientGain);
+            ambientGain.connect(audioContext.destination);
+
+            ambientGain.gain.setValueAtTime(ambientConfig.volume, audioContext.currentTime);
+
+            ambientOscillator.start();
+            
+            console.log('Ambient sound started:', {
+                freq: ambientConfig.freq,
+                type: ambientConfig.type,
+                volume: ambientConfig.volume,
+                modulation: ambientConfig.modulation
+            });
+        }
+
+        // Update playBeep to use themed sound
+        function playBeep() {
+            playThemedSound('click');
+        }
+
+        // ============================================
+        // END THEME-AWARE SOUND SYSTEM
+        // ============================================
+
+        // ============================================
+        // END THEME MANAGEMENT SYSTEM
+        // ============================================
+
         // Apply ULTRA VISIBLE glitch effects
         function applyRandomGlitch() {
             const elements = document.querySelectorAll('.scene-title, .terminal-title, h3, .roles-title, .btn, .timer-display');
@@ -3050,35 +3617,25 @@
         // Background ambient sound system
         let ambientOscillator = null;
         let ambientGain = null;
-
-        function startAmbientSound() {
-            if (!soundEnabled || !ensureAudioContext() || ambientOscillator) return;
-
-            ambientOscillator = audioContext.createOscillator();
-            ambientGain = audioContext.createGain();
-            const ambientFilter = audioContext.createBiquadFilter();
-
-            ambientOscillator.type = 'sawtooth'; // Changed from 'brown' which is not valid
-            ambientOscillator.frequency.setValueAtTime(60, audioContext.currentTime);
-
-            ambientFilter.type = 'lowpass';
-            ambientFilter.frequency.setValueAtTime(100, audioContext.currentTime);
-
-            ambientOscillator.connect(ambientFilter);
-            ambientFilter.connect(ambientGain);
-            ambientGain.connect(audioContext.destination);
-
-            ambientGain.gain.setValueAtTime(0.75, audioContext.currentTime); // Increased volume to 0.75 (was 0.6, originally 0.1)
-
-            ambientOscillator.start();
-        }
+        let ambientLFO = null;
+        let ambientLFOGain = null;
 
         function stopAmbientSound() {
             if (ambientOscillator) {
-                ambientOscillator.stop();
+                try {
+                    ambientOscillator.stop();
+                } catch(e) {}
                 ambientOscillator = null;
-                ambientGain = null;
             }
+            if (ambientLFO) {
+                try {
+                    ambientLFO.stop();
+                } catch(e) {}
+                ambientLFO = null;
+            }
+            ambientGain = null;
+            ambientLFOGain = null;
+            console.log('Ambient sound stopped');
         }
 
         // Touch/Click Easter Egg - Triple click on timer display
@@ -3642,6 +4199,34 @@
                 return;
             }
             
+            // Add error handler for video loading issues
+            video.addEventListener('error', function(e) {
+                console.error('[INTRO] Video error:', e);
+                console.error('[INTRO] Error details:', {
+                    error: video.error,
+                    networkState: video.networkState,
+                    readyState: video.readyState,
+                    currentSrc: video.currentSrc
+                });
+                
+                // Show helpful message
+                prompt.innerHTML = '<span style="color: #ff0000;">⚠ Video file not found or incompatible format</span><br><br><button onclick="document.getElementById(\'introOverlay\').style.display=\'none\'" style="background: #00ff00; color: #000; border: 2px solid #00ff00; padding: 10px 20px; font-family: \'Orbitron\', monospace; cursor: pointer; border-radius: 4px;">SKIP TO APP</button>';
+                prompt.style.display = 'block';
+            });
+            
+            // Log video loading progress
+            video.addEventListener('loadstart', function() {
+                console.log('[INTRO] Video loading started, src:', video.currentSrc);
+            });
+            
+            video.addEventListener('loadedmetadata', function() {
+                console.log('[INTRO] Video metadata loaded, duration:', video.duration, 'seconds');
+            });
+            
+            video.addEventListener('canplay', function() {
+                console.log('[INTRO] Video ready to play');
+            });
+            
             console.log('%c[INTRO] Starting (always show on refresh)', 'color: #00ff00; font-weight: bold');
             overlay.style.display = 'flex';
             prompt.style.display = 'none';
@@ -4169,10 +4754,6 @@
             oscillator.stop(audioContext.currentTime + duration / 1000);
         }
 
-        function playBeep() {
-            playTone(800, 100);
-        }
-
         function playMultiTone(frequencies, duration = 100) {
             frequencies.forEach((freq, index) => {
                 setTimeout(() => playTone(freq, duration), index * 50);
@@ -4180,15 +4761,15 @@
         }
 
         function playSuccess() {
-            playMultiTone([400, 600, 800, 1000], 150);
+            playThemedSound('success');
         }
 
         function playTransition() {
-            playMultiTone([200, 400, 600], 80);
+            playThemedSound('click');
         }
 
         function playClick() {
-            playTone(800, 30);
+            playThemedSound('hover');
         }
 
         function playWarning() {
@@ -9007,7 +9588,10 @@ function renderWriteScene() {
             const gameOverBtn = document.getElementById('odGameOver');
             if (gameOverBtn) {
                 gameOverBtn.addEventListener('click', () => {
-                    if (typeof audio === 'object' && typeof audio.click === 'function') {
+                    // Play themed game over sound
+                    if (typeof playThemedSound === 'function') {
+                        playThemedSound('gameOver');
+                    } else if (typeof audio === 'object' && typeof audio.click === 'function') {
                         audio.click();
                     }
                     showGameOver();
@@ -9025,10 +9609,30 @@ function renderWriteScene() {
                 // Enable sound now that we have a user gesture
                 soundEnabled = true;
                 
-                // Initialize audio context
-                if (ensureAudioContext()) {
-                    console.log('Audio context initialized');
+                // Create audio context if it doesn't exist
+                if (!audioContext) {
+                    try {
+                        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                        console.log('Audio context created, state:', audioContext.state);
+                    } catch (e) {
+                        console.log('Audio not supported:', e);
+                        soundEnabled = false;
+                        return;
+                    }
+                }
+                
+                // Now resume and start ambient sound
+                if (audioContext.state === 'running') {
+                    console.log('Audio context already running, starting ambient');
                     startAmbientSound();
+                } else if (audioContext.state === 'suspended') {
+                    console.log('Resuming suspended audio context');
+                    audioContext.resume().then(() => {
+                        console.log('Audio context resumed successfully, state:', audioContext.state);
+                        startAmbientSound();
+                    }).catch(err => {
+                        console.log('Failed to resume audio context:', err);
+                    });
                 }
                 
                 // Attempt fullscreen on the first user interaction
@@ -10264,7 +10868,12 @@ function renderWriteScene() {
             const randomBtn = document.getElementById('odRandom');
             if (randomBtn) {
               randomBtn.addEventListener('click', () => {
-                audio.click();
+                // Play themed random sound
+                if (typeof playThemedSound === 'function') {
+                    playThemedSound('random');
+                } else {
+                    audio.click();
+                }
                 audio.ensureContext();
                 // Initialize voice only if audio (voice) is enabled.  Some browsers
                 // only load voices after a user gesture, so calling init here
@@ -10292,7 +10901,11 @@ function renderWriteScene() {
                 const overlay = document.getElementById('odOverlay');
                 const dismiss = () => {
                   ui.showOverlay(false);
-                  audio.click();
+                  if (typeof playThemedSound === 'function') {
+                      playThemedSound('click');
+                  } else {
+                      audio.click();
+                  }
                   
                   // ✅ Show score panel (collapsed) after overlay closes
                   setTimeout(() => {
@@ -10845,8 +11458,12 @@ COACH: Iris Wang
             // Create fireworks
             createFireworks();
             
-            // Play victory sound using existing audio system
-            if (STATE.audioCtx && typeof audio === 'object' && typeof audio.click === 'function') {
+            // Play victory sound using themed success sound
+            if (typeof playThemedSound === 'function') {
+                playThemedSound('success');
+                setTimeout(() => playThemedSound('success'), 300);
+                setTimeout(() => playThemedSound('success'), 600);
+            } else if (STATE.audioCtx && typeof audio === 'object' && typeof audio.click === 'function') {
                 audio.click();
                 setTimeout(() => audio.click(), 200);
                 setTimeout(() => audio.click(), 400);
