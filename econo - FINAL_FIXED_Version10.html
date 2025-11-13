@@ -3143,11 +3143,11 @@
                 sounds: {
                     click: { freq: 800, duration: 100, type: 'square' },
                     hover: { freq: 600, duration: 50, type: 'square' },
-                    success: { freq: [600, 800, 1000], duration: 150, type: 'sine' },
-                    error: { freq: [400, 300, 200], duration: 200, type: 'sawtooth' },
-                    ambient: { freq: 60, type: 'sawtooth', volume: 0.05 },
-                    random: { freq: [1200, 1400, 1600], duration: 100, type: 'triangle' },
-                    gameOver: { freq: [800, 600, 400, 200], duration: 300, type: 'square' }
+                    success: { freq: [600, 800, 1000, 1200], duration: 150, type: 'sine' },
+                    error: { freq: [400, 300, 200, 100], duration: 200, type: 'sawtooth' },
+                    ambient: { freq: 60, type: 'sawtooth', volume: 0.05, modulation: 0.3 },
+                    random: { freq: [1200, 1400, 1600, 1800], duration: 80, type: 'triangle' },
+                    gameOver: { freq: [800, 900, 1000, 1100, 1200], duration: 250, type: 'square' }
                 }
             },
             'amber-mono': {
@@ -3172,11 +3172,11 @@
                 sounds: {
                     click: { freq: 700, duration: 120, type: 'sine' },
                     hover: { freq: 500, duration: 60, type: 'sine' },
-                    success: { freq: [550, 700, 900], duration: 180, type: 'triangle' },
-                    error: { freq: [350, 250, 150], duration: 220, type: 'sine' },
-                    ambient: { freq: 50, type: 'triangle', volume: 0.04 },
-                    random: { freq: [1100, 1300, 1500], duration: 110, type: 'sine' },
-                    gameOver: { freq: [700, 550, 350, 180], duration: 320, type: 'triangle' }
+                    success: { freq: [550, 700, 850, 1000], duration: 180, type: 'triangle' },
+                    error: { freq: [350, 280, 210, 140], duration: 220, type: 'sine' },
+                    ambient: { freq: 50, type: 'triangle', volume: 0.04, modulation: 0.2 },
+                    random: { freq: [1100, 1250, 1400, 1550], duration: 90, type: 'sine' },
+                    gameOver: { freq: [700, 800, 900, 1000, 1100], duration: 270, type: 'triangle' }
                 }
             },
             'blue-matrix': {
@@ -3201,11 +3201,11 @@
                 sounds: {
                     click: { freq: 900, duration: 90, type: 'sine' },
                     hover: { freq: 700, duration: 45, type: 'sine' },
-                    success: { freq: [700, 900, 1200], duration: 140, type: 'sine' },
-                    error: { freq: [450, 350, 250], duration: 190, type: 'triangle' },
-                    ambient: { freq: 70, type: 'sine', volume: 0.06 },
-                    random: { freq: [1300, 1500, 1700], duration: 95, type: 'sine' },
-                    gameOver: { freq: [900, 700, 450, 250], duration: 280, type: 'sine' }
+                    success: { freq: [700, 900, 1100, 1300], duration: 140, type: 'sine' },
+                    error: { freq: [450, 360, 270, 180], duration: 190, type: 'triangle' },
+                    ambient: { freq: 70, type: 'sine', volume: 0.06, modulation: 0.4 },
+                    random: { freq: [1300, 1450, 1600, 1750], duration: 75, type: 'sine' },
+                    gameOver: { freq: [900, 1000, 1100, 1200, 1300], duration: 240, type: 'sine' }
                 }
             },
             'purple-cyber': {
@@ -3230,11 +3230,11 @@
                 sounds: {
                     click: { freq: 1000, duration: 80, type: 'triangle' },
                     hover: { freq: 800, duration: 40, type: 'triangle' },
-                    success: { freq: [800, 1000, 1300], duration: 130, type: 'triangle' },
-                    error: { freq: [500, 400, 300], duration: 180, type: 'sawtooth' },
-                    ambient: { freq: 80, type: 'triangle', volume: 0.07 },
-                    random: { freq: [1400, 1600, 1800], duration: 90, type: 'triangle' },
-                    gameOver: { freq: [1000, 800, 500, 300], duration: 260, type: 'triangle' }
+                    success: { freq: [800, 1000, 1200, 1400], duration: 130, type: 'triangle' },
+                    error: { freq: [500, 420, 340, 260], duration: 180, type: 'sawtooth' },
+                    ambient: { freq: 80, type: 'triangle', volume: 0.07, modulation: 0.5 },
+                    random: { freq: [1400, 1550, 1700, 1850], duration: 70, type: 'triangle' },
+                    gameOver: { freq: [1000, 1100, 1200, 1300, 1400], duration: 230, type: 'triangle' }
                 }
             },
             'white-paper': {
@@ -3259,11 +3259,11 @@
                 sounds: {
                     click: { freq: 600, duration: 100, type: 'sine' },
                     hover: { freq: 450, duration: 50, type: 'sine' },
-                    success: { freq: [500, 650, 850], duration: 160, type: 'sine' },
-                    error: { freq: [300, 220, 160], duration: 210, type: 'sine' },
-                    ambient: { freq: 40, type: 'sine', volume: 0.03 },
-                    random: { freq: [1000, 1200, 1400], duration: 105, type: 'sine' },
-                    gameOver: { freq: [600, 500, 300, 160], duration: 310, type: 'sine' }
+                    success: { freq: [500, 600, 750, 900], duration: 160, type: 'sine' },
+                    error: { freq: [300, 240, 180, 120], duration: 210, type: 'sine' },
+                    ambient: { freq: 40, type: 'sine', volume: 0.03, modulation: 0.15 },
+                    random: { freq: [1000, 1150, 1300, 1450], duration: 85, type: 'sine' },
+                    gameOver: { freq: [600, 700, 800, 900, 1000], duration: 260, type: 'sine' }
                 }
             },
             'high-contrast': {
@@ -3288,11 +3288,11 @@
                 sounds: {
                     click: { freq: 850, duration: 95, type: 'square' },
                     hover: { freq: 650, duration: 48, type: 'square' },
-                    success: { freq: [650, 850, 1100], duration: 145, type: 'square' },
-                    error: { freq: [420, 320, 220], duration: 195, type: 'square' },
-                    ambient: { freq: 65, type: 'square', volume: 0.055 },
-                    random: { freq: [1250, 1450, 1650], duration: 98, type: 'square' },
-                    gameOver: { freq: [850, 650, 420, 220], duration: 290, type: 'square' }
+                    success: { freq: [650, 850, 1050, 1250], duration: 145, type: 'square' },
+                    error: { freq: [420, 340, 260, 180], duration: 195, type: 'square' },
+                    ambient: { freq: 65, type: 'square', volume: 0.055, modulation: 0.35 },
+                    random: { freq: [1250, 1400, 1550, 1700], duration: 78, type: 'square' },
+                    gameOver: { freq: [850, 950, 1050, 1150, 1250], duration: 245, type: 'square' }
                 }
             },
             'sepia-classroom': {
@@ -3317,11 +3317,11 @@
                 sounds: {
                     click: { freq: 550, duration: 110, type: 'sine' },
                     hover: { freq: 400, duration: 55, type: 'sine' },
-                    success: { freq: [450, 600, 800], duration: 170, type: 'triangle' },
-                    error: { freq: [280, 200, 140], duration: 215, type: 'sine' },
-                    ambient: { freq: 35, type: 'sine', volume: 0.025 },
-                    random: { freq: [950, 1150, 1350], duration: 108, type: 'sine' },
-                    gameOver: { freq: [550, 450, 280, 140], duration: 315, type: 'sine' }
+                    success: { freq: [450, 550, 700, 850], duration: 170, type: 'triangle' },
+                    error: { freq: [280, 220, 160, 100], duration: 215, type: 'sine' },
+                    ambient: { freq: 35, type: 'sine', volume: 0.025, modulation: 0.12 },
+                    random: { freq: [950, 1100, 1250, 1400], duration: 88, type: 'sine' },
+                    gameOver: { freq: [550, 650, 750, 850, 950], duration: 265, type: 'sine' }
                 }
             },
             'future-blue': {
@@ -3346,11 +3346,11 @@
                 sounds: {
                     click: { freq: 950, duration: 85, type: 'triangle' },
                     hover: { freq: 750, duration: 43, type: 'triangle' },
-                    success: { freq: [750, 950, 1250], duration: 135, type: 'triangle' },
-                    error: { freq: [480, 380, 280], duration: 185, type: 'triangle' },
-                    ambient: { freq: 75, type: 'triangle', volume: 0.058 },
-                    random: { freq: [1350, 1550, 1750], duration: 93, type: 'triangle' },
-                    gameOver: { freq: [950, 750, 480, 280], duration: 270, type: 'triangle' }
+                    success: { freq: [750, 950, 1150, 1350], duration: 135, type: 'triangle' },
+                    error: { freq: [480, 400, 320, 240], duration: 185, type: 'triangle' },
+                    ambient: { freq: 75, type: 'triangle', volume: 0.058, modulation: 0.42 },
+                    random: { freq: [1350, 1500, 1650, 1800], duration: 73, type: 'triangle' },
+                    gameOver: { freq: [950, 1050, 1150, 1250, 1350], duration: 235, type: 'triangle' }
                 }
             }
         };
@@ -3512,12 +3512,27 @@
             ambientOscillator = audioContext.createOscillator();
             ambientGain = audioContext.createGain();
             const ambientFilter = audioContext.createBiquadFilter();
+            
+            // Add LFO (Low Frequency Oscillator) for modulation if specified
+            let lfo = null;
+            let lfoGain = null;
+            if (ambientConfig.modulation) {
+                lfo = audioContext.createOscillator();
+                lfoGain = audioContext.createGain();
+                
+                lfo.frequency.setValueAtTime(0.5, audioContext.currentTime); // Slow modulation
+                lfoGain.gain.setValueAtTime(ambientConfig.freq * ambientConfig.modulation, audioContext.currentTime);
+                
+                lfo.connect(lfoGain);
+                lfoGain.connect(ambientOscillator.frequency);
+                lfo.start();
+            }
 
             ambientOscillator.type = ambientConfig.type;
             ambientOscillator.frequency.setValueAtTime(ambientConfig.freq, audioContext.currentTime);
 
             ambientFilter.type = 'lowpass';
-            ambientFilter.frequency.setValueAtTime(100, audioContext.currentTime);
+            ambientFilter.frequency.setValueAtTime(120 + ambientConfig.freq * 0.5, audioContext.currentTime);
 
             ambientOscillator.connect(ambientFilter);
             ambientFilter.connect(ambientGain);
@@ -9502,7 +9517,10 @@ function renderWriteScene() {
             const gameOverBtn = document.getElementById('odGameOver');
             if (gameOverBtn) {
                 gameOverBtn.addEventListener('click', () => {
-                    if (typeof audio === 'object' && typeof audio.click === 'function') {
+                    // Play themed game over sound
+                    if (typeof playThemedSound === 'function') {
+                        playThemedSound('gameOver');
+                    } else if (typeof audio === 'object' && typeof audio.click === 'function') {
                         audio.click();
                     }
                     showGameOver();
@@ -10759,7 +10777,12 @@ function renderWriteScene() {
             const randomBtn = document.getElementById('odRandom');
             if (randomBtn) {
               randomBtn.addEventListener('click', () => {
-                audio.click();
+                // Play themed random sound
+                if (typeof playThemedSound === 'function') {
+                    playThemedSound('random');
+                } else {
+                    audio.click();
+                }
                 audio.ensureContext();
                 // Initialize voice only if audio (voice) is enabled.  Some browsers
                 // only load voices after a user gesture, so calling init here
@@ -10787,7 +10810,11 @@ function renderWriteScene() {
                 const overlay = document.getElementById('odOverlay');
                 const dismiss = () => {
                   ui.showOverlay(false);
-                  audio.click();
+                  if (typeof playThemedSound === 'function') {
+                      playThemedSound('click');
+                  } else {
+                      audio.click();
+                  }
                   
                   // ✅ Show score panel (collapsed) after overlay closes
                   setTimeout(() => {
@@ -11340,8 +11367,12 @@ COACH: Iris Wang
             // Create fireworks
             createFireworks();
             
-            // Play victory sound using existing audio system
-            if (STATE.audioCtx && typeof audio === 'object' && typeof audio.click === 'function') {
+            // Play victory sound using themed success sound
+            if (typeof playThemedSound === 'function') {
+                playThemedSound('success');
+                setTimeout(() => playThemedSound('success'), 300);
+                setTimeout(() => playThemedSound('success'), 600);
+            } else if (STATE.audioCtx && typeof audio === 'object' && typeof audio.click === 'function') {
                 audio.click();
                 setTimeout(() => audio.click(), 200);
                 setTimeout(() => audio.click(), 400);
