@@ -3502,12 +3502,27 @@
 
         // Update ambient sound to use theme settings
         function startAmbientSound() {
-            if (!soundEnabled || !ensureAudioContext() || ambientOscillator) return;
+            console.log('startAmbientSound called:', {
+                soundEnabled,
+                audioContextExists: !!audioContext,
+                audioContextState: audioContext?.state,
+                ambientOscillatorExists: !!ambientOscillator,
+                currentTheme
+            });
+            
+            if (!soundEnabled || !audioContext || ambientOscillator) {
+                console.log('startAmbientSound early return');
+                return;
+            }
 
             const theme = themes[currentTheme];
-            if (!theme || !theme.sounds || !theme.sounds.ambient) return;
+            if (!theme || !theme.sounds || !theme.sounds.ambient) {
+                console.log('startAmbientSound: no theme or ambient config');
+                return;
+            }
 
             const ambientConfig = theme.sounds.ambient;
+            console.log('Starting ambient with config:', ambientConfig);
 
             ambientOscillator = audioContext.createOscillator();
             ambientGain = audioContext.createGain();
