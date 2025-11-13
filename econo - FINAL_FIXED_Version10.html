@@ -1465,20 +1465,20 @@
         .image-modal-img {
             max-width: 100%;
             max-height: 80vh;
-            border: 3px solid #00ff00;
+            border: 3px solid var(--theme-border);
             border-radius: 5px;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+            box-shadow: 0 0 30px var(--theme-shadow-strong);
             cursor: zoom-in;
         }
 
         .image-modal-caption {
             margin-top: var(--space-4);
-            color: #00ff00;
+            color: var(--theme-primary);
             font-size: var(--text-base);
             text-align: center;
-            background: #000;
+            background: var(--theme-background);
             padding: var(--space-3) var(--space-5);
-            border: 1px solid #00ff00;
+            border: 1px solid var(--theme-border);
             border-radius: 3px;
         }
 
@@ -1486,9 +1486,9 @@
             position: absolute;
             top: -40px;
             right: 0;
-            background: #000;
-            color: #00ff00;
-            border: 2px solid #00ff00;
+            background: var(--theme-background);
+            color: var(--theme-primary);
+            border: 2px solid var(--theme-border);
             width: 36px;
             height: 36px;
             border-radius: 50%;
@@ -1501,9 +1501,9 @@
         }
 
         .image-modal-close:hover {
-            background: #001100;
+            background: var(--theme-background-light);
             transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 15px var(--theme-glow);
         }
 
         /* IMAGE BUTTONS */
@@ -1591,7 +1591,7 @@
             top: 140px;
             left: var(--space-4);
             background: rgba(0, 0, 0, 0.95);
-            border: 1px solid #00ff00;
+            border: 1px solid var(--theme-border);
             padding: var(--space-3);
             border-radius: 3px;
             z-index: 1400;
@@ -1611,8 +1611,8 @@
             top: 140px;
             left: 5px;
             background: rgba(0, 0, 0, 0.9);
-            border: 1px solid #00ff00;
-            color: #00ff00;
+            border: 1px solid var(--theme-border);
+            color: var(--theme-primary);
             padding: var(--space-2);
             border-radius: 3px;
             cursor: pointer;
@@ -1629,8 +1629,8 @@
         }
 
         .section-toggle:hover {
-            background: #001100;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
+            background: var(--theme-background-light);
+            box-shadow: 0 0 10px var(--theme-shadow);
         }
 
         /* Adjust toggle position when menu is open */
@@ -1647,23 +1647,23 @@
             cursor: pointer;
             transition: all 0.2s ease;
             font-size: 10px;
-            color: #00aa00;
+            color: var(--theme-secondary);
             border: 1px solid transparent;
         }
 
         .section-indicator.active {
-            background: #001100;
-            border: 1px solid #00ff00;
-            color: #00ff00;
+            background: var(--theme-background-light);
+            border: 1px solid var(--theme-border);
+            color: var(--theme-primary);
         }
 
         .section-indicator.completed {
-            color: #00ff00;
+            color: var(--theme-primary);
         }
 
         .section-indicator:hover {
-            background: #001100;
-            border: 1px solid #00ff00;
+            background: var(--theme-background-light);
+            border: 1px solid var(--theme-border);
         }
 
         .section-icon {
@@ -1740,11 +1740,11 @@
        ============================================ */
     /* HAL Variables (compatible with existing) */
     .od-control-bar {
-      --od-ink: #00ff65;
-      --od-ink-soft: #21c96c;
-      --od-bg: #000;
-      --od-cyan: #00fff6;
-      --od-red: #ff2a2a;
+      --od-ink: var(--theme-primary);
+      --od-ink-soft: var(--theme-secondary);
+      --od-bg: var(--theme-background);
+      --od-cyan: var(--theme-accent);
+      --od-red: var(--theme-error);
     }
     /* Control Bar - Positioned to avoid conflicts */
     .od-control-bar {
@@ -2619,9 +2619,9 @@
 
     .winner-score {
         font-size: 36px;
-        color: #00ff00;
+        color: var(--theme-primary);
         font-weight: bold;
-        text-shadow: 0 0 20px #00ff00;
+        text-shadow: 0 0 20px var(--theme-primary);
         margin: 15px 0;
     }
 
@@ -3118,6 +3118,8 @@
         // THEME MANAGEMENT SYSTEM
         // ============================================
         
+        let currentTheme = 'classic-green';  // Track current theme for sound system
+        
         const themes = {
             'classic-green': {
                 name: 'Classic Green Terminal',
@@ -3137,7 +3139,16 @@
                 error: '#ff0000',
                 success: '#00ff00',
                 scanline: 'rgba(0, 255, 0, 0.03)',
-                crtRgb: 'rgba(0, 255, 0, 0.02)'
+                crtRgb: 'rgba(0, 255, 0, 0.02)',
+                sounds: {
+                    click: { freq: 800, duration: 100, type: 'square' },
+                    hover: { freq: 600, duration: 50, type: 'square' },
+                    success: { freq: [600, 800, 1000], duration: 150, type: 'sine' },
+                    error: { freq: [400, 300, 200], duration: 200, type: 'sawtooth' },
+                    ambient: { freq: 60, type: 'sawtooth', volume: 0.05 },
+                    random: { freq: [1200, 1400, 1600], duration: 100, type: 'triangle' },
+                    gameOver: { freq: [800, 600, 400, 200], duration: 300, type: 'square' }
+                }
             },
             'amber-mono': {
                 name: 'Amber Monochrome',
@@ -3157,7 +3168,16 @@
                 error: '#ff3300',
                 success: '#ffcc00',
                 scanline: 'rgba(255, 170, 0, 0.03)',
-                crtRgb: 'rgba(255, 170, 0, 0.02)'
+                crtRgb: 'rgba(255, 170, 0, 0.02)',
+                sounds: {
+                    click: { freq: 700, duration: 120, type: 'sine' },
+                    hover: { freq: 500, duration: 60, type: 'sine' },
+                    success: { freq: [550, 700, 900], duration: 180, type: 'triangle' },
+                    error: { freq: [350, 250, 150], duration: 220, type: 'sine' },
+                    ambient: { freq: 50, type: 'triangle', volume: 0.04 },
+                    random: { freq: [1100, 1300, 1500], duration: 110, type: 'sine' },
+                    gameOver: { freq: [700, 550, 350, 180], duration: 320, type: 'triangle' }
+                }
             },
             'blue-matrix': {
                 name: 'Blue Matrix',
@@ -3177,7 +3197,16 @@
                 error: '#ff0044',
                 success: '#00ffcc',
                 scanline: 'rgba(0, 204, 255, 0.03)',
-                crtRgb: 'rgba(0, 204, 255, 0.02)'
+                crtRgb: 'rgba(0, 204, 255, 0.02)',
+                sounds: {
+                    click: { freq: 900, duration: 90, type: 'sine' },
+                    hover: { freq: 700, duration: 45, type: 'sine' },
+                    success: { freq: [700, 900, 1200], duration: 140, type: 'sine' },
+                    error: { freq: [450, 350, 250], duration: 190, type: 'triangle' },
+                    ambient: { freq: 70, type: 'sine', volume: 0.06 },
+                    random: { freq: [1300, 1500, 1700], duration: 95, type: 'sine' },
+                    gameOver: { freq: [900, 700, 450, 250], duration: 280, type: 'sine' }
+                }
             },
             'purple-cyber': {
                 name: 'Purple Cyber',
@@ -3197,7 +3226,16 @@
                 error: '#ff0066',
                 success: '#cc00ff',
                 scanline: 'rgba(187, 0, 255, 0.03)',
-                crtRgb: 'rgba(187, 0, 255, 0.02)'
+                crtRgb: 'rgba(187, 0, 255, 0.02)',
+                sounds: {
+                    click: { freq: 1000, duration: 80, type: 'triangle' },
+                    hover: { freq: 800, duration: 40, type: 'triangle' },
+                    success: { freq: [800, 1000, 1300], duration: 130, type: 'triangle' },
+                    error: { freq: [500, 400, 300], duration: 180, type: 'sawtooth' },
+                    ambient: { freq: 80, type: 'triangle', volume: 0.07 },
+                    random: { freq: [1400, 1600, 1800], duration: 90, type: 'triangle' },
+                    gameOver: { freq: [1000, 800, 500, 300], duration: 260, type: 'triangle' }
+                }
             },
             'white-paper': {
                 name: 'White Paper (Classroom)',
@@ -3217,7 +3255,16 @@
                 error: '#cc0000',
                 success: '#006600',
                 scanline: 'rgba(0, 0, 0, 0.02)',
-                crtRgb: 'rgba(0, 0, 0, 0.01)'
+                crtRgb: 'rgba(0, 0, 0, 0.01)',
+                sounds: {
+                    click: { freq: 600, duration: 100, type: 'sine' },
+                    hover: { freq: 450, duration: 50, type: 'sine' },
+                    success: { freq: [500, 650, 850], duration: 160, type: 'sine' },
+                    error: { freq: [300, 220, 160], duration: 210, type: 'sine' },
+                    ambient: { freq: 40, type: 'sine', volume: 0.03 },
+                    random: { freq: [1000, 1200, 1400], duration: 105, type: 'sine' },
+                    gameOver: { freq: [600, 500, 300, 160], duration: 310, type: 'sine' }
+                }
             },
             'high-contrast': {
                 name: 'High Contrast (Classroom)',
@@ -3237,7 +3284,16 @@
                 error: '#ff4444',
                 success: '#44ff44',
                 scanline: 'rgba(255, 255, 255, 0.02)',
-                crtRgb: 'rgba(255, 255, 255, 0.01)'
+                crtRgb: 'rgba(255, 255, 255, 0.01)',
+                sounds: {
+                    click: { freq: 850, duration: 95, type: 'square' },
+                    hover: { freq: 650, duration: 48, type: 'square' },
+                    success: { freq: [650, 850, 1100], duration: 145, type: 'square' },
+                    error: { freq: [420, 320, 220], duration: 195, type: 'square' },
+                    ambient: { freq: 65, type: 'square', volume: 0.055 },
+                    random: { freq: [1250, 1450, 1650], duration: 98, type: 'square' },
+                    gameOver: { freq: [850, 650, 420, 220], duration: 290, type: 'square' }
+                }
             },
             'sepia-classroom': {
                 name: 'Sepia Classroom',
@@ -3257,7 +3313,16 @@
                 error: '#b22222',
                 success: '#228b22',
                 scanline: 'rgba(92, 64, 51, 0.02)',
-                crtRgb: 'rgba(92, 64, 51, 0.01)'
+                crtRgb: 'rgba(92, 64, 51, 0.01)',
+                sounds: {
+                    click: { freq: 550, duration: 110, type: 'sine' },
+                    hover: { freq: 400, duration: 55, type: 'sine' },
+                    success: { freq: [450, 600, 800], duration: 170, type: 'triangle' },
+                    error: { freq: [280, 200, 140], duration: 215, type: 'sine' },
+                    ambient: { freq: 35, type: 'sine', volume: 0.025 },
+                    random: { freq: [950, 1150, 1350], duration: 108, type: 'sine' },
+                    gameOver: { freq: [550, 450, 280, 140], duration: 315, type: 'sine' }
+                }
             },
             'future-blue': {
                 name: 'Future Blue (Presentation)',
@@ -3277,7 +3342,16 @@
                 error: '#ff5555',
                 success: '#55ff55',
                 scanline: 'rgba(77, 166, 255, 0.03)',
-                crtRgb: 'rgba(77, 166, 255, 0.02)'
+                crtRgb: 'rgba(77, 166, 255, 0.02)',
+                sounds: {
+                    click: { freq: 950, duration: 85, type: 'triangle' },
+                    hover: { freq: 750, duration: 43, type: 'triangle' },
+                    success: { freq: [750, 950, 1250], duration: 135, type: 'triangle' },
+                    error: { freq: [480, 380, 280], duration: 185, type: 'triangle' },
+                    ambient: { freq: 75, type: 'triangle', volume: 0.058 },
+                    random: { freq: [1350, 1550, 1750], duration: 93, type: 'triangle' },
+                    gameOver: { freq: [950, 750, 480, 280], duration: 270, type: 'triangle' }
+                }
             }
         };
 
@@ -3303,11 +3377,23 @@
             root.style.setProperty('--theme-scanline', theme.scanline);
             root.style.setProperty('--theme-crt-rgb', theme.crtRgb);
 
+            // Update current theme for sound system
+            currentTheme = themeId;
+
+            // Restart ambient sound with new theme
+            if (ambientOscillator) {
+                stopAmbientSound();
+                startAmbientSound();
+            }
+
             // Save to localStorage
             localStorage.setItem('selectedTheme', themeId);
 
             // Update active state in UI
             updateThemeUI(themeId);
+
+            // Play theme switch sound
+            playThemedSound('click');
         }
 
         // Update theme selector UI
@@ -3369,6 +3455,89 @@
         document.addEventListener('DOMContentLoaded', initThemeSelector);
 
         // ============================================
+        // THEME-AWARE SOUND SYSTEM
+        // ============================================
+
+        // Play theme-specific sound
+        function playThemedSound(soundType) {
+            if (!soundEnabled || !ensureAudioContext()) return;
+            
+            const theme = themes[currentTheme];
+            if (!theme || !theme.sounds || !theme.sounds[soundType]) return;
+            
+            const soundConfig = theme.sounds[soundType];
+            
+            if (Array.isArray(soundConfig.freq)) {
+                // Multi-tone sound (sequence)
+                soundConfig.freq.forEach((freq, index) => {
+                    setTimeout(() => {
+                        playThemedTone(freq, soundConfig.duration, soundConfig.type);
+                    }, index * 80);
+                });
+            } else {
+                // Single tone
+                playThemedTone(soundConfig.freq, soundConfig.duration, soundConfig.type);
+            }
+        }
+
+        // Play a single themed tone
+        function playThemedTone(frequency, duration, waveType = 'square') {
+            if (!soundEnabled || !ensureAudioContext()) return;
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+            oscillator.type = waveType;
+            
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
+            
+            oscillator.start();
+            oscillator.stop(audioContext.currentTime + duration / 1000);
+        }
+
+        // Update ambient sound to use theme settings
+        function startAmbientSound() {
+            if (!soundEnabled || !ensureAudioContext() || ambientOscillator) return;
+
+            const theme = themes[currentTheme];
+            if (!theme || !theme.sounds || !theme.sounds.ambient) return;
+
+            const ambientConfig = theme.sounds.ambient;
+
+            ambientOscillator = audioContext.createOscillator();
+            ambientGain = audioContext.createGain();
+            const ambientFilter = audioContext.createBiquadFilter();
+
+            ambientOscillator.type = ambientConfig.type;
+            ambientOscillator.frequency.setValueAtTime(ambientConfig.freq, audioContext.currentTime);
+
+            ambientFilter.type = 'lowpass';
+            ambientFilter.frequency.setValueAtTime(100, audioContext.currentTime);
+
+            ambientOscillator.connect(ambientFilter);
+            ambientFilter.connect(ambientGain);
+            ambientGain.connect(audioContext.destination);
+
+            ambientGain.gain.setValueAtTime(ambientConfig.volume, audioContext.currentTime);
+
+            ambientOscillator.start();
+        }
+
+        // Update playBeep to use themed sound
+        function playBeep() {
+            playThemedSound('click');
+        }
+
+        // ============================================
+        // END THEME-AWARE SOUND SYSTEM
+        // ============================================
+
+        // ============================================
         // END THEME MANAGEMENT SYSTEM
         // ============================================
 
@@ -3402,28 +3571,6 @@
         // Background ambient sound system
         let ambientOscillator = null;
         let ambientGain = null;
-
-        function startAmbientSound() {
-            if (!soundEnabled || !ensureAudioContext() || ambientOscillator) return;
-
-            ambientOscillator = audioContext.createOscillator();
-            ambientGain = audioContext.createGain();
-            const ambientFilter = audioContext.createBiquadFilter();
-
-            ambientOscillator.type = 'sawtooth'; // Changed from 'brown' which is not valid
-            ambientOscillator.frequency.setValueAtTime(60, audioContext.currentTime);
-
-            ambientFilter.type = 'lowpass';
-            ambientFilter.frequency.setValueAtTime(100, audioContext.currentTime);
-
-            ambientOscillator.connect(ambientFilter);
-            ambientFilter.connect(ambientGain);
-            ambientGain.connect(audioContext.destination);
-
-            ambientGain.gain.setValueAtTime(0.75, audioContext.currentTime); // Increased volume to 0.75 (was 0.6, originally 0.1)
-
-            ambientOscillator.start();
-        }
 
         function stopAmbientSound() {
             if (ambientOscillator) {
@@ -4521,10 +4668,6 @@
             oscillator.stop(audioContext.currentTime + duration / 1000);
         }
 
-        function playBeep() {
-            playTone(800, 100);
-        }
-
         function playMultiTone(frequencies, duration = 100) {
             frequencies.forEach((freq, index) => {
                 setTimeout(() => playTone(freq, duration), index * 50);
@@ -4532,15 +4675,15 @@
         }
 
         function playSuccess() {
-            playMultiTone([400, 600, 800, 1000], 150);
+            playThemedSound('success');
         }
 
         function playTransition() {
-            playMultiTone([200, 400, 600], 80);
+            playThemedSound('click');
         }
 
         function playClick() {
-            playTone(800, 30);
+            playThemedSound('hover');
         }
 
         function playWarning() {
