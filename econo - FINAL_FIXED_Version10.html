@@ -2709,13 +2709,24 @@
          to enter the app. -->
     <div id="introOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.95); display: none; justify-content: center; align-items: center; z-index: 10000;">
       <video id="introVideo" 
-             src="intro.mp4" 
              style="width: 90vw; max-width: 1200px; height: auto; border: 3px solid #fff; box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);" 
              autoplay
              controls
              preload="auto"
              playsinline
              webkit-playsinline>
+        <!-- Multiple source formats for better compatibility -->
+        <source src="intro.mp4" type="video/mp4">
+        <source src="intro.webm" type="video/webm">
+        <source src="intro.ogv" type="video/ogg">
+        <p style="color: #ff0000; font-family: 'Orbitron', monospace;">
+          Your browser does not support the video tag or the video file could not be loaded.
+          <br><br>
+          <button onclick="document.getElementById('introOverlay').style.display='none'" 
+                  style="background: #00ff00; color: #000; border: 2px solid #00ff00; padding: 10px 20px; font-family: 'Orbitron', monospace; cursor: pointer; border-radius: 4px;">
+            SKIP TO APP
+          </button>
+        </p>
       </video>
       <div id="introPrompt" style="position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; color: #00ff00; font-family: 'Orbitron', monospace; font-size: 14px; letter-spacing: 1px; display: none;">Click to play video</div>
     </div>
@@ -4187,6 +4198,34 @@
                 console.error('[INTRO] Elements missing');
                 return;
             }
+            
+            // Add error handler for video loading issues
+            video.addEventListener('error', function(e) {
+                console.error('[INTRO] Video error:', e);
+                console.error('[INTRO] Error details:', {
+                    error: video.error,
+                    networkState: video.networkState,
+                    readyState: video.readyState,
+                    currentSrc: video.currentSrc
+                });
+                
+                // Show helpful message
+                prompt.innerHTML = '<span style="color: #ff0000;">⚠ Video file not found or incompatible format</span><br><br><button onclick="document.getElementById(\'introOverlay\').style.display=\'none\'" style="background: #00ff00; color: #000; border: 2px solid #00ff00; padding: 10px 20px; font-family: \'Orbitron\', monospace; cursor: pointer; border-radius: 4px;">SKIP TO APP</button>';
+                prompt.style.display = 'block';
+            });
+            
+            // Log video loading progress
+            video.addEventListener('loadstart', function() {
+                console.log('[INTRO] Video loading started, src:', video.currentSrc);
+            });
+            
+            video.addEventListener('loadedmetadata', function() {
+                console.log('[INTRO] Video metadata loaded, duration:', video.duration, 'seconds');
+            });
+            
+            video.addEventListener('canplay', function() {
+                console.log('[INTRO] Video ready to play');
+            });
             
             console.log('%c[INTRO] Starting (always show on refresh)', 'color: #00ff00; font-weight: bold');
             overlay.style.display = 'flex';
