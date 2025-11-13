@@ -3145,7 +3145,7 @@
                     hover: { freq: 600, duration: 50, type: 'square' },
                     success: { freq: [600, 800, 1000, 1200], duration: 150, type: 'sine' },
                     error: { freq: [400, 300, 200, 100], duration: 200, type: 'sawtooth' },
-                    ambient: { freq: 60, type: 'sawtooth', volume: 0.15, modulation: 0.3 },
+                    ambient: { freq: 120, type: 'sawtooth', volume: 0.15, modulation: 0.3 },
                     random: { freq: [1200, 1400, 1600, 1800], duration: 80, type: 'triangle' },
                     gameOver: { freq: [800, 900, 1000, 1100, 1200], duration: 250, type: 'square' }
                 }
@@ -3174,7 +3174,7 @@
                     hover: { freq: 500, duration: 60, type: 'sine' },
                     success: { freq: [550, 700, 850, 1000], duration: 180, type: 'triangle' },
                     error: { freq: [350, 280, 210, 140], duration: 220, type: 'sine' },
-                    ambient: { freq: 50, type: 'triangle', volume: 0.12, modulation: 0.2 },
+                    ambient: { freq: 100, type: 'triangle', volume: 0.12, modulation: 0.2 },
                     random: { freq: [1100, 1250, 1400, 1550], duration: 90, type: 'sine' },
                     gameOver: { freq: [700, 800, 900, 1000, 1100], duration: 270, type: 'triangle' }
                 }
@@ -3203,7 +3203,7 @@
                     hover: { freq: 700, duration: 45, type: 'sine' },
                     success: { freq: [700, 900, 1100, 1300], duration: 140, type: 'sine' },
                     error: { freq: [450, 360, 270, 180], duration: 190, type: 'triangle' },
-                    ambient: { freq: 70, type: 'sine', volume: 0.18, modulation: 0.4 },
+                    ambient: { freq: 140, type: 'sine', volume: 0.18, modulation: 0.4 },
                     random: { freq: [1300, 1450, 1600, 1750], duration: 75, type: 'sine' },
                     gameOver: { freq: [900, 1000, 1100, 1200, 1300], duration: 240, type: 'sine' }
                 }
@@ -3232,7 +3232,7 @@
                     hover: { freq: 800, duration: 40, type: 'triangle' },
                     success: { freq: [800, 1000, 1200, 1400], duration: 130, type: 'triangle' },
                     error: { freq: [500, 420, 340, 260], duration: 180, type: 'sawtooth' },
-                    ambient: { freq: 80, type: 'triangle', volume: 0.20, modulation: 0.5 },
+                    ambient: { freq: 160, type: 'triangle', volume: 0.20, modulation: 0.5 },
                     random: { freq: [1400, 1550, 1700, 1850], duration: 70, type: 'triangle' },
                     gameOver: { freq: [1000, 1100, 1200, 1300, 1400], duration: 230, type: 'triangle' }
                 }
@@ -3261,7 +3261,7 @@
                     hover: { freq: 450, duration: 50, type: 'sine' },
                     success: { freq: [500, 600, 750, 900], duration: 160, type: 'sine' },
                     error: { freq: [300, 240, 180, 120], duration: 210, type: 'sine' },
-                    ambient: { freq: 40, type: 'sine', volume: 0.10, modulation: 0.15 },
+                    ambient: { freq: 80, type: 'sine', volume: 0.10, modulation: 0.15 },
                     random: { freq: [1000, 1150, 1300, 1450], duration: 85, type: 'sine' },
                     gameOver: { freq: [600, 700, 800, 900, 1000], duration: 260, type: 'sine' }
                 }
@@ -3290,7 +3290,7 @@
                     hover: { freq: 650, duration: 48, type: 'square' },
                     success: { freq: [650, 850, 1050, 1250], duration: 145, type: 'square' },
                     error: { freq: [420, 340, 260, 180], duration: 195, type: 'square' },
-                    ambient: { freq: 65, type: 'square', volume: 0.16, modulation: 0.35 },
+                    ambient: { freq: 130, type: 'square', volume: 0.16, modulation: 0.35 },
                     random: { freq: [1250, 1400, 1550, 1700], duration: 78, type: 'square' },
                     gameOver: { freq: [850, 950, 1050, 1150, 1250], duration: 245, type: 'square' }
                 }
@@ -3319,7 +3319,7 @@
                     hover: { freq: 400, duration: 55, type: 'sine' },
                     success: { freq: [450, 550, 700, 850], duration: 170, type: 'triangle' },
                     error: { freq: [280, 220, 160, 100], duration: 215, type: 'sine' },
-                    ambient: { freq: 35, type: 'sine', volume: 0.08, modulation: 0.12 },
+                    ambient: { freq: 70, type: 'sine', volume: 0.08, modulation: 0.12 },
                     random: { freq: [950, 1100, 1250, 1400], duration: 88, type: 'sine' },
                     gameOver: { freq: [550, 650, 750, 850, 950], duration: 265, type: 'sine' }
                 }
@@ -3348,7 +3348,7 @@
                     hover: { freq: 750, duration: 43, type: 'triangle' },
                     success: { freq: [750, 950, 1150, 1350], duration: 135, type: 'triangle' },
                     error: { freq: [480, 400, 320, 240], duration: 185, type: 'triangle' },
-                    ambient: { freq: 75, type: 'triangle', volume: 0.17, modulation: 0.42 },
+                    ambient: { freq: 150, type: 'triangle', volume: 0.17, modulation: 0.42 },
                     random: { freq: [1350, 1500, 1650, 1800], duration: 73, type: 'triangle' },
                     gameOver: { freq: [950, 1050, 1150, 1250, 1350], duration: 235, type: 'triangle' }
                 }
@@ -3514,18 +3514,16 @@
             const ambientFilter = audioContext.createBiquadFilter();
             
             // Add LFO (Low Frequency Oscillator) for modulation if specified
-            let lfo = null;
-            let lfoGain = null;
             if (ambientConfig.modulation) {
-                lfo = audioContext.createOscillator();
-                lfoGain = audioContext.createGain();
+                ambientLFO = audioContext.createOscillator();
+                ambientLFOGain = audioContext.createGain();
                 
-                lfo.frequency.setValueAtTime(0.5, audioContext.currentTime); // Slow modulation
-                lfoGain.gain.setValueAtTime(ambientConfig.freq * ambientConfig.modulation, audioContext.currentTime);
+                ambientLFO.frequency.setValueAtTime(0.5, audioContext.currentTime); // Slow modulation
+                ambientLFOGain.gain.setValueAtTime(ambientConfig.freq * ambientConfig.modulation, audioContext.currentTime);
                 
-                lfo.connect(lfoGain);
-                lfoGain.connect(ambientOscillator.frequency);
-                lfo.start();
+                ambientLFO.connect(ambientLFOGain);
+                ambientLFOGain.connect(ambientOscillator.frequency);
+                ambientLFO.start();
             }
 
             ambientOscillator.type = ambientConfig.type;
@@ -3541,6 +3539,13 @@
             ambientGain.gain.setValueAtTime(ambientConfig.volume, audioContext.currentTime);
 
             ambientOscillator.start();
+            
+            console.log('Ambient sound started:', {
+                freq: ambientConfig.freq,
+                type: ambientConfig.type,
+                volume: ambientConfig.volume,
+                modulation: ambientConfig.modulation
+            });
         }
 
         // Update playBeep to use themed sound
@@ -3586,13 +3591,25 @@
         // Background ambient sound system
         let ambientOscillator = null;
         let ambientGain = null;
+        let ambientLFO = null;
+        let ambientLFOGain = null;
 
         function stopAmbientSound() {
             if (ambientOscillator) {
-                ambientOscillator.stop();
+                try {
+                    ambientOscillator.stop();
+                } catch(e) {}
                 ambientOscillator = null;
-                ambientGain = null;
             }
+            if (ambientLFO) {
+                try {
+                    ambientLFO.stop();
+                } catch(e) {}
+                ambientLFO = null;
+            }
+            ambientGain = null;
+            ambientLFOGain = null;
+            console.log('Ambient sound stopped');
         }
 
         // Touch/Click Easter Egg - Triple click on timer display
