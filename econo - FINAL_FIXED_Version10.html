@@ -663,25 +663,25 @@
         .btn.warning {
             color: #ffaa00;
             border-color: #ffaa00;
-            background: #110800;
+            background: var(--theme-background-light);
         }
 
         .btn.warning:hover {
-            background: #221100;
+            background: var(--theme-background-light);
             box-shadow: 0 0 20px rgba(255, 170, 0, 0.7);
         }
 
         /* Button state indicators */
         .btn.active {
-            background: #002200;
+            background: var(--theme-background-light);
             border-color: #ffff00;
             color: #ffff00;
         }
 
         /* BULLETPROOF WRITE AREAS */
         .write-reminder {
-            background: #002200;
-            border: 2px solid #00ff00;
+            background: var(--theme-background-light);
+            border: 2px solid var(--theme-border);
             padding: var(--space-6);
             margin: var(--space-4) 0;
             text-align: center;
@@ -699,8 +699,8 @@
         }
 
         .write-prompt {
-            background: #001100;
-            border: 1px solid #00aa00;
+            background: var(--theme-background-light);
+            border: 1px solid var(--theme-secondary);
             padding: var(--space-5);
             margin: var(--space-3) 0;
             border-radius: 3px;
@@ -723,8 +723,8 @@
         .start-title {
             font-family: 'Orbitron', monospace;
             font-size: var(--text-4xl);
-            color: #00ff00;
-            text-shadow: 0 0 20px #00ff00;
+            color: var(--theme-primary);
+            text-shadow: 0 0 20px var(--theme-primary);
             margin-bottom: var(--space-4);
             letter-spacing: 3px;
             font-weight: 900;
@@ -733,39 +733,39 @@
 
         .start-subtitle {
             font-size: var(--text-lg);
-            color: #00aa00;
+            color: var(--theme-secondary);
             margin-bottom: var(--space-6);
         }
 
         .start-subtitle-zh {
             font-size: var(--text-md);
-            color: #008800;
+            color: var(--theme-secondary);
             margin-top: var(--space-2);
         }
 
         .role-card {
-            background: #001100;
-            border: 2px solid #00aa00;
+            background: var(--theme-background-light);
+            border: 2px solid var(--theme-secondary);
             padding: var(--space-5);
             border-radius: 3px;
         }
 
         .role-name {
             font-size: var(--text-md);
-            color: #00ff00;
+            color: var(--theme-primary);
             margin-bottom: var(--space-2);
             font-weight: bold;
         }
 
         .role-name-zh {
             font-size: var(--text-md);
-            color: #00aa00;
+            color: var(--theme-secondary);
             margin-bottom: var(--space-3);
         }
 
         .role-desc {
             font-size: var(--text-sm);
-            color: #00aa00;
+            color: var(--theme-secondary);
             line-height: 1.3;
         }
 
@@ -1003,13 +1003,13 @@
             position: fixed;
             bottom: 20px;
             right: -300px;
-            background: linear-gradient(135deg, #000, #001100);
-            border: 2px solid #00ff00;
+            background: linear-gradient(135deg, var(--theme-background), var(--theme-background-light));
+            border: 2px solid var(--theme-border);
             border-radius: 8px;
             padding: 15px;
             z-index: 2000;
             width: 280px;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.4);
+            box-shadow: 0 0 30px var(--theme-shadow);
             transition: right 0.3s ease;
             -webkit-backdrop-filter: blur(10px); /* Add this line for Safari support */
             backdrop-filter: blur(10px);
@@ -1026,8 +1026,8 @@
             right: 20px;
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, #000, #001100);
-            border: 2px solid #00ff00;
+            background: linear-gradient(135deg, var(--theme-background), var(--theme-background-light));
+            border: 2px solid var(--theme-border);
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -1035,15 +1035,15 @@
             cursor: pointer;
             z-index: 1999;
             font-size: 24px;
-            color: #00ff00;
-            text-shadow: 0 0 10px #00ff00;
+            color: var(--theme-primary);
+            text-shadow: 0 0 10px var(--theme-primary);
             transition: all 0.3s ease;
             animation: scalePulse 3s infinite;
         }
 
         .scale-toggle:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+            box-shadow: 0 0 20px var(--theme-shadow-strong);
         }
 
         .scale-control-header {
@@ -1051,7 +1051,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
-            color: #00ff00;
+            color: var(--theme-primary);
             font-size: 11px;
             font-weight: bold;
             letter-spacing: 1px;
@@ -1059,12 +1059,12 @@
 
         .scale-current {
             font-size: 18px;
-            color: #00ff00;
+            color: var(--theme-primary);
             font-weight: bold;
             text-align: center;
             padding: 5px;
-            background: #001100;
-            border: 1px solid #00aa00;
+            background: var(--theme-background-light);
+            border: 1px solid var(--theme-secondary);
             border-radius: 4px;
             min-width: 60px;
             font-family: 'Courier New', monospace;
@@ -1074,8 +1074,8 @@
             width: 20px;
             height: 20px;
             background: transparent;
-            border: 1px solid #00ff00;
-            color: #00ff00;
+            border: 1px solid var(--theme-border);
+            color: var(--theme-primary);
             cursor: pointer;
             border-radius: 3px;
             font-size: 12px;
@@ -1084,7 +1084,7 @@
         }
 
         .scale-minimize-btn:hover {
-            background: #001100;
+            background: var(--theme-background-light);
             transform: scale(1.1);
         }
 
@@ -1096,9 +1096,9 @@
         }
 
         .scale-preset-btn {
-            background: #001100;
-            border: 2px solid #00aa00;
-            color: #00ff00;
+            background: var(--theme-background-light);
+            border: 2px solid var(--theme-secondary);
+            color: var(--theme-primary);
             padding: 8px 4px;
             cursor: pointer;
             border-radius: 4px;
@@ -1110,17 +1110,17 @@
         }
 
         .scale-preset-btn:hover {
-            background: #001100;
-            border-color: #00ff00;
-            color: #00ff00;
+            background: var(--theme-background-light);
+            border-color: var(--theme-border);
+            color: var(--theme-primary);
             transform: scale(1.05);
         }
 
         .scale-preset-btn.active {
-            background: #00ff00;
-            color: #000;
-            border-color: #00ff00;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            background: var(--theme-primary);
+            color: var(--theme-background);
+            border-color: var(--theme-primary);
+            box-shadow: 0 0 10px var(--theme-glow);
         }
 
         .scale-slider-container {
@@ -1130,7 +1130,7 @@
         .scale-slider-label {
             display: flex;
             justify-content: space-between;
-            color: #00aa00;
+            color: var(--theme-secondary);
             font-size: 9px;
             margin-bottom: 5px;
         }
@@ -1140,8 +1140,8 @@
             -webkit-appearance: none;
             appearance: none;
             height: 6px;
-            background: #001100;
-            border: 1px solid #00aa00;
+            background: var(--theme-background-light);
+            border: 1px solid var(--theme-secondary);
             border-radius: 3px;
             outline: none;
             transition: all 0.2s ease;
@@ -1152,49 +1152,49 @@
             appearance: none;
             width: 18px;
             height: 18px;
-            background: #00ff00;
-            border: 2px solid #000;
+            background: var(--theme-primary);
+            border: 2px solid var(--theme-background);
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 10px var(--theme-glow);
             transition: all 0.2s ease;
         }
 
         .scale-slider::-moz-range-thumb {
             width: 18px;
             height: 18px;
-            background: #00ff00;
-            border: 2px solid #000;
+            background: var(--theme-primary);
+            border: 2px solid var(--theme-background);
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 10px var(--theme-glow);
             transition: all 0.2s ease;
         }
 
         .scale-slider:hover::-webkit-slider-thumb {
             transform: scale(1.2);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+            box-shadow: 0 0 15px var(--theme-glow);
         }
 
         .scale-slider:hover::-moz-range-thumb {
             transform: scale(1.2);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+            box-shadow: 0 0 15px var(--theme-glow);
         }
 
         .scale-info {
             display: flex;
             justify-content: space-between;
             font-size: 9px;
-            color: #00aa00;
+            color: var(--theme-secondary);
             margin-top: 8px;
             padding-top: 8px;
-            border-top: 1px solid #003300;
+            border-top: 1px solid var(--theme-secondary);
         }
 
         .scale-reset-btn {
             background: transparent;
-            border: 1px solid #ff3333;
-            color: #ff3333;
+            border: 1px solid var(--theme-error);
+            color: var(--theme-error);
             padding: 6px 12px;
             cursor: pointer;
             border-radius: 4px;
@@ -1208,8 +1208,8 @@
         /* Presentation mode toggle button inside scale panel */
         .presentation-mode-btn {
             background: transparent;
-            border: 1px solid #00aa00;
-            color: #00aa00;
+            border: 1px solid var(--theme-secondary);
+            color: var(--theme-secondary);
             padding: 6px 12px;
             cursor: pointer;
             border-radius: 4px;
