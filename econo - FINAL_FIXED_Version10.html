@@ -9555,10 +9555,22 @@ function renderWriteScene() {
                 // Enable sound now that we have a user gesture
                 soundEnabled = true;
                 
-                // Initialize audio context
+                // Initialize audio context and start ambient sound
                 if (ensureAudioContext()) {
                     console.log('Audio context initialized');
-                    startAmbientSound();
+                    
+                    // Wait for audio context to be fully ready before starting ambient
+                    if (audioContext.state === 'running') {
+                        startAmbientSound();
+                    } else {
+                        // Resume and then start ambient
+                        audioContext.resume().then(() => {
+                            console.log('Audio context resumed, starting ambient');
+                            startAmbientSound();
+                        }).catch(err => {
+                            console.log('Failed to resume audio context:', err);
+                        });
+                    }
                 }
                 
                 // Attempt fullscreen on the first user interaction
