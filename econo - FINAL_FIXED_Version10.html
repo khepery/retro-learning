@@ -9570,22 +9570,30 @@ function renderWriteScene() {
                 // Enable sound now that we have a user gesture
                 soundEnabled = true;
                 
-                // Initialize audio context and start ambient sound
-                if (ensureAudioContext()) {
-                    console.log('Audio context initialized');
-                    
-                    // Wait for audio context to be fully ready before starting ambient
-                    if (audioContext.state === 'running') {
-                        startAmbientSound();
-                    } else {
-                        // Resume and then start ambient
-                        audioContext.resume().then(() => {
-                            console.log('Audio context resumed, starting ambient');
-                            startAmbientSound();
-                        }).catch(err => {
-                            console.log('Failed to resume audio context:', err);
-                        });
+                // Create audio context if it doesn't exist
+                if (!audioContext) {
+                    try {
+                        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                        console.log('Audio context created, state:', audioContext.state);
+                    } catch (e) {
+                        console.log('Audio not supported:', e);
+                        soundEnabled = false;
+                        return;
                     }
+                }
+                
+                // Now resume and start ambient sound
+                if (audioContext.state === 'running') {
+                    console.log('Audio context already running, starting ambient');
+                    startAmbientSound();
+                } else if (audioContext.state === 'suspended') {
+                    console.log('Resuming suspended audio context');
+                    audioContext.resume().then(() => {
+                        console.log('Audio context resumed successfully, state:', audioContext.state);
+                        startAmbientSound();
+                    }).catch(err => {
+                        console.log('Failed to resume audio context:', err);
+                    });
                 }
                 
                 // Attempt fullscreen on the first user interaction
