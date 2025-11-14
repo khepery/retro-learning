@@ -151,6 +151,38 @@
             --shadow-color: rgba(255, 255, 255, 0.3);
         }
 
+        body.theme-teal {
+            --primary-color: #00ccaa;
+            --primary-bright: #00ffcc;
+            --primary-dim: #00aa88;
+            --primary-dark: #008866;
+            --primary-glow: rgba(0, 204, 170, 0.3);
+            --background: #000000;
+            --background-light: #001a15;
+            --background-lighter: #00332a;
+            --text-color: #00ccaa;
+            --text-muted: #00aa88;
+            --border-color: #00ccaa;
+            --border-dim: #00aa88;
+            --shadow-color: rgba(0, 204, 170, 0.3);
+        }
+
+        body.theme-gold {
+            --primary-color: #d4af37;
+            --primary-bright: #ffd700;
+            --primary-dim: #b8960f;
+            --primary-dark: #9a7d0a;
+            --primary-glow: rgba(212, 175, 55, 0.3);
+            --background: #000000;
+            --background-light: #1a1508;
+            --background-lighter: #332a10;
+            --text-color: #d4af37;
+            --text-muted: #b8960f;
+            --border-color: #d4af37;
+            --border-dim: #b8960f;
+            --shadow-color: rgba(212, 175, 55, 0.3);
+        }
+
         /* Smooth transitions for theme changes */
         body {
             transition: background-color var(--transition-speed) ease;
@@ -2862,6 +2894,8 @@
                 <button class="timer-btn theme-btn" onclick="setTheme('purple')" data-theme="purple">PURPLE</button>
                 <button class="timer-btn theme-btn" onclick="setTheme('red')" data-theme="red">RED</button>
                 <button class="timer-btn theme-btn" onclick="setTheme('white')" data-theme="white">WHITE</button>
+                <button class="timer-btn theme-btn" onclick="setTheme('teal')" data-theme="teal">TEAL</button>
+                <button class="timer-btn theme-btn" onclick="setTheme('gold')" data-theme="gold">GOLD</button>
             </div>
         </div>
 
@@ -3218,21 +3252,24 @@
         function startAmbientSound() {
             if (!soundEnabled || !ensureAudioContext() || ambientOscillator) return;
 
+            const theme = getCurrentTheme();
+            const ambientConfig = themeSounds[theme].ambient;
+
             ambientOscillator = audioContext.createOscillator();
             ambientGain = audioContext.createGain();
             const ambientFilter = audioContext.createBiquadFilter();
 
-            ambientOscillator.type = 'sawtooth'; // Changed from 'brown' which is not valid
-            ambientOscillator.frequency.setValueAtTime(60, audioContext.currentTime);
+            ambientOscillator.type = ambientConfig.type;
+            ambientOscillator.frequency.setValueAtTime(ambientConfig.freq, audioContext.currentTime);
 
             ambientFilter.type = 'lowpass';
-            ambientFilter.frequency.setValueAtTime(100, audioContext.currentTime);
+            ambientFilter.frequency.setValueAtTime(ambientConfig.filterFreq, audioContext.currentTime);
 
             ambientOscillator.connect(ambientFilter);
             ambientFilter.connect(ambientGain);
             ambientGain.connect(audioContext.destination);
 
-            ambientGain.gain.setValueAtTime(0.75, audioContext.currentTime); // Increased volume to 0.75 (was 0.6, originally 0.1)
+            ambientGain.gain.setValueAtTime(ambientConfig.gain, audioContext.currentTime);
 
             ambientOscillator.start();
         }
@@ -4341,52 +4378,76 @@
             if (document.body.classList.contains('theme-purple')) return 'purple';
             if (document.body.classList.contains('theme-red')) return 'red';
             if (document.body.classList.contains('theme-white')) return 'white';
+            if (document.body.classList.contains('theme-teal')) return 'teal';
+            if (document.body.classList.contains('theme-gold')) return 'gold';
             return 'matrix';
         }
 
-        // Theme-specific sound profiles
+        // Theme-specific sound profiles with ambient background sounds
         const themeSounds = {
             matrix: {
                 beep: [800, 100],
                 success: [[400, 600, 800, 1000], 150],
                 click: [800, 30],
                 warning: [[500, 300, 500], 100],
-                victory: [[400, 500, 600, 700, 800, 900, 1000, 1200], 100]
+                victory: [[400, 500, 600, 700, 800, 900, 1000, 1200], 100],
+                ambient: { type: 'sawtooth', freq: 60, filterFreq: 100, gain: 0.75 }
             },
             amber: {
                 beep: [600, 120],
                 success: [[300, 500, 700, 900], 170],
                 click: [600, 40],
                 warning: [[400, 250, 400], 120],
-                victory: [[350, 450, 550, 650, 750, 850, 950, 1100], 110]
+                victory: [[350, 450, 550, 650, 750, 850, 950, 1100], 110],
+                ambient: { type: 'sine', freq: 80, filterFreq: 150, gain: 0.5 }
             },
             blue: {
                 beep: [900, 90],
                 success: [[500, 700, 900, 1100], 140],
                 click: [900, 25],
                 warning: [[600, 350, 600], 90],
-                victory: [[450, 550, 650, 750, 850, 950, 1050, 1250], 95]
+                victory: [[450, 550, 650, 750, 850, 950, 1050, 1250], 95],
+                ambient: { type: 'triangle', freq: 110, filterFreq: 200, gain: 0.4 }
             },
             purple: {
                 beep: [700, 110],
                 success: [[350, 550, 750, 950], 160],
                 click: [700, 35],
                 warning: [[450, 280, 450], 110],
-                victory: [[380, 480, 580, 680, 780, 880, 980, 1180], 105]
+                victory: [[380, 480, 580, 680, 780, 880, 980, 1180], 105],
+                ambient: { type: 'sine', freq: 90, filterFreq: 180, gain: 0.45 }
             },
             red: {
                 beep: [650, 130],
                 success: [[320, 520, 720, 920], 180],
                 click: [650, 45],
                 warning: [[420, 260, 420], 130],
-                victory: [[360, 460, 560, 660, 760, 860, 960, 1160], 115]
+                victory: [[360, 460, 560, 660, 760, 860, 960, 1160], 115],
+                ambient: { type: 'square', freq: 70, filterFreq: 120, gain: 0.6 }
             },
             white: {
                 beep: [1000, 80],
                 success: [[600, 800, 1000, 1200], 130],
                 click: [1000, 20],
                 warning: [[700, 400, 700], 80],
-                victory: [[500, 600, 700, 800, 900, 1000, 1100, 1300], 85]
+                victory: [[500, 600, 700, 800, 900, 1000, 1100, 1300], 85],
+                ambient: { type: 'triangle', freq: 120, filterFreq: 250, gain: 0.35 }
+            },
+            teal: {
+                beep: [750, 100],
+                success: [[450, 650, 850, 1050], 145],
+                click: [750, 28],
+                warning: [[550, 320, 550], 95],
+                victory: [[425, 525, 625, 725, 825, 925, 1025, 1225], 98],
+                ambient: { type: 'sine', freq: 95, filterFreq: 170, gain: 0.42 }
+            },
+            gold: {
+                beep: [680, 115],
+                success: [[340, 540, 740, 940], 165],
+                click: [680, 38],
+                warning: [[460, 270, 460], 115],
+                victory: [[365, 465, 565, 665, 765, 865, 965, 1165], 108],
+                ambient: { type: 'sine', freq: 85, filterFreq: 160, gain: 0.48 }
             }
         };
 
@@ -4991,11 +5052,17 @@
         // Theme Management
         window.setTheme = function(themeName) {
             // Remove all theme classes from body
-            document.body.classList.remove('theme-amber', 'theme-blue', 'theme-purple', 'theme-red', 'theme-white');
+            document.body.classList.remove('theme-amber', 'theme-blue', 'theme-purple', 'theme-red', 'theme-white', 'theme-teal', 'theme-gold');
             
             // Add new theme class (matrix is default, no class needed)
             if (themeName !== 'matrix') {
                 document.body.classList.add('theme-' + themeName);
+            }
+            
+            // Restart ambient sound with new theme
+            if (ambientOscillator) {
+                stopAmbientSound();
+                startAmbientSound();
             }
             
             // Update button states
