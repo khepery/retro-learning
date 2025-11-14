@@ -3918,8 +3918,9 @@
             prompt.style.display = 'none';
             
             // Initialize audio for intro
+            soundEnabled = true;
             if (!audioContext || audioContext.state === 'suspended') {
-                initializeAudio();
+                ensureAudioContext();
             }
             
             // Initialize epic effects
