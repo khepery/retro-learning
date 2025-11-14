@@ -2798,24 +2798,125 @@
       becomes visible.  The video file (intro.mp4) should reside in the
       same directory as this HTML file.
     -->
-    <!-- Intro video overlay.  Hidden by default until the boot sequence completes.
-         Contains the video element and a message prompt that appears after playback.
-         The video will attempt to play with audio.  If autoplay is blocked,
-         the overlay will display a prompt asking the user to click to begin playback.
-         After the video ends, a different prompt instructs the user to click
-         to enter the app. -->
-    <div id="introOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.95); display: none; justify-content: center; align-items: center; z-index: 10000;">
-      <video id="introVideo" 
-             src="intro.mp4" 
-             style="width: 90vw; max-width: 1200px; height: auto; border: 3px solid #fff; box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);" 
-             autoplay
-             controls
-             preload="auto"
-             playsinline
-             webkit-playsinline>
-      </video>
-      <div id="introPrompt" style="position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; color: var(--primary-bright); font-family: 'Orbitron', monospace; font-size: 14px; letter-spacing: 1px; display: none;">Click to play video</div>
+    <!-- Intro Animation Overlay - Retro Terminal Style -->
+    <div id="introOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; display: none; justify-content: center; align-items: center; z-index: 10000; overflow: hidden;">
+      <div id="introAnimation" style="width: 100%; height: 100%; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <!-- Matrix-style falling code background -->
+        <canvas id="matrixCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.15;"></canvas>
+        
+        <!-- Main intro content -->
+        <div style="position: relative; z-index: 2; text-align: center;">
+          <!-- Scanning line effect -->
+          <div id="scanLine" style="position: absolute; width: 120%; left: -10%; height: 2px; background: var(--primary-bright); box-shadow: 0 0 10px var(--primary-bright), 0 0 20px var(--primary-bright); opacity: 0; animation: scanLineMove 3s ease-in-out infinite;"></div>
+          
+          <!-- Title with glitch effect -->
+          <div id="introTitle" style="font-family: 'Orbitron', monospace; font-size: 72px; font-weight: bold; color: var(--primary-bright); text-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--primary-color); margin-bottom: 30px; opacity: 0; animation: glitchFadeIn 2s ease-out 0.5s forwards;">
+            RETRO ECONOMICS
+          </div>
+          
+          <!-- Subtitle -->
+          <div style="font-family: 'Orbitron', monospace; font-size: 24px; color: var(--primary-dim); letter-spacing: 4px; margin-bottom: 50px; opacity: 0; animation: fadeInUp 1.5s ease-out 2s forwards;">
+            防弹自适应课堂
+          </div>
+          
+          <!-- System status boxes -->
+          <div style="display: flex; gap: 30px; justify-content: center; margin-bottom: 50px;">
+            <div class="intro-box" style="opacity: 0; animation: fadeInScale 0.8s ease-out 2.5s forwards;">
+              <div style="color: var(--primary-bright); font-size: 14px; margin-bottom: 5px;">SYSTEM</div>
+              <div style="color: var(--primary-color); font-size: 24px; font-weight: bold;">ACTIVE</div>
+            </div>
+            <div class="intro-box" style="opacity: 0; animation: fadeInScale 0.8s ease-out 2.8s forwards;">
+              <div style="color: var(--primary-bright); font-size: 14px; margin-bottom: 5px;">STATUS</div>
+              <div style="color: var(--primary-color); font-size: 24px; font-weight: bold;">ONLINE</div>
+            </div>
+            <div class="intro-box" style="opacity: 0; animation: fadeInScale 0.8s ease-out 3.1s forwards;">
+              <div style="color: var(--primary-bright); font-size: 14px; margin-bottom: 5px;">NODE</div>
+              <div style="color: var(--primary-color); font-size: 24px; font-weight: bold;">01</div>
+            </div>
+          </div>
+          
+          <!-- Progress bar -->
+          <div style="width: 600px; max-width: 80vw; height: 6px; background: rgba(0, 255, 0, 0.1); border: 2px solid var(--primary-dim); border-radius: 3px; overflow: hidden; opacity: 0; animation: fadeIn 1s ease-out 3.5s forwards;">
+            <div id="introProgress" style="height: 100%; background: var(--primary-bright); box-shadow: 0 0 10px var(--primary-bright); width: 0%; animation: progressFill 2s ease-out 3.5s forwards;"></div>
+          </div>
+          
+          <!-- Loading text -->
+          <div id="loadingText" style="font-family: 'Orbitron', monospace; font-size: 16px; color: var(--primary-color); letter-spacing: 2px; margin-top: 20px; opacity: 0; animation: fadeIn 1s ease-out 3.5s forwards;">
+            INITIALIZING LEARNING PROTOCOL...
+          </div>
+          
+          <!-- Hexagon grid decoration -->
+          <div style="position: absolute; width: 400px; height: 400px; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.05; animation: rotate 30s linear infinite;">
+            <svg viewBox="0 0 200 200" style="width: 100%; height: 100%;">
+              <defs>
+                <pattern id="hexPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <polygon points="20,5 35,15 35,30 20,40 5,30 5,15" fill="none" stroke="var(--primary-color)" stroke-width="0.5"/>
+                </pattern>
+              </defs>
+              <rect width="200" height="200" fill="url(#hexPattern)"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div id="introPrompt" style="position: absolute; bottom: 40px; left: 0; right: 0; text-align: center; color: var(--primary-bright); font-family: 'Orbitron', monospace; font-size: 14px; letter-spacing: 1px; display: none; opacity: 0; animation: blink 1.5s ease-in-out infinite;">
+        CLICK TO CONTINUE
+      </div>
     </div>
+    
+    <style>
+      @keyframes scanLineMove {
+        0%, 100% { transform: translateY(-100px); opacity: 0; }
+        50% { transform: translateY(600px); opacity: 0.8; }
+      }
+      
+      @keyframes glitchFadeIn {
+        0% { opacity: 0; transform: translateX(-20px); }
+        10% { opacity: 0.8; transform: translateX(10px); }
+        20% { opacity: 0.6; transform: translateX(-5px); }
+        30% { opacity: 1; transform: translateX(0); }
+        100% { opacity: 1; transform: translateX(0); }
+      }
+      
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      @keyframes fadeInScale {
+        from { opacity: 0; transform: scale(0.8); }
+        to { opacity: 1; transform: scale(1); }
+      }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      
+      @keyframes progressFill {
+        from { width: 0%; }
+        to { width: 100%; }
+      }
+      
+      @keyframes rotate {
+        from { transform: translate(-50%, -50%) rotate(0deg); }
+        to { transform: translate(-50%, -50%) rotate(360deg); }
+      }
+      
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+      }
+      
+      .intro-box {
+        font-family: 'Orbitron', monospace;
+        padding: 20px 30px;
+        border: 2px solid var(--primary-dim);
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 4px;
+        box-shadow: 0 0 15px rgba(0, 255, 0, 0.2), inset 0 0 15px rgba(0, 255, 0, 0.1);
+        min-width: 150px;
+      }
+    </style>
     <!-- Corner Decorations -->
     <div style="position: fixed; top: 10px; left: 10px; color: var(--primary-bright); opacity: 0.3; font-size: 20px; z-index: 998; pointer-events: none; font-family: 'Orbitron', monospace;">[[ SYSTEM ]]</div>
     <div style="position: fixed; top: 10px; right: 10px; color: var(--primary-bright); opacity: 0.3; font-size: 20px; z-index: 998; pointer-events: none; font-family: 'Orbitron', monospace;">{{ ACTIVE }}</div>
@@ -3832,35 +3933,35 @@
         // ============================================
         // HOISTED INTRO VIDEO FUNCTION (SINGLE DEFINITION)
         // ============================================
-        function showIntroVideo() {
-            // **REMOVED: localStorage check - always show intro**
+        function showIntroAnimation() {
+            console.log('%c[INTRO] Starting animation (always show on refresh)', 'color: var(--primary-bright); font-weight: bold');
             
             var overlay = document.getElementById('introOverlay');
-            var video = document.getElementById('introVideo');
             var prompt = document.getElementById('introPrompt');
             
-            if (!overlay || !video || !prompt) {
+            if (!overlay || !prompt) {
                 console.error('[INTRO] Elements missing');
                 return;
             }
             
-            console.log('%c[INTRO] Starting (always show on refresh)', 'color: var(--primary-bright); font-weight: bold');
             overlay.style.display = 'flex';
             prompt.style.display = 'none';
             
+            // Initialize Matrix rain effect
+            initMatrixRain();
+            
+            // Create skip button
             var skipBtn = document.createElement('button');
             skipBtn.textContent = 'SKIP [ESC]';
-            skipBtn.style.cssText = 'position:absolute;top:20px;right:20px;background:rgba(0,0,0,0.9);color:#0f0;border:2px solid #0f0;padding:10px 20px;font-family:Orbitron,monospace;font-size:14px;cursor:pointer;border-radius:4px;z-index:20001';
+            skipBtn.style.cssText = 'position:absolute;top:20px;right:20px;background:rgba(0,0,0,0.9);color:var(--primary-bright);border:2px solid var(--primary-bright);padding:10px 20px;font-family:Orbitron,monospace;font-size:14px;cursor:pointer;border-radius:4px;z-index:20001;transition:all 0.3s;';
+            skipBtn.onmouseenter = function() { this.style.boxShadow = '0 0 20px var(--primary-bright)'; };
+            skipBtn.onmouseleave = function() { this.style.boxShadow = 'none'; };
             overlay.appendChild(skipBtn);
             
             var dismiss = function() {
                 overlay.style.display = 'none';
-                // **REMOVED: localStorage.setItem - don't remember "seen" state**
                 if (skipBtn.parentNode) skipBtn.remove();
-                try { 
-                    video.pause(); 
-                    video.currentTime = 0; 
-                } catch(e) {}
+                stopMatrixRain();
             };
             
             skipBtn.onclick = dismiss;
@@ -3871,65 +3972,80 @@
                 }
             });
             
-            video.addEventListener('ended', function() {
-                prompt.textContent = 'Click to continue';
+            // Show "Click to continue" after animation completes (5.5 seconds)
+            setTimeout(function() {
                 prompt.style.display = 'block';
                 overlay.onclick = dismiss;
-            }, { once: true });
+            }, 5500);
             
-            // Better autoplay handling
-            video.muted = false;
-            var playPromise = video.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(function() {
-                    console.log('[INTRO] Video playing');
-                }).catch(function(error) {
-                    console.warn('[INTRO] Autoplay failed, showing prompt:', error);
-                    video.muted = true;
-                    video.play().catch(function() {
-                        prompt.textContent = 'Click to play video';
-                        prompt.style.display = 'block';
-                        overlay.onclick = function() {
-                            video.play();
-                            prompt.style.display = 'none';
-                            overlay.onclick = null;
-                        };
-                    });
-                });
-            }
-            
-            // Auto-dismiss after video duration + 2 seconds
+            // Auto-dismiss after 10 seconds total
             setTimeout(function() {
                 if (document.body.contains(overlay) && overlay.style.display !== 'none') {
                     console.log('[INTRO] Auto-dismiss timeout');
                     dismiss();
                 }
-            }, 12000);
+            }, 10000);
+        }
+
+        // Matrix Rain Effect
+        var matrixInterval;
+        function initMatrixRain() {
+            var canvas = document.getElementById('matrixCanvas');
+            if (!canvas) return;
+            
+            var ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            var fontSize = 16;
+            var columns = canvas.width / fontSize;
+            var drops = [];
+            for (var i = 0; i < columns; i++) {
+                drops[i] = Math.random() * -100;
+            }
+            
+            var chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            
+            function draw() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = 'var(--primary-color)';
+                ctx.font = fontSize + 'px monospace';
+                
+                for (var i = 0; i < drops.length; i++) {
+                    var text = chars.charAt(Math.floor(Math.random() * chars.length));
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+            
+            matrixInterval = setInterval(draw, 50);
+        }
+        
+        function stopMatrixRain() {
+            if (matrixInterval) {
+                clearInterval(matrixInterval);
+            }
         }
 
         // ============================================
-        // INTRO VIDEO EVENT HANDLERS
+        // INTRO ANIMATION EVENT HANDLERS
         // ============================================
         // Add event listeners when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
-            var introVideo = document.getElementById('introVideo');
             var introOverlay = document.getElementById('introOverlay');
-            
-            if (introVideo) {
-                // Close overlay when video ends
-                introVideo.addEventListener('ended', function() {
-                    if (introOverlay) {
-                        introOverlay.style.display = 'none';
-                    }
-                });
-            }
             
             if (introOverlay) {
                 // Allow clicking overlay to close it
                 introOverlay.addEventListener('click', function(e) {
                     if (e.target === this) {
                         this.style.display = 'none';
+                        stopMatrixRain();
                     }
                 });
             }
@@ -3964,9 +4080,9 @@
                         bootEl.style.display = 'none';
                         console.log('%c[BOOT] Complete', 'color: #0f0; font-weight: bold');
                     }
-                    if (typeof showIntroVideo === 'function') {
+                    if (typeof showIntroAnimation === 'function') {
                         try {
-                            showIntroVideo();
+                            showIntroAnimation();
                         } catch (err) {
                             console.error('[BOOT] Error:', err);
                         }
@@ -10606,9 +10722,8 @@ function renderWriteScene() {
             };
             updateAudioUI();
 
-            // Intro video autoplay is now handled in showIntroVideo(), which is
-            // invoked after the boot sequence completes.  Removed legacy
-            // autoplay-on-init block.
+            // Intro animation autoplay is now handled in showIntroAnimation(), which is
+            // invoked after the boot sequence completes.
 
             // Initialize repeat mode LED based on persisted state
             const repeatLedInit = document.getElementById('odLedRepeat');
