@@ -9380,7 +9380,10 @@ function renderWriteScene() {
                 // Initialize audio context
                 if (ensureAudioContext()) {
                     console.log('Audio context initialized');
-                    startAmbientSound();
+                    // Start ambient sound after audio context is ready
+                    setTimeout(() => {
+                        startAmbientSound();
+                    }, 100);
                 }
                 
                 // Attempt fullscreen on the first user interaction
