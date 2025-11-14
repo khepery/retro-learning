@@ -21,8 +21,8 @@
             width: 100vw;
             overflow: hidden !important;
             font-family: 'Share Tech Mono', monospace;
-            background: #000;
-            color: #00ff00;
+            background: var(--background);
+            color: var(--primary-color);
         }
 
         /* FLUID TYPOGRAPHY SYSTEM */
@@ -33,16 +33,16 @@
             --usable-h: calc(100dvh - 120px);
             --transition-speed: 0.3s;
             
-            /* True fluid typography with clamp() - increased max values for better scaling */
-            --text-xs: clamp(10px, calc(18px * var(--text-scale)), 36px);
-            --text-sm: clamp(12px, calc(20px * var(--text-scale)), 40px);
-            --text-base: clamp(15px, calc(24px * var(--text-scale)), 52px);
-            --text-md: clamp(18px, calc(26px * var(--text-scale)), 56px);
-            --text-lg: clamp(20px, calc(30px * var(--text-scale)), 68px);
-            --text-xl: clamp(24px, calc(36px * var(--text-scale)), 80px);
-            --text-2xl: clamp(26px, calc(42px * var(--text-scale)), 92px);
-            --text-3xl: clamp(30px, calc(48px * var(--text-scale)), 108px);
-            --text-4xl: clamp(36px, calc(54px * var(--text-scale)), 128px);
+            /* True fluid typography with clamp() - significantly increased max values for better readability */
+            --text-xs: clamp(10px, calc(18px * var(--text-scale)), 54px);
+            --text-sm: clamp(12px, calc(20px * var(--text-scale)), 60px);
+            --text-base: clamp(15px, calc(24px * var(--text-scale)), 72px);
+            --text-md: clamp(18px, calc(26px * var(--text-scale)), 78px);
+            --text-lg: clamp(20px, calc(30px * var(--text-scale)), 90px);
+            --text-xl: clamp(24px, calc(36px * var(--text-scale)), 108px);
+            --text-2xl: clamp(26px, calc(42px * var(--text-scale)), 126px);
+            --text-3xl: clamp(30px, calc(48px * var(--text-scale)), 144px);
+            --text-4xl: clamp(36px, calc(54px * var(--text-scale)), 162px);
             
             /* Fluid spacing - scales with text-scale */
             --space-1: calc(4px * var(--text-scale));
@@ -53,6 +53,117 @@
             --space-6: calc(20px * var(--text-scale));
             --space-8: calc(24px * var(--text-scale));
             --space-12: calc(32px * var(--text-scale));
+            
+            /* Theme Colors - Default Matrix Theme */
+            --primary-color: #00ff00;
+            --primary-bright: #00ff00;
+            --primary-dim: #00aa00;
+            --primary-dark: #008800;
+            --primary-glow: rgba(0, 255, 0, 0.3);
+            --background: #000000;
+            --background-light: #001100;
+            --background-lighter: #002200;
+            --text-color: #00ff00;
+            --text-muted: #00aa00;
+            --border-color: #00ff00;
+            --border-dim: #00aa00;
+            --shadow-color: rgba(0, 255, 0, 0.3);
+        }
+
+        /* Theme Variations */
+        body.theme-amber {
+            --primary-color: #ffaa00;
+            --primary-bright: #ffcc00;
+            --primary-dim: #dd8800;
+            --primary-dark: #aa6600;
+            --primary-glow: rgba(255, 170, 0, 0.3);
+            --background: #000000;
+            --background-light: #1a0f00;
+            --background-lighter: #332200;
+            --text-color: #ffaa00;
+            --text-muted: #dd8800;
+            --border-color: #ffaa00;
+            --border-dim: #dd8800;
+            --shadow-color: rgba(255, 170, 0, 0.3);
+        }
+
+        body.theme-blue {
+            --primary-color: #00aaff;
+            --primary-bright: #00ccff;
+            --primary-dim: #0088dd;
+            --primary-dark: #0066aa;
+            --primary-glow: rgba(0, 170, 255, 0.3);
+            --background: #000000;
+            --background-light: #001119;
+            --background-lighter: #002233;
+            --text-color: #00aaff;
+            --text-muted: #0088dd;
+            --border-color: #00aaff;
+            --border-dim: #0088dd;
+            --shadow-color: rgba(0, 170, 255, 0.3);
+        }
+
+        body.theme-purple {
+            --primary-color: #bb00ff;
+            --primary-bright: #dd00ff;
+            --primary-dim: #9900dd;
+            --primary-dark: #7700aa;
+            --primary-glow: rgba(187, 0, 255, 0.3);
+            --background: #000000;
+            --background-light: #110019;
+            --background-lighter: #220033;
+            --text-color: #bb00ff;
+            --text-muted: #9900dd;
+            --border-color: #bb00ff;
+            --border-dim: #9900dd;
+            --shadow-color: rgba(187, 0, 255, 0.3);
+        }
+
+        body.theme-red {
+            --primary-color: #ff2a2a;
+            --primary-bright: #ff4444;
+            --primary-dim: #dd2222;
+            --primary-dark: #aa1111;
+            --primary-glow: rgba(255, 42, 42, 0.3);
+            --background: #000000;
+            --background-light: #190000;
+            --background-lighter: #330000;
+            --text-color: #ff2a2a;
+            --text-muted: #dd2222;
+            --border-color: #ff2a2a;
+            --border-dim: #dd2222;
+            --shadow-color: rgba(255, 42, 42, 0.3);
+        }
+
+        body.theme-white {
+            --primary-color: #ffffff;
+            --primary-bright: #ffffff;
+            --primary-dim: #cccccc;
+            --primary-dark: #999999;
+            --primary-glow: rgba(255, 255, 255, 0.3);
+            --background: #1a1a1a;
+            --background-light: #2a2a2a;
+            --background-lighter: #3a3a3a;
+            --text-color: #ffffff;
+            --text-muted: #cccccc;
+            --border-color: #ffffff;
+            --border-dim: #cccccc;
+            --shadow-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Smooth transitions for theme changes */
+        body {
+            transition: background-color var(--transition-speed) ease;
+        }
+
+        body, .terminal-header, .timer-section, .terminal-card, 
+        .content-box, .mcq-option, .write-prompt, .btn, 
+        .od-control-bar, .od-overlay, .settings-panel {
+            transition: 
+                background-color var(--transition-speed) ease,
+                border-color var(--transition-speed) ease,
+                color var(--transition-speed) ease,
+                box-shadow var(--transition-speed) ease;
         }
 
         /* Smooth transitions for all scalable content */
@@ -117,21 +228,21 @@
             width: 100vw;
             height: 100dvh;
             height: 100vh; /* Fallback */
-            background: #000;
+            background: var(--background);
             overflow: hidden !important;
             display: flex;
             flex-direction: column;
             padding-bottom: max(10px, env(safe-area-inset-bottom));
             padding-left: max(0px, env(safe-area-inset-left));
             padding-right: max(0px, env(safe-area-inset-right));
-            box-shadow: inset 0 0 30px rgba(0, 255, 0, 0.1);
+            box-shadow: inset 0 0 30px var(--primary-glow);
         }
 
         /* BULLETPROOF HEADER */
         .terminal-header {
-            background: linear-gradient(135deg, #001100, #000800);
-            border: 2px solid #00ff00;
-            border-bottom: 1px solid #00ff00;
+            background: linear-gradient(135deg, var(--background-light), var(--background));
+            border: 2px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
             padding: var(--space-4);
             display: grid;
             grid-template-columns: 1fr auto 1fr;
@@ -145,8 +256,8 @@
         .terminal-title {
             font-family: 'Orbitron', monospace;
             font-size: var(--text-3xl);
-            color: #00ff00;
-            text-shadow: 0 0 10px #00ff00;
+            color: var(--primary-bright);
+            text-shadow: 0 0 10px var(--primary-bright);
             letter-spacing: 2px;
             font-weight: 900;
             line-height: 1;
@@ -154,14 +265,14 @@
 
         .terminal-subtitle {
             font-size: var(--text-sm);
-            color: #00aa00;
+            color: var(--primary-dim);
             margin-top: 3px;
         }
 
         .timer-section {
             text-align: center;
-            background: #000;
-            border: 2px solid #00ff00;
+            background: var(--background);
+            border: 2px solid var(--border-color);
             padding: var(--space-4);
             border-radius: 3px;
             min-width: 200px;
@@ -170,8 +281,8 @@
         .timer-display {
             font-family: 'Orbitron', monospace;
             font-size: var(--text-4xl);
-            color: #00ff00;
-            text-shadow: 0 0 15px #00ff00;
+            color: var(--primary-bright);
+            text-shadow: 0 0 15px var(--primary-bright);
             letter-spacing: 2px;
             line-height: 1;
         }
@@ -179,8 +290,8 @@
         .progress-bar {
             width: 100%;
             height: 12px;
-            background: #000;
-            border: 1px solid #00ff00;
+            background: var(--background);
+            border: 1px solid var(--border-color);
             margin: var(--space-2) 0;
             border-radius: 2px;
             overflow: hidden;
@@ -188,20 +299,20 @@
 
         .progress-fill {
             height: 100%;
-            background: #00ff00;
+            background: var(--primary-bright);
             transition: width 1s linear;
-            box-shadow: 0 0 8px #00ff00;
+            box-shadow: 0 0 8px var(--primary-bright);
         }
 
         .scene-info {
             font-size: var(--text-xs);
-            color: #00aa00;
+            color: var(--primary-dim);
             text-transform: uppercase;
         }
 
         .roles-section {
-            background: #000;
-            border: 2px solid #00ff00;
+            background: var(--background);
+            border: 2px solid var(--border-color);
             padding: var(--space-4);
             border-radius: 3px;
             text-align: right;
@@ -209,23 +320,23 @@
 
         .roles-title {
             font-size: var(--text-xs);
-            color: #00ff00;
+            color: var(--primary-bright);
             margin-bottom: var(--space-2);
             font-weight: bold;
         }
 
         .roles-content {
             font-size: var(--text-xs);
-            color: #00dd00;
+            color: var(--text-color);
             line-height: 1.3;
         }
 
         /* BULLETPROOF MAIN CONTENT */
         .terminal-screen {
             flex: 1;
-            background: #000;
-            border: 2px solid #00ff00;
-            border-top: 1px solid #00ff00;
+            background: var(--background);
+            border: 2px solid var(--border-color);
+            border-top: 1px solid var(--border-color);
             overflow: hidden !important;
             display: flex;
             flex-direction: column;
@@ -305,8 +416,8 @@
         .scene-title {
             font-family: 'Orbitron', monospace;
             font-size: var(--text-4xl);
-            color: #00ff00;
-            text-shadow: 0 0 12px #00ff00;
+            color: var(--primary-bright);
+            text-shadow: 0 0 12px var(--primary-bright);
             margin-bottom: var(--space-3);
             letter-spacing: 2px;
             font-weight: 700;
@@ -315,21 +426,21 @@
 
         .scene-subtitle {
             font-size: var(--text-lg);
-            color: #00aa00;
+            color: var(--primary-dim);
             text-transform: uppercase;
             line-height: 1.1;
         }
 
         .scene-subtitle-zh {
             font-size: var(--text-lg);
-            color: #008800;
+            color: var(--primary-dark);
             margin-top: var(--space-1);
         }
 
         /* BULLETPROOF CONTENT */
         .content-box {
             background: linear-gradient(135deg, #001100, #000800);
-            border: 2px solid #00ff00;
+            border: 2px solid var(--border-color);
             padding: var(--space-6);
             margin: var(--space-4) 0;
             border-radius: 3px;
@@ -340,9 +451,9 @@
         .story-text {
             font-size: var(--text-lg);
             line-height: 1.8;
-            color: #00ff00;
+            color: var(--primary-bright);
             text-align: justify;
-            text-shadow: 0 0 1px #00ff00;
+            text-shadow: 0 0 1px var(--primary-bright);
         }
 
         .keyword {
@@ -424,7 +535,7 @@
         /* BULLETPROOF CARDS */
         .terminal-card {
             background: linear-gradient(135deg, #000, #001100);
-            border: 2px solid #00ff00;
+            border: 2px solid var(--border-color);
             padding: var(--space-5);
             border-radius: 3px;
             cursor: pointer;
@@ -445,7 +556,7 @@
 
         .card-title {
             font-size: var(--text-md);
-            color: #00ff00;
+            color: var(--primary-bright);
             margin-bottom: var(--space-2);
             font-weight: bold;
             line-height: 1.3;
@@ -453,7 +564,7 @@
 
         .card-subtitle {
             font-size: var(--text-base);
-            color: #00aa00;
+            color: var(--primary-dim);
             line-height: 1.3;
         }
 
@@ -461,7 +572,7 @@
         .frame-text {
             font-size: var(--text-lg);
             line-height: 1.5;
-            color: #00ff00;
+            color: var(--primary-bright);
             text-align: center;
             margin: var(--space-5) 0;
             font-weight: 600;
@@ -471,11 +582,11 @@
             display: inline-block;
             min-width: clamp(64px, 10cqw, 140px);
             height: clamp(24px, 4cqh, 36px);
-            border: 2px dashed #00ff00;
+            border: 2px dashed var(--border-color);
             border-radius: 3px;
             margin: 0 var(--space-2);
-            background: #000;
-            color: #00ff00;
+            background: var(--background);
+            color: var(--primary-bright);
             text-align: center;
             line-height: clamp(20px, 4cqh, 32px);
             font-weight: bold;
@@ -486,12 +597,12 @@
 
         .frame-blank.selected {
             border: 2px solid #ffff00;
-            background: #002200;
+            background: var(--background-lighter);
         }
 
         .frame-blank.filled {
-            border: 2px solid #00ff00;
-            background: #001100;
+            border: 2px solid var(--border-color);
+            background: var(--background-light);
         }
 
         .frame-blank.wrong {
@@ -500,8 +611,8 @@
         }
 
         .frame-blank.correct {
-            border: 2px solid #00ff00;
-            background: #002200;
+            border: 2px solid var(--border-color);
+            background: var(--background-lighter);
             box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
         }
 
@@ -513,7 +624,7 @@
         /* BULLETPROOF MCQ */
         .mcq-question {
             font-size: var(--text-xl);
-            color: #00ff00;
+            color: var(--primary-bright);
             text-align: center;
             margin: var(--space-5) 0;
             font-weight: bold;
@@ -522,13 +633,13 @@
 
         .mcq-question-zh {
             font-size: var(--text-lg);
-            color: #00aa00;
+            color: var(--primary-dim);
             margin-top: var(--space-2);
         }
 
         .mcq-option {
-            background: #000;
-            border: 2px solid #00ff00;
+            background: var(--background);
+            border: 2px solid var(--border-color);
             padding: var(--space-5);
             border-radius: 3px;
             cursor: pointer;
@@ -541,19 +652,19 @@
         }
 
         .mcq-option:hover {
-            background: #001100;
+            background: var(--background-light);
             box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
         }
 
         .mcq-option.selected {
-            background: #002200;
+            background: var(--background-lighter);
             border-color: #ffff00;
             box-shadow: 0 0 15px rgba(255, 255, 0, 0.4);
         }
 
         .mcq-option.correct {
-            background: #002200;
-            border-color: #00ff00;
+            background: var(--background-lighter);
+            border-color: var(--primary-bright);
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
         }
 
@@ -564,14 +675,14 @@
 
         .mcq-option-en {
             font-size: var(--text-md);
-            color: #00ff00;
+            color: var(--primary-bright);
             margin-bottom: var(--space-2);
             font-weight: bold;
         }
 
         .mcq-option-zh {
             font-size: var(--text-base);
-            color: #00aa00;
+            color: var(--primary-dim);
         }
 
         /* BULLETPROOF CONTROLS */
@@ -581,16 +692,16 @@
             padding: var(--space-5) 0;
             flex-shrink: 0;
             background: rgba(0, 0, 0, 0.9);
-            border-top: 1px solid #00ff00;
+            border-top: 1px solid var(--border-color);
             position: sticky;
             bottom: 0;
             z-index: 100;
         }
 
         .btn {
-            background: #000;
-            color: #00ff00;
-            border: 2px solid #00ff00;
+            background: var(--background);
+            color: var(--primary-bright);
+            border: 2px solid var(--border-color);
             padding: var(--space-4) var(--space-6);
             font-family: 'Share Tech Mono', monospace;
             font-size: var(--text-base);
@@ -603,7 +714,7 @@
         }
 
         .btn:hover {
-            background: #001100;
+            background: var(--background-light);
             box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
             transform: scale(1.02);
         }
@@ -614,18 +725,18 @@
             cursor: not-allowed;
         }
 
-        .btn.secondary { border-color: #00aa00; color: #00aa00; }
+        .btn.secondary { border-color: var(--primary-dim); color: var(--primary-dim); }
         .btn.danger { border-color: #ff4444; color: #ff4444; }
         .btn.panic { border-color: #ffff00; color: #ffff00; }
 
         .btn.success {
-            color: #00ff00;
-            border-color: #00ff00;
-            background: #001100;
+            color: var(--primary-bright);
+            border-color: var(--primary-bright);
+            background: var(--background-light);
         }
 
         .btn.success:hover {
-            background: #002200;
+            background: var(--background-lighter);
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.7);
         }
 
@@ -642,15 +753,15 @@
 
         /* Button state indicators */
         .btn.active {
-            background: #002200;
+            background: var(--background-lighter);
             border-color: #ffff00;
             color: #ffff00;
         }
 
         /* BULLETPROOF WRITE AREAS */
         .write-reminder {
-            background: #002200;
-            border: 2px solid #00ff00;
+            background: var(--background-lighter);
+            border: 2px solid var(--border-color);
             padding: var(--space-6);
             margin: var(--space-4) 0;
             text-align: center;
@@ -668,13 +779,18 @@
         }
 
         .write-prompt {
-            background: #001100;
-            border: 1px solid #00aa00;
+            background: var(--background-light);
+            border: 1px solid var(--border-dim);
             padding: var(--space-5);
             margin: var(--space-3) 0;
             border-radius: 3px;
             font-size: var(--text-base);
             line-height: 1.4;
+        }
+
+        .write-requirement {
+            font-size: var(--text-md);
+            line-height: 1.5;
         }
 
         /* START SCREEN */
@@ -692,8 +808,8 @@
         .start-title {
             font-family: 'Orbitron', monospace;
             font-size: var(--text-4xl);
-            color: #00ff00;
-            text-shadow: 0 0 20px #00ff00;
+            color: var(--primary-bright);
+            text-shadow: 0 0 20px var(--primary-bright);
             margin-bottom: var(--space-4);
             letter-spacing: 3px;
             font-weight: 900;
@@ -702,39 +818,39 @@
 
         .start-subtitle {
             font-size: var(--text-lg);
-            color: #00aa00;
+            color: var(--primary-dim);
             margin-bottom: var(--space-6);
         }
 
         .start-subtitle-zh {
             font-size: var(--text-md);
-            color: #008800;
+            color: var(--primary-dark);
             margin-top: var(--space-2);
         }
 
         .role-card {
-            background: #001100;
-            border: 2px solid #00aa00;
+            background: var(--background-light);
+            border: 2px solid var(--border-dim);
             padding: var(--space-5);
             border-radius: 3px;
         }
 
         .role-name {
             font-size: var(--text-md);
-            color: #00ff00;
+            color: var(--primary-bright);
             margin-bottom: var(--space-2);
             font-weight: bold;
         }
 
         .role-name-zh {
             font-size: var(--text-md);
-            color: #00aa00;
+            color: var(--primary-dim);
             margin-bottom: var(--space-3);
         }
 
         .role-desc {
             font-size: var(--text-sm);
-            color: #00aa00;
+            color: var(--primary-dim);
             line-height: 1.3;
         }
 
@@ -743,9 +859,9 @@
             position: fixed;
             top: var(--space-4);
             right: var(--space-4);
-            background: #000;
-            color: #00ff00;
-            border: 2px solid #00ff00;
+            background: var(--background);
+            color: var(--primary-bright);
+            border: 2px solid var(--border-color);
             width: 36px;
             height: 36px;
             border-radius: 50%;
@@ -759,7 +875,7 @@
         }
 
         .settings-toggle:hover {
-            background: #001100;
+            background: var(--background-light);
             transform: scale(1.1) rotate(90deg);
             box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
         }
@@ -768,8 +884,8 @@
             position: fixed;
             top: 50px;
             right: var(--space-4);
-            background: #000;
-            border: 2px solid #00ff00;
+            background: var(--background);
+            border: 2px solid var(--border-color);
             padding: var(--space-5);
             border-radius: 3px;
             z-index: 1999;
@@ -786,7 +902,7 @@
         }
 
         .settings-title {
-            color: #00ff00;
+            color: var(--primary-bright);
             margin-bottom: var(--space-4);
             font-size: 12px;
             font-weight: bold;
@@ -796,13 +912,13 @@
         .setting-group {
             margin: var(--space-4) 0;
             padding: var(--space-3);
-            background: #001100;
-            border: 1px solid #00aa00;
+            background: var(--background-light);
+            border: 1px solid var(--border-dim);
             border-radius: 3px;
         }
 
         .setting-label {
-            color: #00ff00;
+            color: var(--primary-bright);
             font-size: 10px;
             display: block;
             margin-bottom: var(--space-2);
@@ -817,9 +933,9 @@
         }
 
         .timer-btn {
-            background: #000;
-            color: #00aa00;
-            border: 1px solid #00aa00;
+            background: var(--background);
+            color: var(--primary-dim);
+            border: 1px solid var(--border-dim);
             padding: 4px;
             font-size: 9px;
             cursor: pointer;
@@ -828,16 +944,16 @@
         }
 
         .timer-btn:hover {
-            background: #001100;
-            color: #00ff00;
-            border-color: #00ff00;
+            background: var(--background-light);
+            color: var(--primary-bright);
+            border-color: var(--primary-bright);
         }
 
         .custom-input {
             width: 100%;
-            background: #000;
-            border: 1px solid #00ff00;
-            color: #00ff00;
+            background: var(--background);
+            border: 1px solid var(--border-color);
+            color: var(--primary-bright);
             padding: 4px;
             border-radius: 2px;
             font-size: 10px;
@@ -846,9 +962,9 @@
 
         .file-input {
             width: 100%;
-            background: #000;
-            border: 1px solid #00aa00;
-            color: #00ff00;
+            background: var(--background);
+            border: 1px solid var(--border-dim);
+            color: var(--primary-bright);
             padding: 4px;
             margin: 4px 0;
             border-radius: 2px;
@@ -871,7 +987,7 @@
         }
 
         .modal-content {
-            background: #001100;
+            background: var(--background-light);
             border: 3px solid #00ff00;
             border-radius: 5px;
             padding: var(--space-8);
@@ -883,7 +999,7 @@
         .modal-title {
             font-family: 'Orbitron', monospace;
             font-size: var(--text-lg);
-            color: #00ff00;
+            color: var(--primary-bright);
             text-shadow: 0 0 8px #00ff00;
             margin-bottom: var(--space-4);
             font-weight: bold;
@@ -891,15 +1007,15 @@
 
         .modal-text {
             font-size: var(--text-base);
-            color: #00aa00;
+            color: var(--primary-dim);
             line-height: 1.4;
             margin-bottom: var(--space-5);
         }
 
         .modal-close {
-            background: #000;
-            color: #00ff00;
-            border: 2px solid #00ff00;
+            background: var(--background);
+            color: var(--primary-bright);
+            border: 2px solid var(--border-color);
             padding: var(--space-3) var(--space-5);
             font-size: var(--text-sm);
             cursor: pointer;
@@ -908,7 +1024,7 @@
         }
 
         .modal-close:hover {
-            background: #001100;
+            background: var(--background-light);
             box-shadow: 0 0 12px rgba(0, 255, 0, 0.5);
         }
 
@@ -918,7 +1034,7 @@
             bottom: 20px;
             right: -300px;
             background: linear-gradient(135deg, #000, #001100);
-            border: 2px solid #00ff00;
+            border: 2px solid var(--border-color);
             border-radius: 8px;
             padding: 15px;
             z-index: 2000;
@@ -941,7 +1057,7 @@
             width: 50px;
             height: 50px;
             background: linear-gradient(135deg, #000, #001100);
-            border: 2px solid #00ff00;
+            border: 2px solid var(--border-color);
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -949,8 +1065,8 @@
             cursor: pointer;
             z-index: 1999;
             font-size: 24px;
-            color: #00ff00;
-            text-shadow: 0 0 10px #00ff00;
+            color: var(--primary-bright);
+            text-shadow: 0 0 10px var(--primary-bright);
             transition: all 0.3s ease;
             animation: scalePulse 3s infinite;
         }
@@ -965,7 +1081,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
-            color: #00ff00;
+            color: var(--primary-bright);
             font-size: 11px;
             font-weight: bold;
             letter-spacing: 1px;
@@ -973,12 +1089,12 @@
 
         .scale-current {
             font-size: 18px;
-            color: #00ff00;
+            color: var(--primary-bright);
             font-weight: bold;
             text-align: center;
             padding: 5px;
-            background: #001100;
-            border: 1px solid #00aa00;
+            background: var(--background-light);
+            border: 1px solid var(--border-dim);
             border-radius: 4px;
             min-width: 60px;
             font-family: 'Courier New', monospace;
@@ -988,8 +1104,8 @@
             width: 20px;
             height: 20px;
             background: transparent;
-            border: 1px solid #00ff00;
-            color: #00ff00;
+            border: 1px solid var(--border-color);
+            color: var(--primary-bright);
             cursor: pointer;
             border-radius: 3px;
             font-size: 12px;
@@ -998,7 +1114,7 @@
         }
 
         .scale-minimize-btn:hover {
-            background: #001100;
+            background: var(--background-light);
             transform: scale(1.1);
         }
 
@@ -1010,9 +1126,9 @@
         }
 
         .scale-preset-btn {
-            background: #001100;
-            border: 2px solid #00aa00;
-            color: #00ff00;
+            background: var(--background-light);
+            border: 2px solid var(--border-dim);
+            color: var(--primary-bright);
             padding: 8px 4px;
             cursor: pointer;
             border-radius: 4px;
@@ -1024,16 +1140,16 @@
         }
 
         .scale-preset-btn:hover {
-            background: #001100;
-            border-color: #00ff00;
-            color: #00ff00;
+            background: var(--background-light);
+            border-color: var(--primary-bright);
+            color: var(--primary-bright);
             transform: scale(1.05);
         }
 
         .scale-preset-btn.active {
             background: #00ff00;
             color: #000;
-            border-color: #00ff00;
+            border-color: var(--primary-bright);
             box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
         }
 
@@ -1044,7 +1160,7 @@
         .scale-slider-label {
             display: flex;
             justify-content: space-between;
-            color: #00aa00;
+            color: var(--primary-dim);
             font-size: 9px;
             margin-bottom: 5px;
         }
@@ -1054,8 +1170,8 @@
             -webkit-appearance: none;
             appearance: none;
             height: 6px;
-            background: #001100;
-            border: 1px solid #00aa00;
+            background: var(--background-light);
+            border: 1px solid var(--border-dim);
             border-radius: 3px;
             outline: none;
             transition: all 0.2s ease;
@@ -1099,7 +1215,7 @@
             display: flex;
             justify-content: space-between;
             font-size: 9px;
-            color: #00aa00;
+            color: var(--primary-dim);
             margin-top: 8px;
             padding-top: 8px;
             border-top: 1px solid #003300;
@@ -1122,8 +1238,8 @@
         /* Presentation mode toggle button inside scale panel */
         .presentation-mode-btn {
             background: transparent;
-            border: 1px solid #00aa00;
-            color: #00aa00;
+            border: 1px solid var(--border-dim);
+            color: var(--primary-dim);
             padding: 6px 12px;
             cursor: pointer;
             border-radius: 4px;
@@ -1264,7 +1380,7 @@
 
         .cursor::after {
             content: '█';
-            color: #00ff00;
+            color: var(--primary-bright);
             animation: blink 1s infinite;
             margin-left: 2px;
         }
@@ -1346,8 +1462,8 @@
             position: absolute;
             font-family: 'Courier New', monospace;
             font-size: 20px;
-            color: #00ff00;
-            text-shadow: 0 0 10px #00ff00;
+            color: var(--primary-bright);
+            text-shadow: 0 0 10px var(--primary-bright);
             animation: matrix-rain 3s linear infinite;
             line-height: 1.2;
         }
@@ -1387,12 +1503,12 @@
 
         .image-modal-caption {
             margin-top: var(--space-4);
-            color: #00ff00;
+            color: var(--primary-bright);
             font-size: var(--text-base);
             text-align: center;
-            background: #000;
+            background: var(--background);
             padding: var(--space-3) var(--space-5);
-            border: 1px solid #00ff00;
+            border: 1px solid var(--border-color);
             border-radius: 3px;
         }
 
@@ -1400,9 +1516,9 @@
             position: absolute;
             top: -40px;
             right: 0;
-            background: #000;
-            color: #00ff00;
-            border: 2px solid #00ff00;
+            background: var(--background);
+            color: var(--primary-bright);
+            border: 2px solid var(--border-color);
             width: 36px;
             height: 36px;
             border-radius: 50%;
@@ -1415,16 +1531,16 @@
         }
 
         .image-modal-close:hover {
-            background: #001100;
+            background: var(--background-light);
             transform: scale(1.1);
             box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
         }
 
         /* IMAGE BUTTONS */
         .image-btn {
-            background: #000;
-            color: #00ff00;
-            border: 2px solid #00ff00;
+            background: var(--background);
+            color: var(--primary-bright);
+            border: 2px solid var(--border-color);
             padding: var(--space-2) var(--space-4);
             font-size: var(--text-sm);
             cursor: pointer;
@@ -1437,7 +1553,7 @@
         }
 
         .image-btn:hover {
-            background: #001100;
+            background: var(--background-light);
             box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
             transform: scale(1.02);
         }
@@ -1464,7 +1580,7 @@
             width: 150px;
             height: 100px;
             object-fit: cover;
-            border: 2px solid #00ff00;
+            border: 2px solid var(--border-color);
             border-radius: 3px;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -1505,7 +1621,7 @@
             top: 140px;
             left: var(--space-4);
             background: rgba(0, 0, 0, 0.95);
-            border: 1px solid #00ff00;
+            border: 1px solid var(--border-color);
             padding: var(--space-3);
             border-radius: 3px;
             z-index: 1400;
@@ -1525,8 +1641,8 @@
             top: 140px;
             left: 5px;
             background: rgba(0, 0, 0, 0.9);
-            border: 1px solid #00ff00;
-            color: #00ff00;
+            border: 1px solid var(--border-color);
+            color: var(--primary-bright);
             padding: var(--space-2);
             border-radius: 3px;
             cursor: pointer;
@@ -1543,7 +1659,7 @@
         }
 
         .section-toggle:hover {
-            background: #001100;
+            background: var(--background-light);
             box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
         }
 
@@ -1561,23 +1677,23 @@
             cursor: pointer;
             transition: all 0.2s ease;
             font-size: 10px;
-            color: #00aa00;
+            color: var(--primary-dim);
             border: 1px solid transparent;
         }
 
         .section-indicator.active {
-            background: #001100;
-            border: 1px solid #00ff00;
-            color: #00ff00;
+            background: var(--background-light);
+            border: 1px solid var(--border-color);
+            color: var(--primary-bright);
         }
 
         .section-indicator.completed {
-            color: #00ff00;
+            color: var(--primary-bright);
         }
 
         .section-indicator:hover {
-            background: #001100;
-            border: 1px solid #00ff00;
+            background: var(--background-light);
+            border: 1px solid var(--border-color);
         }
 
         .section-icon {
@@ -1654,10 +1770,10 @@
        ============================================ */
     /* HAL Variables (compatible with existing) */
     .od-control-bar {
-      --od-ink: #00ff65;
-      --od-ink-soft: #21c96c;
-      --od-bg: #000;
-      --od-cyan: #00fff6;
+      --od-ink: var(--primary-color);
+      --od-ink-soft: var(--primary-dim);
+      --od-bg: var(--background);
+      --od-cyan: var(--primary-bright);
       --od-red: #ff2a2a;
     }
     /* Control Bar - Positioned to avoid conflicts */
@@ -2113,7 +2229,7 @@
       border: 1px solid var(--od-ink-soft);
       border-radius: 8px;
       padding: 8px;
-      background: #000;
+      background: var(--background);
       transition: all 0.2s ease;
     }
     .od-cardteam:hover {
@@ -2251,7 +2367,7 @@
     }
 
     .score-panel-header {
-        background: #000;
+        background: var(--background);
         border-bottom: 2px solid #00ff00;
         padding: 12px;
         border-radius: 9px 9px 0 0;
@@ -2268,7 +2384,7 @@
     }
 
     .score-panel-header:hover {
-        background: #001100;
+        background: var(--background-light);
     }
 
     .score-icon {
@@ -2300,13 +2416,13 @@
         flex: 1;
         font-family: 'Orbitron', monospace;
         font-weight: bold;
-        color: #00ff00;
+        color: var(--primary-bright);
         text-shadow: 0 0 8px #00ff00;
         letter-spacing: 1px;
     }
 
     .score-collapse-btn {
-        color: #00ff00;
+        color: var(--primary-bright);
         font-size: 14px;
         transition: transform 0.3s ease;
     }
@@ -2320,8 +2436,8 @@
     }
 
     .score-info {
-        background: #000;
-        border: 1px solid #00aa00;
+        background: var(--background);
+        border: 1px solid var(--border-dim);
         border-radius: 6px;
         padding: 12px;
         margin-bottom: 12px;
@@ -2337,7 +2453,7 @@
     }
 
     .score-team {
-        color: #00ff00;
+        color: var(--primary-bright);
         margin-bottom: 6px;
     }
 
@@ -2359,9 +2475,9 @@
 
     .score-btn {
         flex: 1;
-        background: #001100;
-        color: #00ff00;
-        border: 2px solid #00ff00;
+        background: var(--background-light);
+        color: var(--primary-bright);
+        border: 2px solid var(--border-color);
         padding: 12px 8px;
         border-radius: 6px;
         cursor: pointer;
@@ -2377,14 +2493,14 @@
     }
 
     .score-btn:hover {
-        background: #002200;
+        background: var(--background-lighter);
         box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
         transform: scale(1.05);
     }
 
     .score-btn.add {
-        border-color: #00ff00;
-        color: #00ff00;
+        border-color: var(--primary-bright);
+        color: var(--primary-bright);
     }
 
     .score-btn.add:hover {
@@ -2533,9 +2649,9 @@
 
     .winner-score {
         font-size: 36px;
-        color: #00ff00;
+        color: var(--primary-bright);
         font-weight: bold;
-        text-shadow: 0 0 20px #00ff00;
+        text-shadow: 0 0 20px var(--primary-bright);
         margin: 15px 0;
     }
 
@@ -2631,22 +2747,22 @@
              playsinline
              webkit-playsinline>
       </video>
-      <div id="introPrompt" style="position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; color: #00ff00; font-family: 'Orbitron', monospace; font-size: 14px; letter-spacing: 1px; display: none;">Click to play video</div>
+      <div id="introPrompt" style="position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; color: var(--primary-bright); font-family: 'Orbitron', monospace; font-size: 14px; letter-spacing: 1px; display: none;">Click to play video</div>
     </div>
     <!-- Corner Decorations -->
-    <div style="position: fixed; top: 10px; left: 10px; color: #00ff00; opacity: 0.3; font-size: 20px; z-index: 998; pointer-events: none; font-family: 'Orbitron', monospace;">[[ SYSTEM ]]</div>
-    <div style="position: fixed; top: 10px; right: 10px; color: #00ff00; opacity: 0.3; font-size: 20px; z-index: 998; pointer-events: none; font-family: 'Orbitron', monospace;">{{ ACTIVE }}</div>
-    <div style="position: fixed; bottom: 10px; left: 10px; color: #00ff00; opacity: 0.3; font-size: 20px; z-index: 998; pointer-events: none; font-family: 'Orbitron', monospace;"><< NODE-01 >></div>
-    <div style="position: fixed; bottom: 10px; right: 10px; color: #00ff00; opacity: 0.3; font-size: 20px; z-index: 998; pointer-events: none; font-family: 'Orbitron', monospace;">// ONLINE //</div>
+    <div style="position: fixed; top: 10px; left: 10px; color: var(--primary-bright); opacity: 0.3; font-size: 20px; z-index: 998; pointer-events: none; font-family: 'Orbitron', monospace;">[[ SYSTEM ]]</div>
+    <div style="position: fixed; top: 10px; right: 10px; color: var(--primary-bright); opacity: 0.3; font-size: 20px; z-index: 998; pointer-events: none; font-family: 'Orbitron', monospace;">{{ ACTIVE }}</div>
+    <div style="position: fixed; bottom: 10px; left: 10px; color: var(--primary-bright); opacity: 0.3; font-size: 20px; z-index: 998; pointer-events: none; font-family: 'Orbitron', monospace;"><< NODE-01 >></div>
+    <div style="position: fixed; bottom: 10px; right: 10px; color: var(--primary-bright); opacity: 0.3; font-size: 20px; z-index: 998; pointer-events: none; font-family: 'Orbitron', monospace;">// ONLINE //</div>
 
     <!-- Boot Sequence Overlay -->
-    <div id="bootSequence" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: 'Orbitron', monospace;">
-        <div style="color: #00ff00; font-size: 24px; margin-bottom: 20px; text-shadow: 0 0 10px #00ff00;">INITIALIZING SYSTEM...</div>
-        <div style="width: 300px; height: 30px; border: 2px solid #00ff00; position: relative;">
+    <div id="bootSequence" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--background); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: 'Orbitron', monospace;">
+        <div style="color: var(--primary-bright); font-size: 24px; margin-bottom: 20px; text-shadow: 0 0 10px var(--primary-bright);">INITIALIZING SYSTEM...</div>
+        <div style="width: 300px; height: 30px; border: 2px solid var(--border-color); position: relative;">
             <div id="bootProgress" style="position: absolute; top: 0; left: 0; height: 100%; background: linear-gradient(90deg, #00ff00, #00ffff); width: 0%; transition: width 0.1s;"></div>
         </div>
-        <div id="bootPercent" style="color: #00ff00; margin-top: 10px; font-size: 18px;">0%</div>
-        <div id="bootStatus" style="color: #00aa00; margin-top: 10px; font-size: 12px; text-align: center;">Loading modules...</div>
+        <div id="bootPercent" style="color: var(--primary-bright); margin-top: 10px; font-size: 18px;">0%</div>
+        <div id="bootStatus" style="color: var(--primary-dim); margin-top: 10px; font-size: 12px; text-align: center;">Loading modules...</div>
     </div>
 
     <!-- Section Toggle Button -->
@@ -2696,8 +2812,21 @@
                 <label for="customTimer">
                     <input type="number" id="customTimer" min="1" max="180" value="15" class="custom-input custom-timer-input" title="Enter custom timer duration (1-180 minutes)">
                 </label>
-                <span style="color: #00aa00; font-size: 9px;">min</span>
+                <span style="color: var(--primary-dim); font-size: 9px;">min</span>
                 <button class="timer-btn" onclick="setCustomTimer()">SET</button>
+            </div>
+        </div>
+
+        <!-- Theme Settings -->
+        <div class="setting-group">
+            <div class="setting-label">THEME | 主题</div>
+            <div class="timer-buttons" style="grid-template-columns: repeat(2, 1fr);">
+                <button class="timer-btn theme-btn" onclick="setTheme('matrix')" data-theme="matrix">MATRIX</button>
+                <button class="timer-btn theme-btn" onclick="setTheme('amber')" data-theme="amber">AMBER</button>
+                <button class="timer-btn theme-btn" onclick="setTheme('blue')" data-theme="blue">BLUE</button>
+                <button class="timer-btn theme-btn" onclick="setTheme('purple')" data-theme="purple">PURPLE</button>
+                <button class="timer-btn theme-btn" onclick="setTheme('red')" data-theme="red">RED</button>
+                <button class="timer-btn theme-btn" onclick="setTheme('white')" data-theme="white">WHITE</button>
             </div>
         </div>
 
@@ -2718,7 +2847,7 @@
         <!-- Storage Management -->
         <div class="setting-group">
             <div class="setting-label">STORAGE MANAGEMENT | 存储管理</div>
-            <div id="storageInfo" style="color: #00ff00; font-size: 10px; margin: 4px 0;">Loading...</div>
+            <div id="storageInfo" style="color: var(--primary-bright); font-size: 10px; margin: 4px 0;">Loading...</div>
             <button class="timer-btn" onclick="showStorageDetails()" style="width: 100%; margin: 2px 0;">VIEW DETAILS</button>
             <button class="timer-btn" onclick="clearImageStorage()" style="width: 100%; margin: 2px 0; background: #aa0000;">CLEAR IMAGES</button>
             <button class="timer-btn" onclick="clearAllStorage()" style="width: 100%; background: #550000;">CLEAR ALL DATA</button>
@@ -2749,7 +2878,7 @@
             </div>
 
             <div class="scale-slider-container">
-                <input type="range" class="scale-slider" id="scaleSlider" min="30" max="200" value="100" step="10" oninput="updateScale(this.value)" title="Adjust text size">
+                <input type="range" class="scale-slider" id="scaleSlider" min="30" max="300" value="100" step="10" oninput="updateScale(this.value)" title="Adjust text size">
                 <div class="scale-slider-labels">
                     <span>30%</span>
                     <span>200%</span>
@@ -3235,7 +3364,7 @@
             const hackerMsg = document.createElement('div');
             hackerMsg.style.cssText = `
                 font-size: 48px;
-                color: #00ff00;
+                color: var(--primary-bright);
                 text-shadow: 0 0 30px #00ff00;
                 font-family: 'Orbitron', monospace;
                 animation: glitch 0.5s infinite, holographic 2s infinite;
@@ -3300,7 +3429,7 @@
         // EASTER EGG 2: RETRO MODE
         function activateRetroMode() {
             playVictory();
-            console.log('%cRETRO MODE ACTIVATED! Welcome to 1985!', 'color: #00ff00; font-size: 24px; font-family: monospace;');
+            console.log('%cRETRO MODE ACTIVATED! Welcome to 1985!', 'color: var(--primary-bright); font-size: 24px; font-family: monospace;');
 
             // Create retro overlay
             const retroOverlay = document.createElement('div');
@@ -3311,7 +3440,7 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: #000;
+                background: var(--background);
                 z-index: 10000;
                 cursor: pointer;
                 animation: crtGlow 0.1s infinite;
@@ -3330,7 +3459,7 @@
                 }
 
                 .retro-mode * {
-                    color: #00ff00 !important;
+                    color: var(--primary-bright) !important;
                     text-shadow: 0 0 3px #00ff00 !important;
                     font-family: 'Courier New', monospace !important;
                 }
@@ -3365,8 +3494,8 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
                 font-size: 48px;
-                color: #00ff00;
-                text-shadow: 0 0 20px #00ff00;
+                color: var(--primary-bright);
+                text-shadow: 0 0 20px var(--primary-bright);
                 font-family: 'Courier New', monospace;
                 text-align: center;
                 animation: blink 0.5s 3;
@@ -3594,17 +3723,17 @@
                     ✅ SAMPLE SOLUTIONS | 参考答案:
                 </h3>
                 ${prompts.map((prompt, index) => `
-                    <div class="content-box" style="margin-bottom: var(--space-4); border: 2px solid #00aa00;">
-                        <div style="margin-bottom: var(--space-3); color: #00ff00; font-weight: bold;">
+                    <div class="content-box" style="margin-bottom: var(--space-4); border: 2px solid var(--border-dim);">
+                        <div style="margin-bottom: var(--space-3); color: var(--primary-bright); font-weight: bold;">
                             ${index + 1}. ${prompt.en}
                         </div>
                         <div style="color: #00aa00; margin-bottom: var(--space-3); font-size: var(--text-sm);">
                             ${prompt.zh}
                         </div>
-                        <div style="background: #001100; padding: var(--space-3); border-left: 3px solid #00ff00; margin: var(--space-3) 0;">
-                            <div style="color: #00ff00; margin-bottom: var(--space-2);"><strong>Sample Answer | 参考答案:</strong></div>
-                            <div style="color: #00dd00; margin-bottom: var(--space-2);">${prompt.sample_en || 'Not provided'}</div>
-                            <div style="color: #00aa00;">${prompt.sample_zh || '未提供'}</div>
+                        <div style="background: var(--background-light); padding: var(--space-3); border-left: 3px solid var(--border-color); margin: var(--space-3) 0;">
+                            <div style="color: var(--primary-bright); margin-bottom: var(--space-2);"><strong>Sample Answer | 参考答案:</strong></div>
+                            <div style="color: var(--text-color); margin-bottom: var(--space-2);">${prompt.sample_en || 'Not provided'}</div>
+                            <div style="color: var(--primary-dim);">${prompt.sample_zh || '未提供'}</div>
                         </div>
                         ${prompt.explanation_en || prompt.explanation_zh ? `
                             <div style="background: #000800; padding: var(--space-3); border-left: 3px solid #ffaa00; margin: var(--space-3) 0;">
@@ -3642,7 +3771,7 @@
                 return;
             }
             
-            console.log('%c[INTRO] Starting (always show on refresh)', 'color: #00ff00; font-weight: bold');
+            console.log('%c[INTRO] Starting (always show on refresh)', 'color: var(--primary-bright); font-weight: bold');
             overlay.style.display = 'flex';
             prompt.style.display = 'none';
             
@@ -4635,7 +4764,7 @@
                     <p style="color: #ffff00;">What would you like to do? | 您想要做什么？</p>
                     <br>
                     <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
-                        <button class="btn" onclick="stayInCurrentSection()" style="background: #003300; border-color: #00ff00;">
+                        <button class="btn" onclick="stayInCurrentSection()" style="background: #003300; border-color: var(--primary-bright);">
                             STAY IN SECTION | 留在当前部分
                         </button>
                         <button class="btn success" onclick="proceedToNextSection()">
@@ -4757,6 +4886,39 @@
             playBeep();
         };
 
+        // Theme Management
+        window.setTheme = function(themeName) {
+            // Remove all theme classes from body
+            document.body.classList.remove('theme-amber', 'theme-blue', 'theme-purple', 'theme-red', 'theme-white');
+            
+            // Add new theme class (matrix is default, no class needed)
+            if (themeName !== 'matrix') {
+                document.body.classList.add('theme-' + themeName);
+            }
+            
+            // Update button states
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                if (btn.dataset.theme === themeName) {
+                    btn.style.borderColor = 'var(--primary-bright)';
+                    btn.style.color = 'var(--primary-bright)';
+                } else {
+                    btn.style.borderColor = 'var(--border-dim)';
+                    btn.style.color = 'var(--primary-dim)';
+                }
+            });
+            
+            // Save to localStorage
+            localStorage.setItem('selectedTheme', themeName);
+            
+            playBeep();
+        };
+
+        // Load saved theme on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('selectedTheme') || 'matrix';
+            setTheme(savedTheme);
+        });
+
         // Section Menu
         window.toggleSectionMenu = function() {
             const menu = document.getElementById('sectionIndicators');
@@ -4818,8 +4980,8 @@
 
                 if (hasExamples) {
                     content += `
-                        <div id="examplesSection" style="display:none; margin-top: var(--space-4); padding: var(--space-3); background: #001100; border-left: 3px solid #00ff00; border-radius: 3px;">
-                            <div style="color: #00ff00; font-weight: bold; margin-bottom: var(--space-3);">
+                        <div id="examplesSection" style="display:none; margin-top: var(--space-4); padding: var(--space-3); background: var(--background-light); border-left: 3px solid var(--border-color); border-radius: 3px;">
+                            <div style="color: var(--primary-bright); font-weight: bold; margin-bottom: var(--space-3);">
                                 📝 Example Sentences | 例句:
                             </div>
                     `;
@@ -4828,7 +4990,7 @@
                     if (keyword.examples && keyword.examples.length > 0) {
                         keyword.examples.forEach((example, idx) => {
                             content += `
-                                <div style="margin-bottom: var(--space-2); color: #00dd00;">
+                                <div style="margin-bottom: var(--space-2); color: var(--text-color);">
                                     ${idx + 1}. ${example}
                                 </div>
                             `;
@@ -4840,7 +5002,7 @@
                         content += `<div style="margin: var(--space-3) 0; border-top: 1px solid #00aa00;"></div>`;
                         keyword.examples_zh.forEach((example, idx) => {
                             content += `
-                                <div style="margin-bottom: var(--space-2); color: #00aa00;">
+                                <div style="margin-bottom: var(--space-2); color: var(--primary-dim);">
                                     ${idx + 1}. ${example}
                                 </div>
                             `;
@@ -5265,7 +5427,7 @@
                         ${images.map(img => `
                             <div style="display: inline-block; margin: var(--space-2);">
                                 <img src="${img.dataUrl}" alt="${img.name}"
-                                     style="max-width: 300px; max-height: 200px; border: 2px solid #00ff00; border-radius: 3px; cursor: pointer;"
+                                     style="max-width: 300px; max-height: 200px; border: 2px solid var(--border-color); border-radius: 3px; cursor: pointer;"
                                      onclick="openImageModal('${img.dataUrl}', '${img.name}')">
                                 <div style="color: #00aa00; margin-top: var(--space-2); font-size: var(--text-sm);">
                                     ${img.name.replace(/\.[^/.]+$/, "")}
@@ -5483,7 +5645,7 @@
                         ${currentMCQImages.map(img => `
                             <div style="display: inline-block; margin: var(--space-2);">
                                 <img src="${img.dataUrl}" alt="${img.name}"
-                                     style="max-width: 300px; max-height: 200px; border: 2px solid #00ff00; border-radius: 3px; cursor: pointer;"
+                                     style="max-width: 300px; max-height: 200px; border: 2px solid var(--border-color); border-radius: 3px; cursor: pointer;"
                                      onclick="openImageModal('${img.dataUrl}', '${img.name}')">
                                 <div style="color: #00aa00; margin-top: var(--space-2); font-size: var(--text-sm);">
                                     ${img.name.replace(/\.[^/.]+$/, "")}
@@ -5669,7 +5831,7 @@
 
             // Display current definition with progress indicator
             frameContainer.innerHTML = `
-                <div class="definition-progress" style="color: #00ff00; margin-bottom: var(--space-3); text-align: center;">
+                <div class="definition-progress" style="color: var(--primary-bright); margin-bottom: var(--space-3); text-align: center;">
                     DEFINITION ${currentDefinitionIndex + 1} of ${lessonConfig.frames.length} | 定义 ${currentDefinitionIndex + 1}/${lessonConfig.frames.length}
                 </div>
                 <div class="content-box">
@@ -6957,7 +7119,7 @@ function renderWriteScene() {
             <div class="content-box" style="margin-bottom: var(--space-4);">
                 <div style="margin-bottom: var(--space-3);">${prompt.en}</div>
                 <div style="color: #888; margin-bottom: var(--space-3);">${prompt.zh}</div>
-                <textarea style="width: 100%; min-height: 100px; background: #001100; color: #00ff00; border: 1px solid #00aa00; padding: var(--space-3); font-family: monospace;"></textarea>
+                <textarea style="width: 100%; min-height: 100px; background: var(--background-light); color: var(--primary-bright); border: 1px solid var(--border-dim); padding: var(--space-3); font-family: monospace;"></textarea>
             </div>
         `).join('')}
     `;
@@ -7263,7 +7425,7 @@ function renderWriteScene() {
                     // Current definition is complete, show completion message
                     const frameText = document.querySelector('.frame-text');
                     if (frameText && !frameText.innerHTML.includes('DEFINITION COMPLETE')) {
-                        frameText.innerHTML += `<div style="color: #00ff00; margin-top: var(--space-2); text-align: center;">✓ DEFINITION COMPLETE</div>`;
+                        frameText.innerHTML += `<div style="color: var(--primary-bright); margin-top: var(--space-2); text-align: center;">✓ DEFINITION COMPLETE</div>`;
                     }
 
                     // Auto-advance to next definition after a short delay if not the last one
@@ -7465,8 +7627,8 @@ function renderWriteScene() {
                         Check the validation results for corrections<br><br>`;
                 }
 
-                warningMessage += `<strong style="color: #00ff00;">Proceeding to validation results...</strong><br>
-                    <strong style="color: #00ff00;">仍在显示验证结果...</strong>`;
+                warningMessage += `<strong style="color: var(--primary-bright);">Proceeding to validation results...</strong><br>
+                    <strong style="color: var(--primary-bright);">仍在显示验证结果...</strong>`;
 
                 showModal('VALIDATION STATUS | 验证状态', warningMessage);
 
@@ -7865,14 +8027,14 @@ function renderWriteScene() {
                 <div style="color: #ffaa00; font-weight: bold; margin-bottom: var(--space-3); font-size: var(--text-base);">
                     ✅ SOLUTION | 解答
                 </div>
-                <div style="background: #002200; padding: var(--space-3); border-left: 3px solid #00ff00; margin-bottom: var(--space-3);">
-                    <div style="color: #00ff00; font-weight: bold; margin-bottom: var(--space-2);">
+                <div style="background: var(--background-lighter); padding: var(--space-3); border-left: 3px solid var(--border-color); margin-bottom: var(--space-3);">
+                    <div style="color: var(--primary-bright); font-weight: bold; margin-bottom: var(--space-2);">
                         Correct Answer | 正确答案:
                     </div>
-                    <div style="color: #00ff00; margin-bottom: var(--space-1);">
+                    <div style="color: var(--primary-bright); margin-bottom: var(--space-1);">
                         <strong>[${String.fromCharCode(65 + mcq.correct)}]</strong> ${correctOptionText}
                     </div>
-                    <div style="color: #00aa00;">
+                    <div style="color: var(--primary-dim);">
                         ${correctOptionTextZh}
                     </div>
                 </div>
@@ -9067,7 +9229,7 @@ function renderWriteScene() {
 
             // Show easter egg hints in console
             console.log('%c🎮 HIDDEN EASTER EGGS ACTIVATED! 🎮', 'color: #ff00ff; font-size: 24px; font-weight: bold; text-shadow: 0 0 10px #ff00ff;');
-            console.log('%c💻 HACKER MODE: Triple-click the TIMER display', 'color: #00ff00; font-size: 18px;');
+            console.log('%c💻 HACKER MODE: Triple-click the TIMER display', 'color: var(--primary-bright); font-size: 18px;');
             console.log('%c📺 RETRO MODE: Click all 4 CORNERS within 5 seconds', 'color: #00ffff; font-size: 18px;');
             console.log('%c🕺 DISCO MODE: Long press (2 sec) the MAIN TITLE', 'color: #ffff00; font-size: 18px;');
             console.log('%c✨ RANDOM SURPRISE: Click empty space multiple times!', 'color: #ff69b4; font-size: 16px;');
@@ -9948,7 +10110,7 @@ function renderWriteScene() {
                     const sets = this.load();
                     
                     if (sets.length === 0) {
-                        container.innerHTML = '<div style="color: #00aa00; font-size: 10px; font-style: italic; padding: 8px;">No saved sets yet. Save your current teams above.</div>';
+                        container.innerHTML = '<div style="color: var(--primary-dim); font-size: 10px; font-style: italic; padding: 8px;">No saved sets yet. Save your current teams above.</div>';
                         return;
                     }
                     
@@ -9959,9 +10121,9 @@ function renderWriteScene() {
                         const studentCount = set.teams.reduce((sum, t) => sum + (t.roster?.length || 0), 0);
                         
                         return `
-                            <div style="background: #000; border: 1px solid #00aa00; border-radius: 6px; padding: 8px; margin-bottom: 6px;">
+                            <div style="background: #000; border: 1px solid var(--border-dim); border-radius: 6px; padding: 8px; margin-bottom: 6px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-                                    <strong style="color: #00ff00; font-size: 12px;">${set.name}</strong>
+                                    <strong style="color: var(--primary-bright); font-size: 12px;">${set.name}</strong>
                                     <div style="display: flex; gap: 4px;">
                                         <button class="od-btn" style="padding: 2px 6px;" onclick="window.savedSets.loadSetByName('${set.name}')" title="Load this set">
                                             <span style="font-size: 10px;">📂</span>
@@ -9971,10 +10133,10 @@ function renderWriteScene() {
                                         </button>
                                     </div>
                                 </div>
-                                <div style="color: #00aa00; font-size: 9px;">
+                                <div style="color: var(--primary-dim); font-size: 9px;">
                                     ${teamCount} team(s), ${studentCount} student(s)
                                 </div>
-                                <div style="color: #008800; font-size: 9px; margin-top: 2px;">
+                                <div style="color: var(--primary-dark); font-size: 9px; margin-top: 2px;">
                                     Saved: ${dateStr}
                                 </div>
                             </div>
@@ -10061,7 +10223,7 @@ function renderWriteScene() {
               
               const modalContent = `
                   <div style="text-align: center;">
-                      <h3 style="color: #00ff00; margin-bottom: var(--space-3);">SCORE UPDATE | 分数更新</h3>
+                      <h3 style="color: var(--primary-bright); margin-bottom: var(--space-3);">SCORE UPDATE | 分数更新</h3>
                       <p style="margin-bottom: var(--space-2);"><strong>Student:</strong> ${pick.student}</p>
                       <p style="margin-bottom: var(--space-2);"><strong>Team:</strong> ${pick.team}</p>
                       <p style="margin-bottom: var(--space-4); font-size: 24px; color: ${currentScore >= 0 ? '#00ff00' : '#ff4444'};">
@@ -10869,7 +11031,7 @@ COACH: Iris Wang
                 <div class="draw-content">
                     <div class="draw-icon">🤝</div>
                     <div class="draw-title">IT'S A DRAW!</div>
-                    <div class="draw-title" style="font-size: 32px; color: #00aa00;">平局！</div>
+                    <div class="draw-title" style="font-size: 32px; color: var(--primary-dim);">平局！</div>
                     <div class="draw-teams">
                         ${winners.map(w => `${w.name}: ${w.score || 0}`).join('<br>')}
                     </div>
@@ -11114,14 +11276,14 @@ COACH: Iris Wang
         
         <!-- Saved Student Sets Section -->
         <div style="margin-top: var(--space-5); padding-top: var(--space-4); border-top: 2px solid #00aa00;">
-            <h3 style="margin-bottom: var(--space-3); color: #00ff00; font-size: 14px;">
+            <h3 style="margin-bottom: var(--space-3); color: var(--primary-bright); font-size: 14px;">
                 💾 SAVED SETS | 已保存的集合
             </h3>
             
             <div style="display: flex; gap: 6px; margin-bottom: var(--space-3);">
                 <input id="odSetName" type="text" placeholder="Set Name (e.g., 'Class A')" 
                        aria-label="Set name" autocomplete="off" 
-                       style="flex: 1; background: #001000; border: 1px solid #00ff00; color: #00ff00; padding: 6px 8px; border-radius: 6px; font-size: 11px; font-family: inherit;" />
+                       style="flex: 1; background: #001000; border: 1px solid var(--border-color); color: var(--primary-bright); padding: 6px 8px; border-radius: 6px; font-size: 11px; font-family: inherit;" />
                 <button id="odSaveSet" type="button" class="od-btn" aria-label="Save current teams as set">
                     <span class="od-glyph">💾</span>
                     <span class="od-label">SAVE</span>
