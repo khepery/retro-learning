@@ -1645,6 +1645,100 @@
             max-height: calc(200px * var(--text-scale)) !important;
         }
 
+        /* Hidden class for content management */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Video Intro Overlay Styles */
+        #video-intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #video-intro-overlay.fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+            pointer-events: none;
+        }
+
+        #intro-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Sound Toggle Button */
+        #sound-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            background: #000;
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            padding: 12px 16px;
+            font-family: 'Orbitron', monospace;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            min-width: 44px;
+            min-height: 44px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        #sound-toggle:hover {
+            background: #00ff00;
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+        }
+
+        #sound-toggle svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Enter Text */
+        #enter-text {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00ff00;
+            font-family: 'Orbitron', monospace;
+            font-size: 18px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #00ff00;
+            animation: pulse 2s ease-in-out infinite;
+            z-index: 9999;
+            text-transform: uppercase;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                text-shadow: 0 0 10px #00ff00;
+            }
+            50% {
+                opacity: 0.5;
+                text-shadow: 0 0 20px #00ff00;
+            }
+        }
+
     </style>
     <!-- HAL RANDOM SELECTOR V2 - CSS -->
     <style>
@@ -2607,31 +2701,21 @@
     </style>
 </head>
 <body>
-    <!-- Intro Video Overlay -->
-    <!--
-      This overlay plays a short intro video when the application loads.  The
-      video is muted by default to satisfy autoplay policies.  Once the
-      video finishes, the overlay hides itself and the rest of the app
-      becomes visible.  The video file (intro.mp4) should reside in the
-      same directory as this HTML file.
-    -->
-    <!-- Intro video overlay.  Hidden by default until the boot sequence completes.
-         Contains the video element and a message prompt that appears after playback.
-         The video will attempt to play with audio.  If autoplay is blocked,
-         the overlay will display a prompt asking the user to click to begin playback.
-         After the video ends, a different prompt instructs the user to click
-         to enter the app. -->
-    <div id="introOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.95); display: none; justify-content: center; align-items: center; z-index: 10000;">
-      <video id="introVideo" 
-             src="intro.mp4" 
-             style="width: 90vw; max-width: 1200px; height: auto; border: 3px solid #fff; box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);" 
-             autoplay
-             controls
-             preload="auto"
-             playsinline
-             webkit-playsinline>
-      </video>
-      <div id="introPrompt" style="position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; color: #00ff00; font-family: 'Orbitron', monospace; font-size: 14px; letter-spacing: 1px; display: none;">Click to play video</div>
+    <!-- Video Intro Overlay -->
+    <div id="video-intro-overlay">
+        <video id="intro-video" autoplay muted loop playsinline>
+            <source src="retro-intro.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <button id="sound-toggle" class="muted">
+            <svg id="volume-off-icon" viewBox="0 0 24 24">
+                <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+            </svg>
+            <svg id="volume-on-icon" style="display: none;" viewBox="0 0 24 24">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+            </svg>
+        </button>
+        <p id="enter-text">Click anywhere to enter</p>
     </div>
     <!-- Corner Decorations -->
     <div style="position: fixed; top: 10px; left: 10px; color: #00ff00; opacity: 0.3; font-size: 20px; z-index: 998; pointer-events: none; font-family: 'Orbitron', monospace;">[[ SYSTEM ]]</div>
@@ -2781,7 +2865,7 @@
         </div>
     </div>
 
-    <div class="crt-container">
+    <div class="crt-container hidden">
         <!-- ADAPTIVE HEADER -->
         <div class="terminal-header">
             <div>
@@ -3628,109 +3712,104 @@
         };
 
         // ============================================
-        // HOISTED INTRO VIDEO FUNCTION (SINGLE DEFINITION)
+        // VIDEO INTRO OVERLAY SYSTEM
         // ============================================
-        function showIntroVideo() {
-            // **REMOVED: localStorage check - always show intro**
+        function initVideoIntro() {
+            // Check for skip parameter in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const skipIntro = urlParams.get('skip_intro') === 'true';
             
-            var overlay = document.getElementById('introOverlay');
-            var video = document.getElementById('introVideo');
-            var prompt = document.getElementById('introPrompt');
+            const overlay = document.getElementById('video-intro-overlay');
+            const video = document.getElementById('intro-video');
+            const soundToggle = document.getElementById('sound-toggle');
+            const enterText = document.getElementById('enter-text');
+            const crtContainer = document.querySelector('.crt-container');
             
-            if (!overlay || !video || !prompt) {
-                console.error('[INTRO] Elements missing');
+            if (!overlay || !video || !soundToggle || !enterText || !crtContainer) {
+                console.error('[INTRO] Required elements missing');
                 return;
             }
             
-            console.log('%c[INTRO] Starting (always show on refresh)', 'color: #00ff00; font-weight: bold');
-            overlay.style.display = 'flex';
-            prompt.style.display = 'none';
-            
-            var skipBtn = document.createElement('button');
-            skipBtn.textContent = 'SKIP [ESC]';
-            skipBtn.style.cssText = 'position:absolute;top:20px;right:20px;background:rgba(0,0,0,0.9);color:#0f0;border:2px solid #0f0;padding:10px 20px;font-family:Orbitron,monospace;font-size:14px;cursor:pointer;border-radius:4px;z-index:20001';
-            overlay.appendChild(skipBtn);
-            
-            var dismiss = function() {
+            // If skip parameter is present, skip intro entirely
+            if (skipIntro) {
                 overlay.style.display = 'none';
-                // **REMOVED: localStorage.setItem - don't remember "seen" state**
-                if (skipBtn.parentNode) skipBtn.remove();
-                try { 
-                    video.pause(); 
-                    video.currentTime = 0; 
-                } catch(e) {}
-            };
+                crtContainer.classList.remove('hidden');
+                console.log('[INTRO] Skipped via URL parameter');
+                return;
+            }
             
-            skipBtn.onclick = dismiss;
+            // Show overlay (it's visible by default, but ensure it)
+            overlay.style.display = 'flex';
             
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && overlay.style.display === 'flex') {
-                    dismiss();
+            let isMuted = true;
+            
+            // Sound toggle functionality
+            soundToggle.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent triggering enter
+                isMuted = !isMuted;
+                video.muted = isMuted;
+                
+                const volumeOffIcon = document.getElementById('volume-off-icon');
+                const volumeOnIcon = document.getElementById('volume-on-icon');
+                
+                if (isMuted) {
+                    soundToggle.classList.add('muted');
+                    soundToggle.classList.remove('unmuted');
+                    volumeOffIcon.style.display = 'block';
+                    volumeOnIcon.style.display = 'none';
+                } else {
+                    soundToggle.classList.remove('muted');
+                    soundToggle.classList.add('unmuted');
+                    volumeOffIcon.style.display = 'none';
+                    volumeOnIcon.style.display = 'block';
                 }
+                
+                console.log('[INTRO] Sound toggled:', isMuted ? 'muted' : 'unmuted');
             });
             
-            video.addEventListener('ended', function() {
-                prompt.textContent = 'Click to continue';
-                prompt.style.display = 'block';
-                overlay.onclick = dismiss;
-            }, { once: true });
+            // Click-to-enter functionality
+            function enterSite() {
+                // Fade out overlay
+                overlay.classList.add('fade-out');
+                
+                // Pause video and stop audio
+                video.pause();
+                video.currentTime = 0;
+                
+                // After fade transition, hide overlay and show main content
+                setTimeout(function() {
+                    overlay.style.display = 'none';
+                    crtContainer.classList.remove('hidden');
+                    console.log('[INTRO] Entered site');
+                }, 500); // Match transition duration
+            }
             
-            // Better autoplay handling
-            video.muted = false;
-            var playPromise = video.play();
+            // Click anywhere on overlay (but not sound button) to enter
+            overlay.addEventListener('click', function(e) {
+                // Don't trigger if clicking the sound toggle button
+                if (e.target === soundToggle || soundToggle.contains(e.target)) {
+                    return;
+                }
+                enterSite();
+            });
+            
+            // Try to autoplay video (muted for browser compatibility)
+            const playPromise = video.play();
             
             if (playPromise !== undefined) {
                 playPromise.then(function() {
-                    console.log('[INTRO] Video playing');
+                    console.log('[INTRO] Video autoplaying');
                 }).catch(function(error) {
-                    console.warn('[INTRO] Autoplay failed, showing prompt:', error);
-                    video.muted = true;
-                    video.play().catch(function() {
-                        prompt.textContent = 'Click to play video';
-                        prompt.style.display = 'block';
-                        overlay.onclick = function() {
-                            video.play();
-                            prompt.style.display = 'none';
-                            overlay.onclick = null;
-                        };
-                    });
+                    console.warn('[INTRO] Autoplay failed:', error);
+                    // If autoplay fails, user can still click to enter
                 });
             }
-            
-            // Auto-dismiss after video duration + 2 seconds
-            setTimeout(function() {
-                if (document.body.contains(overlay) && overlay.style.display !== 'none') {
-                    console.log('[INTRO] Auto-dismiss timeout');
-                    dismiss();
-                }
-            }, 12000);
         }
 
-        // ============================================
-        // INTRO VIDEO EVENT HANDLERS
-        // ============================================
-        // Add event listeners when DOM is ready
+        // Initialize video intro when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
-            var introVideo = document.getElementById('introVideo');
-            var introOverlay = document.getElementById('introOverlay');
-            
-            if (introVideo) {
-                // Close overlay when video ends
-                introVideo.addEventListener('ended', function() {
-                    if (introOverlay) {
-                        introOverlay.style.display = 'none';
-                    }
-                });
-            }
-            
-            if (introOverlay) {
-                // Allow clicking overlay to close it
-                introOverlay.addEventListener('click', function(e) {
-                    if (e.target === this) {
-                        this.style.display = 'none';
-                    }
-                });
-            }
+            // Wait a brief moment to ensure all elements are loaded
+            setTimeout(initVideoIntro, 100);
         });
 
         // ============================================
@@ -3761,13 +3840,6 @@
                     if (bootEl) {
                         bootEl.style.display = 'none';
                         console.log('%c[BOOT] Complete', 'color: #0f0; font-weight: bold');
-                    }
-                    if (typeof showIntroVideo === 'function') {
-                        try {
-                            showIntroVideo();
-                        } catch (err) {
-                            console.error('[BOOT] Error:', err);
-                        }
                     }
                 }, 500);
                 clearInterval(bootInterval);
