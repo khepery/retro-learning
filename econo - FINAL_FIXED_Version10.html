@@ -2852,8 +2852,8 @@
     <style>
       @keyframes crawlUp {
         0% { bottom: -100%; opacity: 0; }
-        5% { opacity: 1; }
-        85% { opacity: 1; }
+        5% { bottom: -80%; opacity: 1; }
+        85% { bottom: 50%; opacity: 1; }
         100% { bottom: 100%; opacity: 0; }
       }
       
@@ -3917,11 +3917,20 @@
             overlay.style.display = 'flex';
             prompt.style.display = 'none';
             
+            // Initialize audio for intro
+            if (!audioContext || audioContext.state === 'suspended') {
+                initializeAudio();
+            }
+            
             // Initialize epic effects
             initStarField();
             initHyperspace();
             initParticleBurst();
-            playIntroSoundtrack();
+            
+            // Play intro soundtrack with delay to ensure audio is ready
+            setTimeout(function() {
+                playIntroSoundtrack();
+            }, 150);
             
             // Create skip button
             var skipBtn = document.createElement('button');
