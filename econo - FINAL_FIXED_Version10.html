@@ -448,6 +448,41 @@
             flex-shrink: 0;
         }
 
+        /* Fullscreen expandable content */
+        .expandable-content.fullscreen-active {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            margin: 0 !important;
+            z-index: 10000 !important;
+            overflow-y: auto !important;
+            border-radius: 0 !important;
+            padding: var(--space-8) !important;
+            background: var(--background) !important;
+        }
+
+        .expandable-content.fullscreen-active .fullscreen-btn {
+            position: fixed !important;
+            top: var(--space-4) !important;
+            right: var(--space-4) !important;
+        }
+
+        .expandable-content.fullscreen-active .fullscreen-btn::before {
+            content: '✕ EXIT ' !important;
+        }
+
+        .fullscreen-btn {
+            transition: all 0.2s ease;
+        }
+
+        .fullscreen-btn:hover {
+            background: var(--background-light) !important;
+            border-color: var(--primary-bright) !important;
+            transform: scale(1.05);
+        }
+
         .story-text {
             font-size: var(--text-lg);
             line-height: 1.8;
@@ -3719,27 +3754,28 @@
             const prompts = lessonConfig.writePrompts || [];
             
             writePrompts.innerHTML = `
-                <h3 style="color:#00ff00;margin-bottom:var(--space-5);font-size:var(--text-base);">
+                <h3 style="color:#00ff00;margin-bottom:var(--space-5);font-size:var(--text-lg);">
                     ✅ SAMPLE SOLUTIONS | 参考答案:
                 </h3>
                 ${prompts.map((prompt, index) => `
-                    <div class="content-box" style="margin-bottom: var(--space-4); border: 2px solid var(--border-dim);">
-                        <div style="margin-bottom: var(--space-3); color: var(--primary-bright); font-weight: bold;">
+                    <div class="content-box expandable-content" style="margin-bottom: var(--space-4); border: 2px solid var(--border-dim); position: relative;" id="write-prompt-${index}">
+                        <button class="fullscreen-btn" onclick="toggleFullscreen('write-prompt-${index}')" style="position: absolute; top: var(--space-2); right: var(--space-2); background: var(--background); border: 1px solid var(--border-color); color: var(--primary-bright); padding: 4px 8px; cursor: pointer; border-radius: 3px; font-size: 12px; z-index: 10;">⛶ FULLSCREEN</button>
+                        <div style="margin-bottom: var(--space-3); color: var(--primary-bright); font-weight: bold; font-size: var(--text-md);">
                             ${index + 1}. ${prompt.en}
                         </div>
-                        <div style="color: #00aa00; margin-bottom: var(--space-3); font-size: var(--text-sm);">
+                        <div style="color: var(--primary-dim); margin-bottom: var(--space-3); font-size: var(--text-sm);">
                             ${prompt.zh}
                         </div>
-                        <div style="background: var(--background-light); padding: var(--space-3); border-left: 3px solid var(--border-color); margin: var(--space-3) 0;">
-                            <div style="color: var(--primary-bright); margin-bottom: var(--space-2);"><strong>Sample Answer | 参考答案:</strong></div>
-                            <div style="color: var(--text-color); margin-bottom: var(--space-2);">${prompt.sample_en || 'Not provided'}</div>
-                            <div style="color: var(--primary-dim);">${prompt.sample_zh || '未提供'}</div>
+                        <div style="background: var(--background-light); padding: var(--space-4); border-left: 3px solid var(--border-color); margin: var(--space-3) 0;">
+                            <div style="color: var(--primary-bright); margin-bottom: var(--space-3); font-size: var(--text-base);"><strong>Sample Answer | 参考答案:</strong></div>
+                            <div style="color: var(--text-color); margin-bottom: var(--space-2); font-size: var(--text-md); line-height: 1.6;">${prompt.sample_en || 'Not provided'}</div>
+                            <div style="color: var(--primary-dim); font-size: var(--text-sm);">${prompt.sample_zh || '未提供'}</div>
                         </div>
                         ${prompt.explanation_en || prompt.explanation_zh ? `
-                            <div style="background: #000800; padding: var(--space-3); border-left: 3px solid #ffaa00; margin: var(--space-3) 0;">
-                                <div style="color: #ffaa00; margin-bottom: var(--space-2);"><strong>Explanation | 解析:</strong></div>
-                                ${prompt.explanation_en ? `<div style="color: #ffdd00; margin-bottom: var(--space-2);">${prompt.explanation_en}</div>` : ''}
-                                ${prompt.explanation_zh ? `<div style="color: #ffaa00;">${prompt.explanation_zh}</div>` : ''}
+                            <div style="background: var(--background); padding: var(--space-4); border-left: 3px solid #ffaa00; margin: var(--space-3) 0;">
+                                <div style="color: #ffaa00; margin-bottom: var(--space-3); font-size: var(--text-base);"><strong>Explanation | 解析:</strong></div>
+                                ${prompt.explanation_en ? `<div style="color: #ffdd00; margin-bottom: var(--space-2); font-size: var(--text-md); line-height: 1.7;">${prompt.explanation_en}</div>` : ''}
+                                ${prompt.explanation_zh ? `<div style="color: #ffaa00; font-size: var(--text-sm); line-height: 1.6;">${prompt.explanation_zh}</div>` : ''}
                             </div>
                         ` : ''}
                     </div>
@@ -4298,8 +4334,66 @@
             oscillator.stop(audioContext.currentTime + duration / 1000);
         }
 
+        // Get current theme
+        function getCurrentTheme() {
+            if (document.body.classList.contains('theme-amber')) return 'amber';
+            if (document.body.classList.contains('theme-blue')) return 'blue';
+            if (document.body.classList.contains('theme-purple')) return 'purple';
+            if (document.body.classList.contains('theme-red')) return 'red';
+            if (document.body.classList.contains('theme-white')) return 'white';
+            return 'matrix';
+        }
+
+        // Theme-specific sound profiles
+        const themeSounds = {
+            matrix: {
+                beep: [800, 100],
+                success: [[400, 600, 800, 1000], 150],
+                click: [800, 30],
+                warning: [[500, 300, 500], 100],
+                victory: [[400, 500, 600, 700, 800, 900, 1000, 1200], 100]
+            },
+            amber: {
+                beep: [600, 120],
+                success: [[300, 500, 700, 900], 170],
+                click: [600, 40],
+                warning: [[400, 250, 400], 120],
+                victory: [[350, 450, 550, 650, 750, 850, 950, 1100], 110]
+            },
+            blue: {
+                beep: [900, 90],
+                success: [[500, 700, 900, 1100], 140],
+                click: [900, 25],
+                warning: [[600, 350, 600], 90],
+                victory: [[450, 550, 650, 750, 850, 950, 1050, 1250], 95]
+            },
+            purple: {
+                beep: [700, 110],
+                success: [[350, 550, 750, 950], 160],
+                click: [700, 35],
+                warning: [[450, 280, 450], 110],
+                victory: [[380, 480, 580, 680, 780, 880, 980, 1180], 105]
+            },
+            red: {
+                beep: [650, 130],
+                success: [[320, 520, 720, 920], 180],
+                click: [650, 45],
+                warning: [[420, 260, 420], 130],
+                victory: [[360, 460, 560, 660, 760, 860, 960, 1160], 115]
+            },
+            white: {
+                beep: [1000, 80],
+                success: [[600, 800, 1000, 1200], 130],
+                click: [1000, 20],
+                warning: [[700, 400, 700], 80],
+                victory: [[500, 600, 700, 800, 900, 1000, 1100, 1300], 85]
+            }
+        };
+
         function playBeep() {
-            playTone(800, 100);
+            const theme = getCurrentTheme();
+            const [freq, dur] = themeSounds[theme].beep;
+            playTone(freq, dur);
         }
 
         function playMultiTone(frequencies, duration = 100) {
@@ -4309,7 +4403,9 @@
         }
 
         function playSuccess() {
-            playMultiTone([400, 600, 800, 1000], 150);
+            const theme = getCurrentTheme();
+            const [freqs, dur] = themeSounds[theme].success;
+            playMultiTone(freqs, dur);
         }
 
         function playTransition() {
@@ -4317,15 +4413,21 @@
         }
 
         function playClick() {
-            playTone(800, 30);
+            const theme = getCurrentTheme();
+            const [freq, dur] = themeSounds[theme].click;
+            playTone(freq, dur);
         }
 
         function playWarning() {
-            playMultiTone([500, 300, 500], 100);
+            const theme = getCurrentTheme();
+            const [freqs, dur] = themeSounds[theme].warning;
+            playMultiTone(freqs, dur);
         }
 
         function playVictory() {
-            playMultiTone([400, 500, 600, 700, 800, 900, 1000, 1200], 100);
+            const theme = getCurrentTheme();
+            const [freqs, dur] = themeSounds[theme].victory;
+            playMultiTone(freqs, dur);
         }
 
         // Create matrix rain effect for victory
@@ -4918,6 +5020,24 @@
             const savedTheme = localStorage.getItem('selectedTheme') || 'matrix';
             setTheme(savedTheme);
         });
+
+        // Fullscreen toggle for expandable content
+        window.toggleFullscreen = function(elementId) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+
+            if (element.classList.contains('fullscreen-active')) {
+                // Exit fullscreen
+                element.classList.remove('fullscreen-active');
+                document.body.style.overflow = '';
+                playBeep();
+            } else {
+                // Enter fullscreen
+                element.classList.add('fullscreen-active');
+                document.body.style.overflow = 'hidden';
+                playBeep();
+            }
+        };
 
         // Section Menu
         window.toggleSectionMenu = function() {
@@ -7112,14 +7232,14 @@ function renderWriteScene() {
     const writePrompts = document.getElementById('writePrompts');
     const prompts = lessonConfig.writePrompts || [];
     writePrompts.innerHTML = `
-        <h3 style="color:#00ff00;margin-bottom:var(--space-5);font-size:var(--text-base);">
+        <h3 style="color:var(--primary-bright);margin-bottom:var(--space-5);font-size:var(--text-lg);">
             COMPLETE THESE ENTRIES | 完成这些条目:
         </h3>
-        ${prompts.map(prompt => `
+        ${prompts.map((prompt, index) => `
             <div class="content-box" style="margin-bottom: var(--space-4);">
-                <div style="margin-bottom: var(--space-3);">${prompt.en}</div>
-                <div style="color: #888; margin-bottom: var(--space-3);">${prompt.zh}</div>
-                <textarea style="width: 100%; min-height: 100px; background: var(--background-light); color: var(--primary-bright); border: 1px solid var(--border-dim); padding: var(--space-3); font-family: monospace;"></textarea>
+                <div style="margin-bottom: var(--space-3); font-size: var(--text-md);">${prompt.en}</div>
+                <div style="color: #888; margin-bottom: var(--space-3); font-size: var(--text-sm);">${prompt.zh}</div>
+                <textarea style="width: 100%; min-height: 120px; background: var(--background-light); color: var(--primary-bright); border: 1px solid var(--border-dim); padding: var(--space-3); font-family: monospace; font-size: var(--text-sm);"></textarea>
             </div>
         `).join('')}
     `;
@@ -8012,49 +8132,52 @@ function renderWriteScene() {
             
             // Create explanation panel
             const explanationDiv = document.createElement('div');
-            explanationDiv.className = 'mcq-explanation-panel content-box';
+            explanationDiv.className = 'mcq-explanation-panel content-box expandable-content';
+            explanationDiv.id = 'mcq-explanation-' + currentMCQIndex;
             explanationDiv.style.cssText = `
                 margin-top: var(--space-4); 
                 border: 2px solid #ffaa00; 
                 background: linear-gradient(135deg, #111000, #000800);
                 animation: fadeIn 0.3s ease;
+                position: relative;
             `;
             
             let correctOptionText = mcq.options_en[mcq.correct] || 'N/A';
             let correctOptionTextZh = mcq.options_zh[mcq.correct] || 'N/A';
             
             explanationDiv.innerHTML = `
-                <div style="color: #ffaa00; font-weight: bold; margin-bottom: var(--space-3); font-size: var(--text-base);">
+                <button class="fullscreen-btn" onclick="toggleFullscreen('mcq-explanation-${currentMCQIndex}')" style="position: absolute; top: var(--space-2); right: var(--space-2); background: var(--background); border: 1px solid var(--border-color); color: var(--primary-bright); padding: 4px 8px; cursor: pointer; border-radius: 3px; font-size: 12px; z-index: 10;">⛶ FULLSCREEN</button>
+                <div style="color: #ffaa00; font-weight: bold; margin-bottom: var(--space-4); font-size: var(--text-lg);">
                     ✅ SOLUTION | 解答
                 </div>
-                <div style="background: var(--background-lighter); padding: var(--space-3); border-left: 3px solid var(--border-color); margin-bottom: var(--space-3);">
-                    <div style="color: var(--primary-bright); font-weight: bold; margin-bottom: var(--space-2);">
+                <div style="background: var(--background-lighter); padding: var(--space-4); border-left: 3px solid var(--border-color); margin-bottom: var(--space-4);">
+                    <div style="color: var(--primary-bright); font-weight: bold; margin-bottom: var(--space-3); font-size: var(--text-base);">
                         Correct Answer | 正确答案:
                     </div>
-                    <div style="color: var(--primary-bright); margin-bottom: var(--space-1);">
+                    <div style="color: var(--primary-bright); margin-bottom: var(--space-2); font-size: var(--text-md);">
                         <strong>[${String.fromCharCode(65 + mcq.correct)}]</strong> ${correctOptionText}
                     </div>
-                    <div style="color: var(--primary-dim);">
+                    <div style="color: var(--primary-dim); font-size: var(--text-sm);">
                         ${correctOptionTextZh}
                     </div>
                 </div>
                 ${mcq.explanation_en || mcq.explanation_zh ? `
-                    <div style="background: #110800; padding: var(--space-3); border-left: 3px solid #ffaa00;">
-                        <div style="color: #ffaa00; font-weight: bold; margin-bottom: var(--space-2);">
+                    <div style="background: #110800; padding: var(--space-4); border-left: 3px solid #ffaa00;">
+                        <div style="color: #ffaa00; font-weight: bold; margin-bottom: var(--space-3); font-size: var(--text-base);">
                             📚 Explanation | 解析:
                         </div>
                         ${mcq.explanation_en ? `
-                            <div style="color: #ffdd00; margin-bottom: var(--space-2); line-height: 1.6;">
+                            <div style="color: #ffdd00; margin-bottom: var(--space-3); line-height: 1.7; font-size: var(--text-md);">
                                 <strong>English:</strong> ${mcq.explanation_en}
                             </div>
                         ` : ''}
                         ${mcq.explanation_zh ? `
-                            <div style="color: #ffaa00; line-height: 1.6;">
+                            <div style="color: #ffaa00; line-height: 1.6; font-size: var(--text-sm);">
                                 <strong>中文:</strong> ${mcq.explanation_zh}
                             </div>
                         ` : ''}
                     </div>
-                ` : '<div style="color: #888; font-style: italic;">No explanation available for this question.</div>'}
+                ` : '<div style="color: #888; font-style: italic; font-size: var(--text-sm);">No explanation available for this question.</div>'}
             `;
             
             mcqContainer.appendChild(explanationDiv);
